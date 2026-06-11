@@ -1,0 +1,5 @@
+scrapling==0.4.9
+curl_cffi>=0.13
+browserforge>=1.2
+orjson>=3.11
+playwright>=1.50

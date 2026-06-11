@@ -1,0 +1,442 @@
+empresa_id,camara,rubro,url_ficha
+1,CMS,Minería,https://cmsalta.com.ar/asociados/abra-silver-proyecto-diablillos/
+2,CMS,Minería,https://cmsalta.com.ar/asociados/agv-group/
+2,CAPEMISA,Construcción,https://capemisa.com.ar/socio/agv-servicios-mineros-srl/
+2,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/agv-maquinas-srl/
+2,CAPEMISA,Logística,https://capemisa.com.ar/socio/agv-servicios-mineros-srl/
+3,CMS,Minería,https://cmsalta.com.ar/asociados/aldebaran-resources-inc/
+4,CMS,Minería,https://cmsalta.com.ar/asociados/alpha-lithium-proyecto-tolillar/
+5,CMS,Minería,https://cmsalta.com.ar/asociados/argentum-lithium-s-a-2/
+6,CMS,Minería,https://cmsalta.com.ar/asociados/borax-argentina-yacimiento-tincalayu/
+7,CMS,Minería,https://cmsalta.com.ar/asociados/corriente-argentina-s-a-proyecto-taca-taca/
+8,CMS,Minería,https://cmsalta.com.ar/asociados/eramine-sudamerica-sa/
+9,CMS,Minería,https://cmsalta.com.ar/asociados/foraco-salta-s-a/
+10,CMS,Minería,https://cmsalta.com.ar/asociados/ganfeng-lithium-proyecto-mariana/
+11,CMS,Minería,https://cmsalta.com.ar/asociados/gestion-de-talentos/
+11,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/gestion-de-talentos-sas/
+12,CMS,Minería,https://cmsalta.com.ar/asociados/grupo-nioi-sa/
+12,CAPEMISA,Construcción,https://capemisa.com.ar/socio/grupo-nioi/
+12,CAPEMISA,Geomembrana,https://capemisa.com.ar/socio/grupo-nioi/
+12,CAPEMISA,Topografía,https://capemisa.com.ar/socio/grupo-nioi/
+13,CMS,Minería,https://cmsalta.com.ar/asociados/hanaq-group/
+14,CMS,Minería,https://cmsalta.com.ar/asociados/hidrotec-srl/
+14,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/hidrotec-srl/
+15,CMS,Minería,https://cmsalta.com.ar/asociados/hubaide-bohm-asociados/
+16,CMS,Minería,https://cmsalta.com.ar/asociados/lithium-americas-proyecto-pastos-grandes/
+17,CMS,Minería,https://cmsalta.com.ar/asociados/litica-resources-proyecto-pozuelos/
+18,CMS,Minería,https://cmsalta.com.ar/asociados/mansfield-minera-s-a-mina-lindero/
+19,CMS,Minería,https://cmsalta.com.ar/asociados/manufactura-de-los-andes-s-a/
+20,CMS,Minería,https://cmsalta.com.ar/asociados/minera-santa-rita-s-a/
+21,CMS,Minería,https://cmsalta.com.ar/asociados/noa-lithium-brines-s-a/
+22,CMS,Minería,https://cmsalta.com.ar/asociados/posco-argentina-sau-proyecto-sal-de-oro/
+23,CMS,Minería,https://cmsalta.com.ar/asociados/potasio-y-litio-de-argentina-s-a/
+24,CMS,Minería,https://cmsalta.com.ar/asociados/ramon-nunez/
+25,CMS,Minería,https://cmsalta.com.ar/asociados/remsa-s-a/
+26,CMS,Minería,https://cmsalta.com.ar/asociados/rio-tinto-proyecto-rincon/
+27,CMS,Minería,https://cmsalta.com.ar/asociados/silex-argentina-sa-proyecto-el-quevar/
+28,CMS,Minería,https://cmsalta.com.ar/asociados/southern-cross-minerals/
+29,CMS,Minería,https://cmsalta.com.ar/asociados/tamar-mining-s-a/
+30,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/biotec-s-r-l/
+30,CAPEMISA,Construcción,https://capemisa.com.ar/socio/biotec-s-r-l/
+30,CAPEMISA,Logística,https://capemisa.com.ar/socio/biotec-s-r-l/
+31,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/cactus-s-r-l/
+32,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/carbian/
+33,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/control-andina-s-a-s/
+33,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/control-andina-s-a-s/
+34,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/dff-s-r-l/
+35,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/dinatec-group-s-a-s/
+36,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/enfocer-s-a-s/
+37,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/imex-s-a/
+37,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/imex-s-a/
+37,CAPEMISA,Insumos,https://capemisa.com.ar/socio/imex-s-a/
+37,CAPEMISA,Logística,https://capemisa.com.ar/socio/imex-s-a/
+37,UIS,Empresa de servicios,https://uis.com.ar/socios/imex-s-a/
+38,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/m-m-minning-and-construction-service/
+39,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/mgm-group-s-r-l/
+39,CAPEMISA,Insumos,https://capemisa.com.ar/socio/mgm-group-s-r-l/
+40,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/mobi-s-a-s/
+41,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/nuna-s-a-s/
+42,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/rolcar-s-a/
+42,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/rolcar-s-a/
+43,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/yaretas-insumos-servicios/
+44,CAPEMISA,Catering,https://capemisa.com.ar/socio/alimentacion-saludable-s-r-l/
+45,CAPEMISA,Catering,https://capemisa.com.ar/socio/building-s-r-l/
+46,CAPEMISA,Catering,https://capemisa.com.ar/socio/catering-andino/
+47,CAPEMISA,Catering,https://capemisa.com.ar/socio/catering-de-altura-s-a-s/
+48,CAPEMISA,Catering,https://capemisa.com.ar/socio/catering-de-las-nubes-s-r-l/
+49,CAPEMISA,Catering,https://capemisa.com.ar/socio/delight-s-r-l/
+50,CAPEMISA,Catering,https://capemisa.com.ar/socio/el-huayra-s-a-s/
+51,CAPEMISA,Catering,https://capemisa.com.ar/socio/ermaya-s-r-l/
+52,CAPEMISA,Catering,https://capemisa.com.ar/socio/grupo-sierra-delta-s-r-l/
+53,CAPEMISA,Catering,https://capemisa.com.ar/socio/la-estrella/
+54,CAPEMISA,Catering,https://capemisa.com.ar/socio/servicios-andinos-s-r-l/
+54,CAPEMISA,Logística,https://capemisa.com.ar/socio/servicios-andinos-s-r-l/
+54,CAPEMISA,Servicios,https://capemisa.com.ar/socio/servicios-andinos-s-r-l/
+55,CAPEMISA,Catering,https://capemisa.com.ar/socio/servicios-integrales-salta-srl/
+55,CAPEMISA,Logística,https://capemisa.com.ar/socio/servicios-integrales-salta-srl/
+56,CAPEMISA,Comunicaciones,https://capemisa.com.ar/socio/4instal-s-a-s/
+57,CAPEMISA,Comunicaciones,https://capemisa.com.ar/socio/comtec/
+58,CAPEMISA,Comunicaciones,https://capemisa.com.ar/socio/ecin-soluciones-s-r-l/
+58,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/ecin-soluciones-s-r-l/
+58,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/ecin-soluciones-s-r-l/
+59,CAPEMISA,Comunicaciones,https://capemisa.com.ar/socio/nubicom-s-r-l/
+60,CAPEMISA,Comunicaciones,https://capemisa.com.ar/socio/rq-servicios-telecomunicaciones/
+61,CAPEMISA,Comunicaciones,https://capemisa.com.ar/socio/seinoa-srl/
+62,CAPEMISA,Comunicaciones,https://capemisa.com.ar/socio/sic-comunicaciones/
+63,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/analytics-noa/
+64,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/arganaraz-y-asociados/
+64,CAPEMISA,Logística,https://capemisa.com.ar/socio/arganaraz-y-asociados/
+65,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/asset-s-r-l/
+66,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/bayton-sa/
+67,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/berge-bau-patagonia-sa/
+68,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/campo-bravo-s-a-s/
+69,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/capital-humano-salta/
+70,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/cataldi-fleming-ernesto/
+71,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/claudio-devita-consultores-en-abastecimientos/
+72,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/consultora-integral-en-liderazgo/
+73,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/ec-y-asociados-consultora-juridico-ambiental-srl/
+74,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/eco-puna-s-a/
+75,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/finex-s-a/
+76,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/hr-people-impact-s-a-s/
+77,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/laboratorio-bioagronort-salta-s-r-l/
+78,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/nuevas-energias/
+78,CAPEMISA,Construcción,https://capemisa.com.ar/socio/nuevas-energias/
+78,CAPEMISA,Energía,https://capemisa.com.ar/socio/nuevas-energias/
+78,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/nuevas-energias/
+78,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/nuevas-energias/
+79,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/precyt-servicios-s-r-l/
+80,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/quanta-s-a-s/
+81,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/saltapetrol-srl/
+81,UIS,Ind. Química,https://uis.com.ar/socios/saltapetrol-srl/
+82,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/specterman-marcos-gustavo/
+83,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/sr-consultora/
+84,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/srk-consulting-argentina-s-a/
+85,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/tuareg-s-r-l/
+86,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/xi-latam-s-a-s/
+87,CAPEMISA,Construcción,https://capemisa.com.ar/socio/3a-s-r-l/
+88,CAPEMISA,Construcción,https://capemisa.com.ar/socio/ancris-s-r-l/
+89,CAPEMISA,Construcción,https://capemisa.com.ar/socio/bbc-mineria-s-a/
+90,CAPEMISA,Construcción,https://capemisa.com.ar/socio/beton-s-r-l/
+91,CAPEMISA,Construcción,https://capemisa.com.ar/socio/bmi-s-a/
+92,CAPEMISA,Construcción,https://capemisa.com.ar/socio/ce-y-ba-s-r-l/
+92,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/ce-y-ba-s-r-l/
+93,CAPEMISA,Construcción,https://capemisa.com.ar/socio/conevial-s-r-l/
+94,CAPEMISA,Construcción,https://capemisa.com.ar/socio/cyl-s-r-l/
+95,CAPEMISA,Construcción,https://capemisa.com.ar/socio/daber-servicios-industriales-s-r-l/
+95,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/daber-servicios-industriales-s-r-l/
+95,CAPEMISA,Servicios,https://capemisa.com.ar/socio/daber-servicios-industriales-s-r-l/
+96,CAPEMISA,Construcción,https://capemisa.com.ar/socio/imec-ingeniria-s-r-l/
+97,CAPEMISA,Construcción,https://capemisa.com.ar/socio/imeca-s-r-l/
+98,CAPEMISA,Construcción,https://capemisa.com.ar/socio/indasa-s-a/
+98,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/indasa-s-a/
+98,CAPEMISA,Servicios,https://capemisa.com.ar/socio/indasa-s-a/
+99,CAPEMISA,Construcción,https://capemisa.com.ar/socio/invlac-construcciones-s-r-l/
+100,CAPEMISA,Construcción,https://capemisa.com.ar/socio/juan-pedro-garin-construcciones-s-a/
+101,CAPEMISA,Construcción,https://capemisa.com.ar/socio/kajai-s-a/
+102,CAPEMISA,Construcción,https://capemisa.com.ar/socio/ludrox-s-a-s/
+103,CAPEMISA,Construcción,https://capemisa.com.ar/socio/made-s-r-l/
+104,CAPEMISA,Construcción,https://capemisa.com.ar/socio/mega-s-r-l/
+105,CAPEMISA,Construcción,https://capemisa.com.ar/socio/molca-s-r-l/
+105,UIS,Ind. Varias,https://uis.com.ar/socios/molca-s-r-l/
+106,CAPEMISA,Construcción,https://capemisa.com.ar/socio/mp-mineria-positiva-s-r-l/
+107,CAPEMISA,Construcción,https://capemisa.com.ar/socio/neca-s-r-l/
+108,CAPEMISA,Construcción,https://capemisa.com.ar/socio/neobox-construccion-modular/
+108,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/neobox-construccion-modular/
+108,CAPEMISA,Servicios,https://capemisa.com.ar/socio/neobox-construccion-modular/
+109,CAPEMISA,Construcción,https://capemisa.com.ar/socio/oscar-zoricich/
+110,CAPEMISA,Construcción,https://capemisa.com.ar/socio/pascha-s-r-l/
+111,CAPEMISA,Construcción,https://capemisa.com.ar/socio/rm-del-norte-s-r-l/
+111,CAPEMISA,Geomembrana,https://capemisa.com.ar/socio/rm-del-norte-s-r-l/
+112,CAPEMISA,Construcción,https://capemisa.com.ar/socio/saltapor-s-r-l/
+113,CAPEMISA,Construcción,https://capemisa.com.ar/socio/solid-md-s-r-l/
+113,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/solid-md-s-r-l/
+113,CAPEMISA,Topografía,https://capemisa.com.ar/socio/solid-md-s-r-l/
+114,CAPEMISA,Construcción,https://capemisa.com.ar/socio/todo-obras-s-r-l/
+114,CAPEMISA,Energía,https://capemisa.com.ar/socio/todo-obras-s-r-l/
+114,CAPEMISA,Insumos,https://capemisa.com.ar/socio/todo-obras-s-r-l/
+115,CAPEMISA,Construcción,https://capemisa.com.ar/socio/tresing-s-r-l/
+116,CAPEMISA,Construcción,https://capemisa.com.ar/socio/zatec-soluciones-s-a-s/
+117,CAPEMISA,Energía,https://capemisa.com.ar/socio/bosch-s-r-l/
+118,CAPEMISA,Energía,https://capemisa.com.ar/socio/energia-infinita/
+118,CAPEMISA,Servicios,https://capemisa.com.ar/socio/ergy/
+119,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/alto-andina-soluciones-modulares/
+120,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/amarela-s-a/
+121,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/antonio-b-atenor-e-hijos-s-r-l/
+121,CAPEMISA,Insumos,https://capemisa.com.ar/socio/antonio-b-atenor-e-hijos-s-r-l/
+121,CAPEMISA,Servicios,https://capemisa.com.ar/socio/antonio-b-atenor-e-hijos-s-r-l/
+122,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/arizaro-industria-y-servicio-by-duo-s-r-l/
+122,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/arizaro-industria-y-servicio-by-duo-s-r-l/
+122,CAPEMISA,Insumos,https://capemisa.com.ar/socio/arizaro-industria-y-servicio-by-duo-s-r-l/
+123,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/arq-top-s-r-l/
+123,CAPEMISA,Topografía,https://capemisa.com.ar/socio/arq-top-s-r-l/
+124,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/autolux-s-a/
+125,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/big-north-argentina/
+126,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/compania-mercantil-agricola-e-industrial-s-a/
+127,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/david-maquinarias/
+128,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/dessin-s-r-l/
+129,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/dm-noa-s-r-l/
+129,CAPEMISA,Insumos,https://capemisa.com.ar/socio/dm-noa-s-r-l/
+130,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/escape-libre/
+130,CAPEMISA,Insumos,https://capemisa.com.ar/socio/escape-libre/
+131,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/gomez-roco-y-cia-srl/
+132,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/gruas-san-antonio-s-r-l/
+132,CAPEMISA,Logística,https://capemisa.com.ar/socio/gruas-san-antonio-s-r-l/
+133,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/grupo-doce-pilares-s-r-l/
+134,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/grupo-hys-s-r-l/
+135,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/hms-productos-y-servicios-s-r-l/
+136,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/ing-ramon-russo/
+136,UIS,Ind. Metalmecanica,https://uis.com.ar/socios/ramon-salvador-russo-moschino/
+137,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/mae-work-service-s-a-s/
+138,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/mari-mari-modular/
+138,CAPEMISA,Logística,https://capemisa.com.ar/socio/mari-mari-modular/
+138,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mari-mari-modular/
+139,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/nestor-a-marozzi-s-a/
+139,CAPEMISA,Logística,https://capemisa.com.ar/socio/nestor-a-marozzi-s-a/
+140,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/noa-generacion-s-r-l/
+141,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/par-s-r-l/
+142,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/pussetto-salta-s-a/
+143,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/rani-s-a/
+144,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/rodamas-35/
+145,CAPEMISA,Geomembrana,https://capemisa.com.ar/socio/geosinteticos-ingenieria-y-obras-s-a/
+145,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/geosinteticos-ingenieria-y-obras-s-a/
+146,CAPEMISA,Geomembrana,https://capemisa.com.ar/socio/isg-s-a-s/
+147,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/abengu-s-a-s/
+148,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/af-ingenieria-s-r-l/
+149,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/agi-construcciones-s-r-l/
+150,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/aminco-s-r-l/
+151,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/ams-trading-consulting-group-s-r-l/
+152,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/arkade-ingeneria-s-r-l/
+153,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/ciclos-ingenieria-s-r-l/
+154,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/consorcio-de-cooperacion-bsd-geco/
+155,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/dam-ingenieria-s-a-s/
+156,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/futura-ingenieria-y-construccion-s-a-s/
+157,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/grupo-7d-ingenieria-vial-topografia/
+158,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/hoyos-ibarra-enrique/
+159,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/hormin-argentina-s-a/
+160,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/imec-engineering-company-s-r-l/
+161,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/ingenieria-minera-s-a/
+162,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/iruya-ingenieria-s-r-l/
+163,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/kaizen-ingenieria-srl/
+164,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/modes-ingenieria/
+165,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/poq/
+166,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/ris-ingenieria-s-r-l/
+167,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/sysmotion-s-r-l/
+168,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/termoarq-s-a-s/
+169,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/var-s-r-l/
+170,CAPEMISA,Insumos,https://capemisa.com.ar/socio/a-a-fluids-control-s-r-l/
+171,CAPEMISA,Insumos,https://capemisa.com.ar/socio/a-b-construcciones-s-r-l/
+172,CAPEMISA,Insumos,https://capemisa.com.ar/socio/agro-supplies-s-r-l/
+173,CAPEMISA,Insumos,https://capemisa.com.ar/socio/alvear-s-a-s/
+174,CAPEMISA,Insumos,https://capemisa.com.ar/socio/arsus-s-a-s/
+175,CAPEMISA,Insumos,https://capemisa.com.ar/socio/bm-mineria-salta-s-a-s/
+176,CAPEMISA,Insumos,https://capemisa.com.ar/socio/bollini-s-a/
+177,CAPEMISA,Insumos,https://capemisa.com.ar/socio/bp-sa/
+178,CAPEMISA,Insumos,https://capemisa.com.ar/socio/carlos-flores-s-h/
+179,CAPEMISA,Insumos,https://capemisa.com.ar/socio/clicer-s-a-s/
+180,CAPEMISA,Insumos,https://capemisa.com.ar/socio/corralon-cedroran-s-r-l/
+181,CAPEMISA,Insumos,https://capemisa.com.ar/socio/corralon-la-tablada/
+182,CAPEMISA,Insumos,https://capemisa.com.ar/socio/crausaz-s-r-l/
+183,CAPEMISA,Insumos,https://capemisa.com.ar/socio/distribuidora-jj-plast/
+184,CAPEMISA,Insumos,https://capemisa.com.ar/socio/el-arca-de-noe/
+185,CAPEMISA,Insumos,https://capemisa.com.ar/socio/fernandez-insua-s-a/
+186,CAPEMISA,Insumos,https://capemisa.com.ar/socio/ferreteria-gay/
+187,CAPEMISA,Insumos,https://capemisa.com.ar/socio/ferreteria-industrial-norte-hidraulica-norte/
+188,CAPEMISA,Insumos,https://capemisa.com.ar/socio/ferrinor-s-a-s/
+189,CAPEMISA,Insumos,https://capemisa.com.ar/socio/fertel-sa/
+190,CAPEMISA,Insumos,https://capemisa.com.ar/socio/gof-soluciones-constructivas-s-r-l/
+191,CAPEMISA,Insumos,https://capemisa.com.ar/socio/grupo-nc-s-a-s/
+192,CAPEMISA,Insumos,https://capemisa.com.ar/socio/hierronort-s-r-l/
+193,CAPEMISA,Insumos,https://capemisa.com.ar/socio/implementos-industriales-srl/
+194,CAPEMISA,Insumos,https://capemisa.com.ar/socio/ingenieria-electrica-s-a-s/
+195,CAPEMISA,Insumos,https://capemisa.com.ar/socio/lopez-diesel-sa/
+196,CAPEMISA,Insumos,https://capemisa.com.ar/socio/luxing-s-r-l/
+197,CAPEMISA,Insumos,https://capemisa.com.ar/socio/mar-andino-s-a-s/
+197,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mar-andino-s-a-s/
+198,CAPEMISA,Insumos,https://capemisa.com.ar/socio/master-clean-s-a/
+199,CAPEMISA,Insumos,https://capemisa.com.ar/socio/mundo-pack-s-r-l/
+199,UIS,Ind. Gráfica,https://uis.com.ar/socios/mundo-pack/
+200,CAPEMISA,Insumos,https://capemisa.com.ar/socio/productos-quimicos-s-r-l/
+201,CAPEMISA,Insumos,https://capemisa.com.ar/socio/salta-plast-polietilenos-s-r-l/
+202,CAPEMISA,Insumos,https://capemisa.com.ar/socio/san-juan-electricidad/
+203,CAPEMISA,Insumos,https://capemisa.com.ar/socio/segufer-s-a/
+204,CAPEMISA,Insumos,https://capemisa.com.ar/socio/velez-la-bulonera/
+205,CAPEMISA,Insumos,https://capemisa.com.ar/socio/ypf-sa/
+206,CAPEMISA,Logística,https://capemisa.com.ar/socio/aramis-s-a-s/
+206,CAPEMISA,Servicios,https://capemisa.com.ar/socio/aramis-s-a-s/
+207,CAPEMISA,Logística,https://capemisa.com.ar/socio/centro-distribuidor-s-a/
+208,CAPEMISA,Logística,https://capemisa.com.ar/socio/cuenca-del-pilcomayo-s-r-l/
+209,CAPEMISA,Logística,https://capemisa.com.ar/socio/flytec/
+210,CAPEMISA,Logística,https://capemisa.com.ar/socio/gye-s-a/
+211,CAPEMISA,Logística,https://capemisa.com.ar/socio/hjsp-s-a-s/
+212,CAPEMISA,Logística,https://capemisa.com.ar/socio/la-veloz-del-norte-s-a/
+212,CAPEMISA,Servicios,https://capemisa.com.ar/socio/la-veloz-del-norte-s-a/
+213,CAPEMISA,Logística,https://capemisa.com.ar/socio/logistica-cn-grupo-s-a/
+214,CAPEMISA,Logística,https://capemisa.com.ar/socio/logistica-del-alto-s-r-l/
+215,CAPEMISA,Logística,https://capemisa.com.ar/socio/logistica-minera/
+216,CAPEMISA,Logística,https://capemisa.com.ar/socio/logistica-salta/
+217,CAPEMISA,Logística,https://capemisa.com.ar/socio/logistica-y-servicios-ambientales-s-r-l/
+218,CAPEMISA,Logística,https://capemisa.com.ar/socio/m-logistica-y-distribucion-s-r-l/
+219,CAPEMISA,Logística,https://capemisa.com.ar/socio/petroandina/
+219,UIS,Ind. Petroquímica,https://uis.com.ar/socios/petroandina-s-r-l/
+220,CAPEMISA,Logística,https://capemisa.com.ar/socio/royal-logistic-s-r-l/
+221,CAPEMISA,Logística,https://capemisa.com.ar/socio/servinorte-s-r-l/
+222,CAPEMISA,Logística,https://capemisa.com.ar/socio/smart-waste-s-a-s/
+223,CAPEMISA,Logística,https://capemisa.com.ar/socio/solaris-s-r-l/
+224,CAPEMISA,Logística,https://capemisa.com.ar/socio/tranor-s-a/
+225,CAPEMISA,Logística,https://capemisa.com.ar/socio/trans-gon-s-r-l/
+226,CAPEMISA,Logística,https://capemisa.com.ar/socio/transporte-antonini-s-r-l/
+227,CAPEMISA,Logística,https://capemisa.com.ar/socio/transporte-cruz-del-sur-s-a/
+228,CAPEMISA,Logística,https://capemisa.com.ar/socio/traxx-s-a/
+229,CAPEMISA,Medicina,https://capemisa.com.ar/socio/centro-diagnostico-molecular-s-r-l/
+230,CAPEMISA,Medicina,https://capemisa.com.ar/socio/centro-medico-balcarce/
+231,CAPEMISA,Medicina,https://capemisa.com.ar/socio/consulmet-s-r-l/
+232,CAPEMISA,Medicina,https://capemisa.com.ar/socio/diagnostico-salta/
+233,CAPEMISA,Medicina,https://capemisa.com.ar/socio/farmacia-par/
+234,CAPEMISA,Medicina,https://capemisa.com.ar/socio/labac-s-r-l/
+235,CAPEMISA,Medicina,https://capemisa.com.ar/socio/labtec-s-r-l/
+236,CAPEMISA,Medicina,https://capemisa.com.ar/socio/med-lab-salta-s-r-l/
+237,CAPEMISA,Medicina,https://capemisa.com.ar/socio/medicina-ambulatoria-salta-s-r-l/
+238,CAPEMISA,Medicina,https://capemisa.com.ar/socio/prisma-salud/
+239,CAPEMISA,Medicina,https://capemisa.com.ar/socio/salud-integrada-s-r-l/
+240,CAPEMISA,Medicina,https://capemisa.com.ar/socio/servicios-medicos-mineros/
+241,CAPEMISA,Medicina,https://capemisa.com.ar/socio/tempus-s-r-l/
+242,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/agv-falcon-drilling-srl/
+243,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/andina-perforaciones-srl/
+244,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/cuarzo-perforaciones-s-r-l/
+245,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/santa-fe-lithium-rigs-s-r-l/
+246,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/wichi-toledo-s-r-l/
+247,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/albiero-sistemas-de-seguridad/
+248,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/a-tiempo-seguridad-s-r-l/
+249,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/consultoria-y-servicios-afines-a-lamineria-s-a-s/
+250,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/guardian-s-r-l/
+251,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/jci-seguridad-s-a-s/
+252,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/noa-tecnologias-s-r-l/
+253,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/secorp-s-r-l/
+254,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/vacu-s-r-l/
+255,CAPEMISA,Servicios,https://capemisa.com.ar/socio/9amas/
+256,CAPEMISA,Servicios,https://capemisa.com.ar/socio/acclimatare-s-r-l/
+257,CAPEMISA,Servicios,https://capemisa.com.ar/socio/ad-argia-s-r-l/
+258,CAPEMISA,Servicios,https://capemisa.com.ar/socio/agro-mix-s-r-l/
+259,CAPEMISA,Servicios,https://capemisa.com.ar/socio/airox-argentina-s-a-s/
+260,CAPEMISA,Servicios,https://capemisa.com.ar/socio/amalgama-lithium-argentina-s-a-s/
+261,CAPEMISA,Servicios,https://capemisa.com.ar/socio/apana/
+262,CAPEMISA,Servicios,https://capemisa.com.ar/socio/artes-graficas-crivelli/
+262,UIS,Ind. Gráfica,https://uis.com.ar/socios/artes-graficas-s-a/
+263,CAPEMISA,Servicios,https://capemisa.com.ar/socio/blg-translations/
+264,CAPEMISA,Servicios,https://capemisa.com.ar/socio/bohm-asesores-de-seguros/
+265,CAPEMISA,Servicios,https://capemisa.com.ar/socio/centinela-servicios-mineros-s-a/
+266,CAPEMISA,Servicios,https://capemisa.com.ar/socio/centro-de-negocios-sla-coworking-s-a-s/
+267,CAPEMISA,Servicios,https://capemisa.com.ar/socio/cia-gutierrez-s-r-l/
+268,CAPEMISA,Servicios,https://capemisa.com.ar/socio/cis-global-s-a-s/
+269,CAPEMISA,Servicios,https://capemisa.com.ar/socio/cocel-s-a/
+269,UIS,Empresa de servicios,https://uis.com.ar/socios/cocel/
+270,CAPEMISA,Servicios,https://capemisa.com.ar/socio/coseguro-familiar/
+271,CAPEMISA,Servicios,https://capemisa.com.ar/socio/cumbres-mineras-s-a-s/
+272,CAPEMISA,Servicios,https://capemisa.com.ar/socio/escudero-inmobiliara-s-a-s/
+273,CAPEMISA,Servicios,https://capemisa.com.ar/socio/esencial-turismo/
+274,CAPEMISA,Servicios,https://capemisa.com.ar/socio/explora-mining-s-r-l/
+275,CAPEMISA,Servicios,https://capemisa.com.ar/socio/fma-bb-coliving-s-a-s/
+276,CAPEMISA,Servicios,https://capemisa.com.ar/socio/gaana-servicios-s-r-l/
+277,CAPEMISA,Servicios,https://capemisa.com.ar/socio/gelift-s-a-s/
+278,CAPEMISA,Servicios,https://capemisa.com.ar/socio/hotel-alejandro-i/
+279,CAPEMISA,Servicios,https://capemisa.com.ar/socio/huayra-group-servicios-mineros-s-a-s/
+280,CAPEMISA,Servicios,https://capemisa.com.ar/socio/ingenieria-sistemas-s-a-s/
+281,CAPEMISA,Servicios,https://capemisa.com.ar/socio/isitec/
+282,CAPEMISA,Servicios,https://capemisa.com.ar/socio/le-pont-s-a-s/
+283,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mahr-hnos-construcciones-metalicas-s-r-l/
+284,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mam/
+285,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mardan-s-a-s/
+286,CAPEMISA,Servicios,https://capemisa.com.ar/socio/metalnor-s-r-l/
+286,UIS,Ind. Metalurgica,https://uis.com.ar/socios/ecomet-s-r-l/
+287,CAPEMISA,Servicios,https://capemisa.com.ar/socio/milimetric-s-a-s/
+288,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mining-technologies-s-a-s/
+289,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mva-s-r-l/
+290,CAPEMISA,Servicios,https://capemisa.com.ar/socio/nivel-seguros-s-a/
+291,CAPEMISA,Servicios,https://capemisa.com.ar/socio/noa-aberturas-s-r-l/
+292,CAPEMISA,Servicios,https://capemisa.com.ar/socio/nor-trading-mineria-s-r-l/
+293,CAPEMISA,Servicios,https://capemisa.com.ar/socio/norte-vial-servis/
+294,CAPEMISA,Servicios,https://capemisa.com.ar/socio/nortraders/
+295,CAPEMISA,Servicios,https://capemisa.com.ar/socio/lassaga-exequiel-fernando/
+296,CAPEMISA,Servicios,https://capemisa.com.ar/socio/pablo-jose-area/
+297,CAPEMISA,Servicios,https://capemisa.com.ar/socio/rf-comercio-exterior-srl/
+298,CAPEMISA,Servicios,https://capemisa.com.ar/socio/salvador-marinaro-e-hijo-s-r-l/
+298,UIS,Ind. Gaseosas y refrescos,https://uis.com.ar/socios/salvador-marinaro-e-hijos-s-r-l/
+299,CAPEMISA,Servicios,https://capemisa.com.ar/socio/sas-asesores-de-seguros-s-r-l/
+300,CAPEMISA,Servicios,https://capemisa.com.ar/socio/sb-group/
+301,CAPEMISA,Servicios,https://capemisa.com.ar/socio/servicios-mineros-y-ambientales-s-a-s/
+302,CAPEMISA,Servicios,https://capemisa.com.ar/socio/servicios-y-explotaciones-mineras-cruz-s-r-l/
+303,CAPEMISA,Servicios,https://capemisa.com.ar/socio/servicios-y-proyectos-mineros-s-r-l/
+304,CAPEMISA,Servicios,https://capemisa.com.ar/socio/servigruas-s-a/
+305,CAPEMISA,Servicios,https://capemisa.com.ar/socio/servtop-s-r-l/
+305,CAPEMISA,Topografía,https://capemisa.com.ar/socio/servtop-s-r-l/
+306,CAPEMISA,Servicios,https://capemisa.com.ar/socio/sg-servicios-geofisicos-s-a-s/
+307,CAPEMISA,Servicios,https://capemisa.com.ar/socio/simple-trade-s-r-l/
+308,CAPEMISA,Servicios,https://capemisa.com.ar/socio/smg-s-r-l/
+309,CAPEMISA,Servicios,https://capemisa.com.ar/socio/soluciones-integrales-a-la-mineria-argentina-s-a-s/
+310,CAPEMISA,Servicios,https://capemisa.com.ar/socio/sump-s-r-l/
+311,CAPEMISA,Servicios,https://capemisa.com.ar/socio/temet-inc-s-a-s/
+311,UIS,Ind. Metalmecanica,https://uis.com.ar/socios/armando-galloni/
+312,CAPEMISA,Servicios,https://capemisa.com.ar/socio/trebol-carrocerias/
+313,CAPEMISA,Servicios,https://capemisa.com.ar/socio/twin-s-r-l/
+314,CAPEMISA,Servicios,https://capemisa.com.ar/socio/ver-connection-s-a-s/
+315,CAPEMISA,Servicios,https://capemisa.com.ar/socio/victorio-binda/
+316,CAPEMISA,Servicios,https://capemisa.com.ar/socio/wkb-group/
+317,CAPEMISA,Servicios,https://capemisa.com.ar/socio/zelandez-argentina-services-s-r-l/
+318,CAPEMISA,Topografía,https://capemisa.com.ar/socio/tecnosuelo/
+319,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/cosalta-ltda/
+320,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/agroindustrias-san-antonio-envases/
+321,UIS,Ind. Tabacalera,https://uis.com.ar/socios/alliance-one-tobacco-argentina-s-a/
+322,UIS,Ind. Química,https://uis.com.ar/socios/austin-powder-argentina-s-a/
+323,UIS,Entidad Financiera,https://uis.com.ar/socios/banco-de-la-nacion-argentina/
+324,UIS,Entidad Financiera,https://uis.com.ar/socios/banco-macro-s-a/
+325,UIS,Ind. Química,https://uis.com.ar/socios/baterplac/
+326,UIS,Ind. Azucareras y derivados,https://uis.com.ar/socios/bio-san-isidro-s-a/
+326,UIS,Ind. Azucarera,https://uis.com.ar/socios/prosal-s-a/
+327,UIS,Ind. Minera,https://uis.com.ar/socios/camara-de-la-mineria-de-salta/
+328,UIS,Ind. Gráfica,https://uis.com.ar/socios/cartoon-sa/
+329,UIS,Ind. Construcción,https://uis.com.ar/socios/ceramica-saltena-s-a/
+330,UIS,Ind. Construcción,https://uis.com.ar/socios/ceramica-alberdi-s-a/
+331,UIS,Ind. Construcción,https://uis.com.ar/socios/ceramica-del-norte-s-a/
+332,UIS,Ind. Cerveceras y Vitivinícolas,https://uis.com.ar/socios/cia-industrial-cervecera-s-a/
+333,UIS,Ind. Tabacalera,https://uis.com.ar/socios/co-pro-tab-ltda/
+334,UIS,Ind. Varias,https://uis.com.ar/socios/combustibles-del-norte-sa/
+335,UIS,Ind. Metalurgica,https://uis.com.ar/socios/cristalizando-s-r-l/
+336,UIS,Ind. Cuero,https://uis.com.ar/socios/curtiembre-arlei-sa/
+337,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/desdelsur/
+338,UIS,Ind. Energía,https://uis.com.ar/socios/edesa-s-a/
+339,UIS,Ind. Metalmecanica,https://uis.com.ar/socios/equipos-electricos-salta-s-a/
+340,UIS,Servicios jurídicos,https://uis.com.ar/socios/estudio-aguilar-asociados/
+341,UIS,Ind. Frigoríficas,https://uis.com.ar/socios/frigorifico-bermejo-sa-inversora-juramento-s-a/
+342,UIS,Ind. Energía,https://uis.com.ar/socios/gasnor-s-a/
+343,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/hijos-de-salvador-munoz-srl/
+344,UIS,Ind. Gráfica,https://uis.com.ar/socios/horizontes-s-a/
+345,UIS,Ind. Frigoríficas,https://uis.com.ar/socios/ind-frigorificas-norte-grande-sa/
+346,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/jofa-s-a/
+347,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/la-moraleja-sa/
+348,UIS,Ind. Tabacalera,https://uis.com.ar/socios/massalin-particulares-s-r-l/
+349,UIS,Ind. Gaseosas y refrescos,https://uis.com.ar/socios/oeste-embotelladora-s-a/
+350,UIS,Ind. Química,https://uis.com.ar/socios/oxigeno-salta-s-r-l/
+351,UIS,Ind. Energía,https://uis.com.ar/socios/pampa-energia-s-a/
+352,UIS,Entidad Financiera,https://uis.com.ar/socios/raul-coledani-y-asociados/
+353,UIS,Ind. Gaseosas y refrescos,https://uis.com.ar/socios/salta-refrescos-s-a/
+354,UIS,Ind. Química,https://uis.com.ar/socios/santiago-saenz-s-a/
+355,UIS,Ind. Azucarera,https://uis.com.ar/socios/seaboard-energias-renovables-s-a/
+356,UIS,Ind. Tabacalera,https://uis.com.ar/socios/tabes-s-a/
+357,UIS,Empresa de servicios,https://uis.com.ar/socios/tecnofer/
+358,UIS,Ind. Energía,https://uis.com.ar/socios/tecpetrol-s-a/
+359,UIS,Empresa de Telecomunicaciones,https://uis.com.ar/socios/telecom-argentina-s-a/
+360,UIS,Ind. Energía,https://uis.com.ar/socios/termoandes-s-a/
+361,UIS,Ind. Textil,https://uis.com.ar/socios/zozzoli-s-a/
+362,UIS,,https://uis.com.ar/socios/agro-san-pedro-dulces-campo-quijano/
+363,UIS,Servicios jurídicos,https://uis.com.ar/socios/aguilar-dandrea-y-asociados/
+364,UIS,Empresa de servicios,https://uis.com.ar/socios/asociacion-mutual-sancor-salud/
+365,UIS,Ind. Construcción,https://uis.com.ar/socios/castellani/
+366,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/dmc/
+367,UIS,Ind. Frigoríficas,https://uis.com.ar/socios/frigorifico-bermejo/
+368,UIS,Ind. Gráfica,https://uis.com.ar/socios/innoa/
+369,UIS,Ind. Metalurgica,https://uis.com.ar/socios/metalcon/
+370,UIS,Ind. Molinera,https://uis.com.ar/socios/molinos-san-bernardo/
+371,UIS,Ind. Gráfica,https://uis.com.ar/socios/petit-plast/
+372,UIS,Ind. Láctea,https://uis.com.ar/socios/prolacsa/
+373,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/semix/
+374,UIS,Ind. Varias,https://uis.com.ar/socios/recapados-santa-monica/

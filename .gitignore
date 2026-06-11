@@ -1,0 +1,13 @@
+# build artifacts — los CSVs en /data son el source of truth
+directorio.db
+data/staging/
+data/resumen_run.json
+
+# desarrollo local
+_dev/
+__pycache__/
+*.pyc
+
+# archivos de oficina temporales
+~$*
+*.docx

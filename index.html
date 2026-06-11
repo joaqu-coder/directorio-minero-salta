@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Directorio Minero Salta</title>
+<meta name="description" content="Directorio de empresas asociadas a CMS Minería, CAPEMISA y UIS — Salta, Argentina.">
+<meta name="theme-color" content="#0a0c10">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0c10; --surface:#12151c; --surface2:#181c26; --border:#222837;
+  --text:#e8eaf0; --muted:#8b93a7; --accent:#e8a33d;
+  --cms:#e8762d; --capemisa:#4d8fe8; --uis:#d64545;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scrollbar-gutter:stable}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:'Manrope',system-ui,sans-serif; font-size:15px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:'DM Mono',monospace}
+a{color:var(--accent);text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+
+/* ---------- navbar ---------- */
+header{
+  position:sticky;top:0;z-index:50;background:rgba(10,12,16,.92);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);
+}
+.nav{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}
+.brand{font-weight:800;font-size:17px;letter-spacing:-.02em;white-space:nowrap}
+.brand small{display:block;font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+.nav-spacer{flex:1}
+.icon-btn{
+  position:relative;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);flex:none;
+}
+.icon-btn:hover{color:var(--text)}
+.icon-btn svg{width:18px;height:18px}
+#badgeNovedades{
+  position:absolute;top:-5px;right:-5px;min-width:17px;height:17px;padding:0 4px;
+  background:var(--accent);color:#000;border-radius:9px;font-size:10px;font-weight:800;
+  display:none;place-items:center;line-height:17px;
+}
+
+/* ---------- buscador + filtros ---------- */
+.controles{max-width:1100px;margin:0 auto;padding:14px 16px 4px}
+.search-wrap{position:relative}
+.search-wrap svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted)}
+#buscador{
+  width:100%;padding:11px 38px;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);color:var(--text);font:inherit;outline:none;
+}
+#buscador:focus{border-color:#3a4357}
+#limpiar{position:absolute;right:6px;top:50%;transform:translateY(-50%);padding:6px 8px;color:var(--muted);display:none}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:10px 0 6px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex:none;padding:5px 12px;border-radius:99px;border:1px solid var(--border);
+  background:var(--surface);color:var(--muted);font-size:12.5px;font-weight:600;white-space:nowrap;
+}
+.chip.activo{color:var(--text);border-color:var(--accent);background:rgba(232,163,61,.1)}
+.chip[data-camara="CMS"].activo{border-color:var(--cms);background:rgba(232,118,45,.12)}
+.chip[data-camara="CAPEMISA"].activo{border-color:var(--capemisa);background:rgba(77,143,232,.12)}
+.chip[data-camara="UIS"].activo{border-color:var(--uis);background:rgba(214,69,69,.12)}
+#contador{max-width:1100px;margin:0 auto;padding:2px 16px;font-size:12px;color:var(--muted)}
+
+/* ---------- grilla de cards ---------- */
+#lista{
+  max-width:1100px;margin:0 auto;padding:10px 16px 60px;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;
+}
+@media(min-width:700px){#lista{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}}
+.card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:12px;display:flex;flex-direction:column;gap:8px;cursor:pointer;
+  transition:border-color .15s, transform .15s;
+}
+.card:hover{border-color:#3a4357;transform:translateY(-2px)}
+.logo-box{
+  width:100%;aspect-ratio:1;border-radius:10px;overflow:hidden;
+  background:#fff;display:grid;place-items:center;
+}
+.logo-box img{width:100%;height:100%;object-fit:contain;padding:8px}
+.logo-ini{
+  width:100%;height:100%;display:grid;place-items:center;font-weight:800;font-size:34px;
+  color:#fff;letter-spacing:.02em;
+}
+.card h3{font-size:13.5px;font-weight:700;line-height:1.3;letter-spacing:-.01em}
+.badges{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto}
+.badge{
+  font-family:'DM Mono',monospace;font-size:9.5px;padding:2px 7px;border-radius:5px;
+  letter-spacing:.04em;border:1px solid var(--border);color:var(--muted);
+}
+.badge.camara{font-weight:500;color:#fff;border:none}
+.badge.camara.CMS{background:var(--cms)}
+.badge.camara.CAPEMISA{background:var(--capemisa)}
+.badge.camara.UIS{background:var(--uis)}
+#vacio{grid-column:1/-1;text-align:center;color:var(--muted);padding:60px 0;display:none}
+
+/* ---------- modal ficha ---------- */
+dialog{
+  border:none;background:transparent;padding:0;max-width:560px;width:calc(100% - 24px);
+  margin:auto;outline:none;
+}
+dialog :focus{outline:none}
+dialog :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+dialog::backdrop{background:rgba(0,0,0,.65);backdrop-filter:blur(3px)}
+.ficha{
+  background:var(--surface);border:1px solid var(--border);border-radius:18px;
+  max-height:88vh;overflow-y:auto;padding:22px;position:relative;
+}
+.ficha-top{display:flex;gap:16px;align-items:flex-start}
+.ficha .logo-box{width:96px;flex:none;aspect-ratio:1}
+.ficha h2{font-size:19px;font-weight:800;letter-spacing:-.02em;line-height:1.25;padding-right:30px}
+.ficha .actividad{color:var(--muted);font-size:13px;margin-top:4px}
+.cerrar{position:absolute;top:12px;right:12px;color:var(--muted);padding:8px;font-size:18px;line-height:1}
+.ficha .badges{margin:14px 0 4px}
+.datos-lista{margin-top:14px;display:flex;flex-direction:column;gap:2px}
+.dato{
+  display:flex;gap:12px;align-items:baseline;padding:9px 10px;border-radius:9px;
+  font-size:13.5px;
+}
+.dato:hover{background:var(--surface2)}
+.dato .k{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;width:72px;flex:none}
+.dato .v{word-break:break-word}
+.dato .v a{color:var(--text);border-bottom:1px solid #3a4357}
+.sin-info{color:var(--muted);font-style:italic;opacity:.7}
+.cruzado{font-size:12px;color:var(--muted);margin-top:3px}
+.cruzado a{color:var(--accent);cursor:pointer}
+.ficha-acciones{display:flex;gap:8px;margin-top:18px}
+.btn{
+  flex:1;padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);
+  font-weight:700;font-size:13px;text-align:center;
+}
+.btn:hover{border-color:#3a4357}
+.btn.primario{background:var(--accent);color:#000;border-color:var(--accent)}
+.hist{margin-top:18px;border-top:1px solid var(--border);padding-top:12px}
+.hist h4{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;font-family:'DM Mono',monospace}
+.hist-item{font-size:12px;color:var(--muted);padding:3px 0}
+.hist-item b{color:var(--text);font-weight:600}
+
+/* ---------- panel changelog ---------- */
+#panelNovedades .ficha{max-width:560px}
+.nov-item{padding:10px;border-radius:9px;border-bottom:1px solid var(--border);font-size:13px}
+.nov-item:last-child{border-bottom:none}
+.nov-fecha{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--muted)}
+.nov-tipo{
+  display:inline-block;font-family:'DM Mono',monospace;font-size:9.5px;padding:1px 7px;
+  border-radius:5px;margin-left:6px;letter-spacing:.05em;
+}
+.nov-tipo.alta{background:rgba(80,200,120,.15);color:#50c878}
+.nov-tipo.baja{background:rgba(214,69,69,.15);color:#d64545}
+.nov-tipo.modificacion{background:rgba(232,163,61,.15);color:var(--accent)}
+.nov-tipo.nuevo_rubro{background:rgba(77,143,232,.15);color:var(--capemisa)}
+.nov-empresa{font-weight:700;cursor:pointer}
+.nov-detalle{color:var(--muted);font-size:12px;margin-top:2px;word-break:break-word}
+
+footer{
+  max-width:1100px;margin:0 auto;padding:18px 16px 40px;color:var(--muted);
+  font-size:11.5px;font-family:'DM Mono',monospace;border-top:1px solid var(--border);
+}
+
+/* ---------- impresión ---------- */
+@media print{
+  body{background:#fff;color:#000;font-size:11pt}
+  header,.controles,#contador,footer,dialog,.no-print{display:none !important}
+  #lista{display:block;max-width:none;padding:0}
+  .card{
+    display:flex;flex-direction:row;align-items:center;gap:14px;border:none;
+    border-bottom:1px solid #bbb;border-radius:0;background:#fff;color:#000;
+    padding:8px 0;page-break-inside:avoid;transform:none;
+  }
+  .logo-box{width:58px;height:58px;aspect-ratio:auto;flex:none;border:1px solid #ddd}
+  .logo-ini{color:#000 !important;background:#eee !important;font-size:18px}
+  .card h3{color:#000;font-size:11pt}
+  .card .extra-print{display:block !important;font-size:9pt;color:#333}
+  .badge{color:#333;border-color:#bbb}
+  .badge.camara{color:#000;background:#eee !important}
+}
+.extra-print{display:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">Directorio Minero Salta<small>CMS · CAPEMISA · UIS</small></div>
+    <div class="nav-spacer"></div>
+    <button class="icon-btn no-print" id="btnImprimir" title="Imprimir vista actual" aria-label="Imprimir">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+    </button>
+    <button class="icon-btn no-print" id="btnCompartir" title="Compartir directorio" aria-label="Compartir">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+    </button>
+    <button class="icon-btn no-print" id="btnNovedades" title="Novedades" aria-label="Novedades">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+      <span id="badgeNovedades"></span>
+    </button>
+  </div>
+</header>
+
+<div class="controles no-print">
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <input id="buscador" type="search" placeholder="Buscar empresa, actividad, rubro, representante…" autocomplete="off">
+    <button id="limpiar" aria-label="Limpiar">✕</button>
+  </div>
+  <div class="chips" id="chipsCamaras"></div>
+  <div class="chips" id="chipsRubros"></div>
+</div>
+
+<div id="contador"></div>
+<main id="lista"><div id="vacio">Sin resultados para esa búsqueda.</div></main>
+
+<dialog id="modalFicha"><div class="ficha" id="fichaContenido"></div></dialog>
+<dialog id="panelNovedades"><div class="ficha" id="novedadesContenido"></div></dialog>
+
+<footer>
+  <span id="metaGenerado"></span> · datos públicos de cmsalta.com.ar, capemisa.com.ar y uis.com.ar
+</footer>
+
+<script>
+'use strict';
+const FLAGS = { boletin: false, boletinApi: '/api/buscar' };
+const $ = s => document.querySelector(s);
+let DB = { empresas: [], cambios: [], generado: null };
+let filtro = { q: '', camara: null, rubro: null };
+let porContacto = {};
+
+/* ---------- helpers ---------- */
+const norm = s => (s || '').toLowerCase()
+  .normalize('NFD').replace(/[̀-ͯ]/g, '');
+const esc = s => (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const iniciales = n => n.split(/\s+/).filter(w => /\w/.test(w)).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+const hue = n => { let h = 0; for (const c of n) h = (h * 31 + c.charCodeAt(0)) % 360; return h; };
+
+function logoHtml(e, lazy = true) {
+  const fallback = `<div class="logo-ini" style="background:hsl(${hue(e.nombre)},35%,28%)">${esc(iniciales(e.nombre))}</div>`;
+  if (!e.logo) return `<div class="logo-box">${fallback}</div>`;
+  return `<div class="logo-box"><img src="${esc(e.logo)}" alt="" ${lazy ? 'loading="lazy"' : ''}
+    onerror="this.parentNode.innerHTML='${fallback.replace(/'/g, '&#39;').replace(/"/g, '&quot;')}'"></div>`;
+}
+
+function badgesHtml(e) {
+  const camaras = [...new Set(e.membresias.map(m => m.camara))];
+  const rubros = [...new Set(e.membresias.map(m => m.rubro).filter(r => r))];
+  return `<div class="badges">
+    ${camaras.map(c => `<span class="badge camara ${c}">${c}</span>`).join('')}
+    ${rubros.slice(0, 3).map(r => `<span class="badge">${esc(r)}</span>`).join('')}
+    ${rubros.length > 3 ? `<span class="badge">+${rubros.length - 3}</span>` : ''}
+  </div>`;
+}
+
+/* ---------- filtrado + render lista ---------- */
+function filtrar() {
+  const q = norm(filtro.q);
+  return DB.empresas.filter(e => {
+    if (filtro.camara && !e.membresias.some(m => m.camara === filtro.camara)) return false;
+    if (filtro.rubro && !e.membresias.some(m => m.rubro === filtro.rubro)) return false;
+    if (!q) return true;
+    return e._busqueda.includes(q);
+  });
+}
+
+function renderLista() {
+  const items = filtrar();
+  const lista = $('#lista');
+  lista.querySelectorAll('.card').forEach(c => c.remove());
+  $('#vacio').style.display = items.length ? 'none' : 'block';
+  $('#contador').textContent = `${items.length} empresa${items.length === 1 ? '' : 's'}`;
+  const frag = document.createDocumentFragment();
+  for (const e of items) {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+      ${logoHtml(e)}
+      <h3>${esc(e.nombre)}</h3>
+      <div class="extra-print">
+        ${esc([e.actividad, e.direccion, e.telefono, e.email, e.web].filter(Boolean).join(' · '))}
+      </div>
+      ${badgesHtml(e)}`;
+    card.addEventListener('click', () => abrirFicha(e));
+    frag.appendChild(card);
+  }
+  lista.appendChild(frag);
+}
+
+/* ---------- chips ---------- */
+function renderChips() {
+  const camaras = [...new Set(DB.empresas.flatMap(e => e.membresias.map(m => m.camara)))];
+  $('#chipsCamaras').innerHTML = camaras.map(c =>
+    `<button class="chip" data-camara="${c}">${c}</button>`).join('');
+  const counts = {};
+  DB.empresas.forEach(e => [...new Set(e.membresias.map(m => m.rubro).filter(r => r))]
+    .forEach(r => counts[r] = (counts[r] || 0) + 1));
+  const rubros = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+  $('#chipsRubros').innerHTML = rubros.map(r =>
+    `<button class="chip" data-rubro="${esc(r)}">${esc(r)} <span class="mono">${counts[r]}</span></button>`).join('');
+
+  $('#chipsCamaras').addEventListener('click', ev => {
+    const b = ev.target.closest('.chip'); if (!b) return;
+    filtro.camara = filtro.camara === b.dataset.camara ? null : b.dataset.camara;
+    actualizarChips(); renderLista();
+  });
+  $('#chipsRubros').addEventListener('click', ev => {
+    const b = ev.target.closest('.chip'); if (!b) return;
+    filtro.rubro = filtro.rubro === b.dataset.rubro ? null : b.dataset.rubro;
+    actualizarChips(); renderLista();
+  });
+}
+function actualizarChips() {
+  document.querySelectorAll('#chipsCamaras .chip').forEach(c =>
+    c.classList.toggle('activo', c.dataset.camara === filtro.camara));
+  document.querySelectorAll('#chipsRubros .chip').forEach(c =>
+    c.classList.toggle('activo', c.dataset.rubro === filtro.rubro));
+}
+
+/* ---------- ficha ---------- */
+const SIN_INFO = '<span class="sin-info">Sin información</span>';
+function dato(k, vHtml, siempre = false) {
+  if (!vHtml && !siempre) return '';
+  return `<div class="dato"><span class="k">${k}</span><span class="v">${vHtml || SIN_INFO}</span></div>`;
+}
+
+function abrirFicha(e, pushUrl = true) {
+  const cont = $('#fichaContenido');
+  const cambiosEmpresa = DB.cambios.filter(c => c.empresa_id === e.id).slice(0, 8);
+  const colegas = (porContacto[norm(e.contacto)] || []).filter(x => x.id !== e.id);
+  const webHost = e.web ? e.web.replace(/^https?:\/\//, '').replace(/\/$/, '') : null;
+
+  cont.innerHTML = `
+    <button class="cerrar" aria-label="Cerrar">✕</button>
+    <div class="ficha-top">
+      ${logoHtml(e, false)}
+      <div>
+        <h2>${esc(e.nombre)}</h2>
+        ${e.actividad ? `<div class="actividad">${esc(e.actividad)}</div>` : ''}
+      </div>
+    </div>
+    ${badgesHtml(e)}
+    ${e.descripcion ? `<p style="font-size:13px;color:var(--muted);margin-top:10px">${esc(e.descripcion)}</p>` : ''}
+    <div class="datos-lista">
+      ${dato('Dirección', e.direccion ? esc(e.direccion) + (e.ubicacion ? ` <span style="color:var(--muted)">· ${esc(e.ubicacion)}</span>` : '') : (e.ubicacion ? esc(e.ubicacion) : null), true)}
+      ${dato('Teléfono', e.telefono ? `<a href="tel:${esc(e.telefono.replace(/[^\d+]/g, ''))}" class="mono">${esc(e.telefono)}</a>` : null, true)}
+      ${dato('Email', e.email ? `<a href="mailto:${esc(e.email)}" class="mono">${esc(e.email)}</a>` : null, true)}
+      ${dato('Web', e.web ? `<a href="${esc(e.web)}" target="_blank" rel="noopener" class="mono">${esc(webHost)}</a>` : null, true)}
+      ${dato('Instagram', e.instagram ? `<a href="${esc(e.instagram)}" target="_blank" rel="noopener" class="mono">@${esc(e.instagram.replace(/\/$/, '').split('/').pop())}</a>` : null)}
+      ${dato('Facebook', e.facebook ? `<a href="${esc(e.facebook)}" target="_blank" rel="noopener" class="mono">${esc(e.facebook.replace(/\/$/, '').split('/').pop())}</a>` : null)}
+      ${dato('LinkedIn', e.linkedin ? `<a href="${esc(e.linkedin)}" target="_blank" rel="noopener" class="mono">${esc(e.linkedin.replace(/\/$/, '').split('/').pop())}</a>` : null)}
+      ${dato('Contacto', e.contacto ? esc(e.contacto) + (colegas.length ? `<div class="cruzado">también en: ${colegas.map(x => `<a data-id="${x.id}">${esc(x.nombre)}</a>`).join(', ')}</div>` : '') : null)}
+      ${dato('Membresías', e.membresias.map(m => `${m.camara}${m.rubro ? ` / ${esc(m.rubro)}` : ''}`).join('<br>'))}
+    </div>
+    <div class="ficha-acciones no-print">
+      <button class="btn primario" id="btnCompartirFicha">Compartir</button>
+      ${FLAGS.boletin ? `<button class="btn" id="btnBoletin">Buscar en Boletín</button>` : ''}
+    </div>
+    ${cambiosEmpresa.length ? `<div class="hist"><h4>Historial</h4>${cambiosEmpresa.map(c =>
+      `<div class="hist-item"><span class="mono">${c.fecha.slice(0, 10)}</span> · ${c.tipo}${c.campo ? ` <b>${esc(c.campo)}</b>` : ''}${c.despues ? ` → ${esc(c.despues)}` : ''}</div>`).join('')}</div>` : ''}
+  `;
+
+  cont.querySelector('.cerrar').onclick = () => $('#modalFicha').close();
+  cont.querySelectorAll('.cruzado a').forEach(a =>
+    a.onclick = () => abrirFicha(DB.empresas.find(x => x.id === +a.dataset.id)));
+  cont.querySelector('#btnCompartirFicha').onclick = () => compartirFicha(e);
+  if (FLAGS.boletin) cont.querySelector('#btnBoletin').onclick = () =>
+    window.open(`${FLAGS.boletinApi}?q=${encodeURIComponent(e.nombre)}`, '_blank');
+
+  const modal = $('#modalFicha');
+  if (!modal.open) modal.showModal();
+  if (pushUrl) history.replaceState(null, '', `?empresa=${e.slug}`);
+}
+
+$('#modalFicha').addEventListener('close', () => history.replaceState(null, '', location.pathname));
+document.querySelectorAll('dialog').forEach(d =>
+  d.addEventListener('click', ev => { if (ev.target === d) d.close(); }));
+
+/* ---------- compartir ---------- */
+async function compartir(data) {
+  if (navigator.share) {
+    try { await navigator.share(data); return; } catch (e) { if (e.name === 'AbortError') return; }
+  }
+  await navigator.clipboard.writeText(data.url ? `${data.text}\n${data.url}` : data.text);
+  alert('Copiado al portapapeles');
+}
+function compartirFicha(e) {
+  const lineas = [e.nombre];
+  if (e.actividad) lineas.push(e.actividad);
+  if (e.direccion) lineas.push(`📍 ${e.direccion}`);
+  if (e.telefono) lineas.push(`📞 ${e.telefono}`);
+  if (e.email) lineas.push(`✉️ ${e.email}`);
+  if (e.web) lineas.push(`🌐 ${e.web}`);
+  compartir({
+    title: e.nombre,
+    text: lineas.join('\n'),
+    url: `${location.origin}${location.pathname}?empresa=${e.slug}`,
+  });
+}
+$('#btnCompartir').onclick = () => compartir({
+  title: 'Directorio Minero Salta',
+  text: 'Directorio de empresas asociadas a CMS, CAPEMISA y UIS',
+  url: location.origin + location.pathname,
+});
+$('#btnImprimir').onclick = () => window.print();
+
+/* ---------- novedades ---------- */
+function novedadesNoVistas() {
+  const vistoHasta = localStorage.getItem('vistoHasta') || '';
+  return DB.cambios.filter(c => c.fecha > vistoHasta);
+}
+function actualizarBadge() {
+  const n = novedadesNoVistas().length;
+  const b = $('#badgeNovedades');
+  b.style.display = n ? 'grid' : 'none';
+  b.textContent = n > 99 ? '99+' : n;
+}
+$('#btnNovedades').onclick = () => {
+  const cont = $('#novedadesContenido');
+  const items = DB.cambios.slice(0, 60);
+  cont.innerHTML = `
+    <button class="cerrar" aria-label="Cerrar">✕</button>
+    <h2 style="font-size:17px;margin-bottom:12px">🔔 Novedades</h2>
+    ${items.length ? items.map(c => `
+      <div class="nov-item">
+        <span class="nov-fecha">${c.fecha.slice(0, 10)}</span>
+        <span class="nov-tipo ${c.tipo}">${c.tipo.replace('_', ' ')}</span>
+        <div class="nov-empresa" ${c.empresa_id ? `data-id="${c.empresa_id}"` : ''}>${esc(c.empresa)}</div>
+        ${c.campo || c.despues ? `<div class="nov-detalle">${c.campo ? `<b>${esc(c.campo)}</b>: ` : ''}${c.antes ? `${esc(c.antes)} → ` : ''}${esc(c.despues || '')}</div>` : ''}
+      </div>`).join('') : '<p style="color:var(--muted)">Sin novedades registradas todavía.</p>'}
+  `;
+  cont.querySelector('.cerrar').onclick = () => $('#panelNovedades').close();
+  cont.querySelectorAll('.nov-empresa[data-id]').forEach(el =>
+    el.onclick = () => {
+      const e = DB.empresas.find(x => x.id === +el.dataset.id);
+      if (e) { $('#panelNovedades').close(); abrirFicha(e); }
+    });
+  $('#panelNovedades').showModal();
+  localStorage.setItem('vistoHasta', new Date().toISOString().slice(0, 19).replace('T', ' '));
+  actualizarBadge();
+};
+
+/* ---------- buscador ---------- */
+let debounce;
+$('#buscador').addEventListener('input', ev => {
+  clearTimeout(debounce);
+  $('#limpiar').style.display = ev.target.value ? 'block' : 'none';
+  debounce = setTimeout(() => { filtro.q = ev.target.value; renderLista(); }, 120);
+});
+$('#limpiar').onclick = () => {
+  $('#buscador').value = ''; filtro.q = ''; $('#limpiar').style.display = 'none'; renderLista();
+};
+
+/* ---------- init ---------- */
+(async function init() {
+  try {
+    const res = await fetch('data/empresas.json');
+    DB = await res.json();
+  } catch (e) {
+    $('#contador').textContent = 'Error cargando datos.';
+    return;
+  }
+  for (const e of DB.empresas) {
+    e._busqueda = norm([
+      e.nombre, e.actividad, e.contacto, e.descripcion, e.ubicacion, e.direccion,
+      ...e.membresias.map(m => m.rubro),
+    ].filter(Boolean).join(' '));
+    const c = norm(e.contacto);
+    if (c) (porContacto[c] = porContacto[c] || []).push(e);
+  }
+  $('#metaGenerado').textContent = DB.generado ? `actualizado ${DB.generado.slice(0, 10)}` : '';
+  renderChips();
+  renderLista();
+  actualizarBadge();
+  const slug = new URLSearchParams(location.search).get('empresa');
+  if (slug) {
+    const e = DB.empresas.find(x => x.slug === slug);
+    if (e) abrirFicha(e, false);
+  }
+})();
+</script>
+</body>
+</html>
