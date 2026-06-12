@@ -38,6 +38,25 @@ jobs:
           python matching.py
           python build_db.py
 
+      - name: Enriquecer altas nuevas
+        working-directory: scraper
+        run: |
+          ALTAS=$(python -c "
+          import csv, pathlib
+          p = pathlib.Path('../data/cambios.csv')
+          if not p.exists(): print(0); exit()
+          rows = list(csv.DictReader(p.open()))
+          print(sum(1 for r in rows if r.get('tipo') == 'alta'))
+          ")
+          echo "Altas detectadas: $ALTAS"
+          if [ "$ALTAS" -gt 0 ]; then
+            echo "::notice::$ALTAS empresa(s) nueva(s) — corriendo enriquecimiento delta"
+            pip install requests --quiet
+            python enriquecer2.py
+          else
+            echo "Sin altas nuevas — enriquecimiento omitido."
+          fi
+
       - name: Commit si hay cambios
         run: |
           git config user.name "scraper-bot"
