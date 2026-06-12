@@ -62,7 +62,7 @@ def enriquecer_dominio(dominio, url_original):
         return None
 
     info = {}
-    logo, es_svg = extraer_logo(page, str(page.url) or url)
+    logo, es_svg = extraer_logo(page, str(page.url) if page.url else url)
     if logo:
         info["logo_url"] = logo
         info["logo_es_svg"] = es_svg

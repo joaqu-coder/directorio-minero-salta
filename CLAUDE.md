@@ -16,7 +16,7 @@ Usuario: Judas. Comunicación en español, directa, sin relleno. Patches quirúr
 | Scraper | **Scrapling** (verificado: BSD 3-Clause, gratuito, v0.4.9) |
 | Frontend | **Single-file HTML** (`index.html`), sin frameworks, sin build step |
 | Estilo | Dark theme, mobile-first, minimalista. Fuentes: Manrope (UI) + DM Mono (datos) |
-| Hosting frontend | Cloudflare Pages — **direct upload via wrangler en Actions** (sin integración Git; requiere secrets `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` en el repo). Proyecto: `directorio-minero-salta` |
+| Hosting frontend | **GitHub Pages** — deploy automático vía GitHub Actions (`.github/workflows/pages.yml`). Repo público requerido. URL: `https://<owner>.github.io/<repo>/`. Ver regla general de hosting más abajo. |
 | Scheduler | GitHub Actions, cron semanal (lunes 06:00 ART = `0 9 * * 1` UTC) |
 | Datos en frontend | SQLite exportado a JSON estático (`empresas.json`) consumido por fetch — NO servidor backend |
 
@@ -27,6 +27,59 @@ pip install scrapling curl_cffi browserforge orjson playwright
 ```
 
 **API Scrapling 0.4.9** (verificado): `Fetcher.get(url, stealthy_headers=True, follow_redirects=True)` → Response con `.status`, `.css(sel)`. `css('x::text').get()` → TextHandler con `.clean()`; `css('x::text').getall()` → lista; `css('a::attr(href)').get()`. NO existe `css_first`. `retries=0` rompe la sesión interna ("No active session available") — usar `retries>=1`. Helpers en `scraper/common.py`: `texto(nodo, sel)`, `attr(nodo, sel)`.
+
+---
+
+## Regla general de hosting (aplica a este y futuros proyectos)
+
+**Punto de partida siempre: GitHub Pages.**
+- Repo público + workflow `.github/workflows/pages.yml` con `actions/deploy-pages`.
+- Cero cuentas externas, cero secrets, deploy automático en cada push a `main`.
+- Suficiente para: sitios estáticos, SPAs, frontends con fetch a JSON, portfolios, directorios.
+
+**Escalar a otra plataforma solo si GitHub Pages no alcanza:**
+
+| Necesidad | Plataforma |
+|---|---|
+| CDN edge global + headers custom + redirects complejos | **Cloudflare Pages** |
+| Serverless functions junto al frontend (API routes) | **Cloudflare Pages** (Workers) o **Vercel** |
+| Preview deploys por PR + entornos múltiples | **Vercel** o **Netlify** |
+| Backend full (DB, auth, workers de larga duración) | **Fly.io** o **Railway** |
+| Dominio propio con SSL automático | Cualquiera de los anteriores (todos lo ofrecen gratis) |
+
+**Criterio de decisión al arrancar un proyecto nuevo:**
+1. ¿Es estático o SPA con datos en JSON/CDN? → **GitHub Pages**.
+2. ¿Necesita lógica server-side o edge functions? → evaluar Cloudflare Pages primero (más barato), luego Vercel.
+3. ¿Necesita base de datos persistente o procesos largos? → Fly.io o Railway.
+
+El workflow mínimo de GitHub Pages:
+```yaml
+# .github/workflows/pages.yml
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Armar dist
+        run: mkdir -p dist && cp index.html dist/  # ajustar según proyecto
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+      - uses: actions/deploy-pages@v4
+        id: deployment
+```
 
 ---
 
