@@ -16,7 +16,7 @@ Usuario: Judas. Comunicación en español, directa, sin relleno. Patches quirúr
 | Scraper | **Scrapling** (verificado: BSD 3-Clause, gratuito, v0.4.9) |
 | Frontend | **Single-file HTML** (`index.html`), sin frameworks, sin build step |
 | Estilo | Dark theme, mobile-first, minimalista. Fuentes: Manrope (UI) + DM Mono (datos) |
-| Hosting frontend | Cloudflare Pages |
+| Hosting frontend | Cloudflare Pages — **direct upload via wrangler en Actions** (sin integración Git; requiere secrets `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` en el repo). Proyecto: `directorio-minero-salta` |
 | Scheduler | GitHub Actions, cron semanal (lunes 06:00 ART = `0 9 * * 1` UTC) |
 | Datos en frontend | SQLite exportado a JSON estático (`empresas.json`) consumido por fetch — NO servidor backend |
 
@@ -132,7 +132,18 @@ Single-file `index.html`. Sin dependencias externas salvo Google Fonts (Manrope,
 │   ├── build_db.py
 │   └── requirements.txt
 └── .github/workflows/
-    └── scrape-semanal.yml      # cron lunes 06:00 ART
+    ├── scrape-semanal.yml      # cron lunes 06:00 ART (+ deploy al final)
+    └── deploy.yml              # deploy Pages en cada push a main
+```
+
+Repo: `https://github.com/joaqu-coder/directorio-minero-salta` (privado).
+Deploy: ambos workflows omiten el deploy con un notice si falta `CLOUDFLARE_API_TOKEN`.
+Para activarlo (una sola vez, token en dash.cloudflare.com → My Profile → API Tokens → template "Edit Cloudflare Workers" o permiso `Cloudflare Pages:Edit`):
+
+```bash
+gh secret set CLOUDFLARE_API_TOKEN --repo joaqu-coder/directorio-minero-salta
+gh secret set CLOUDFLARE_ACCOUNT_ID --repo joaqu-coder/directorio-minero-salta
+gh workflow run deploy.yml --repo joaqu-coder/directorio-minero-salta
 ```
 
 ## Comandos permitidos

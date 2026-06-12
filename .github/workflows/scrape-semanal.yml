@@ -65,3 +65,18 @@ jobs:
           FECHA=$(date -u +%Y-%m-%d)
           git commit -m "feat(data): ${RESUMEN} — run ${FECHA}"
           git push
+
+      # el push con GITHUB_TOKEN no dispara deploy.yml: deployar acá mismo
+      - name: Deploy Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::notice::Falta CLOUDFLARE_API_TOKEN — deploy omitido."
+            exit 0
+          fi
+          mkdir -p dist/data
+          cp index.html dist/
+          cp data/empresas.json dist/data/
+          npx wrangler@4 pages deploy dist --project-name=directorio-minero-salta --branch=main

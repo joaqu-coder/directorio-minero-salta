@@ -1,0 +1,44 @@
+name: Deploy Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Verificar credenciales
+        id: cred
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "listo=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Falta el secret CLOUDFLARE_API_TOKEN — deploy omitido."
+          else
+            echo "listo=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.cred.outputs.listo == 'true'
+
+      - name: Armar dist
+        if: steps.cred.outputs.listo == 'true'
+        run: |
+          mkdir -p dist/data
+          cp index.html dist/
+          cp data/empresas.json dist/data/
+
+      - name: Crear proyecto Pages si no existe
+        if: steps.cred.outputs.listo == 'true'
+        run: npx wrangler@4 pages project create directorio-minero-salta --production-branch=main 2>/dev/null || true
+
+      - name: Deploy
+        if: steps.cred.outputs.listo == 'true'
+        run: npx wrangler@4 pages deploy dist --project-name=directorio-minero-salta --branch=main
