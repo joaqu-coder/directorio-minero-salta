@@ -6,6 +6,11 @@
 <title>Directorio Minero Salta</title>
 <meta name="description" content="Directorio de empresas asociadas a CMS Minería, CAPEMISA y UIS — Salta, Argentina.">
 <meta name="theme-color" content="#0a0c10">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Dir. Minero">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -482,6 +487,10 @@ $('#limpiar').onclick = () => {
     if (e) abrirFicha(e, false);
   }
 })();
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
 </script>
 </body>
 </html>

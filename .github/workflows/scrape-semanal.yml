@@ -78,5 +78,8 @@ jobs:
           fi
           mkdir -p dist/data
           cp index.html dist/
+          cp manifest.json dist/
+          cp icon.svg dist/
+          cp sw.js dist/
           cp data/empresas.json dist/data/
           npx wrangler@4 pages deploy dist --project-name=directorio-minero-salta --branch=main

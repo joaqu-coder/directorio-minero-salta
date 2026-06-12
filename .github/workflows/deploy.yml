@@ -33,6 +33,9 @@ jobs:
         run: |
           mkdir -p dist/data
           cp index.html dist/
+          cp manifest.json dist/
+          cp icon.svg dist/
+          cp sw.js dist/
           cp data/empresas.json dist/data/
 
       - name: Crear proyecto Pages si no existe
