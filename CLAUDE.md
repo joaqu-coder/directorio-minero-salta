@@ -8,6 +8,24 @@ Usuario: Judas. Comunicación en español, directa, sin relleno. Patches quirúr
 
 ---
 
+## Principio de eficiencia (regla de operación)
+
+**Máximo resultado, mínimo gasto de tokens.**
+
+1. **Usar ECC antes de improvisar.** Este repo tiene instalado [everything-claude-code](https://github.com/affaan-m/everything-claude-code): 64 agents, 197 skills, 84 commands en `~/.claude/`. Antes de escribir código o lanzar búsquedas, verificar si existe un skill o agente que ya lo resuelve (`/ecc-guide` para navegar el catálogo).
+
+2. **Un recorrido, no varios.** Si una tarea requiere múltiples pasadas (scraping, enrichment, búsqueda), detectar el patrón de loop temprano y reemplazarlo por un trigger delta — solo procesar lo que cambió, nunca re-procesar todo.
+
+3. **Paralelizar independientes, serializar dependientes.** Lanzar agentes en paralelo para ángulos independientes. No lanzar un agente si el resultado no cambia la acción siguiente.
+
+4. **Frenar ante rendimientos decrecientes.** Si después de 2 intentos una fuente sigue bloqueada (403, timeout, sin datos), abandonar esa vía y reportar el estado — no seguir quemando requests.
+
+5. **Subagentes para contexto grande.** Usar `Agent` para exploración amplia del codebase o investigación multi-fuente. Mantener el contexto principal limpio para decisiones.
+
+6. **Commits atómicos en cada cambio funcional.** No acumular cambios — commit + push después de cada unidad de trabajo para no perder trabajo en sesiones efímeras.
+
+---
+
 ## Decisiones fijas (NO renegociar)
 
 | Decisión | Valor |
