@@ -105,12 +105,14 @@ class Entidad:
 
 
 def construir_entidades(registros: list) -> tuple[list, list]:
-    """Cascada: 1) nombre_norm exacto  2) dominio  3) fuzzy -> solo log."""
+    """Cascada: 1) nombre_norm exacto  2) dominio  3) fuzzy  4) representante -> solo log."""
     entidades = []
     por_norm = {}
     por_compacto = {}  # norm sin espacios: matchea "co pro tab" con "coprotab"
     por_dominio = {}
+    por_contacto = {}  # contacto_norm -> list[Entidad]
     candidatos = []
+    pares_vistos = set()  # evita duplicar el mismo par en candidatos
 
     for reg in registros:
         if not reg.get("nombre"):
@@ -128,12 +130,31 @@ def construir_entidades(registros: list) -> tuple[list, list]:
             for otra_norm, otra_ent in por_norm.items():
                 s = similitud(norm, otra_norm)
                 if 0.85 <= s < 1.0:
-                    candidatos.append({
-                        "nombre_a": reg["nombre"],
-                        "nombre_b": otra_ent.campos["nombre"],
-                        "similitud": round(s, 3),
-                        "regla": "levenshtein",
-                    })
+                    par = tuple(sorted([norm, otra_norm]))
+                    if par not in pares_vistos:
+                        pares_vistos.add(par)
+                        candidatos.append({
+                            "nombre_a": reg["nombre"],
+                            "nombre_b": otra_ent.campos["nombre"],
+                            "similitud": round(s, 3),
+                            "regla": "levenshtein",
+                        })
+            # regla 4: representante coincidente + rubro coincidente -> candidato
+            contacto_norm = normalizar_nombre(reg.get("contacto_nombre") or "")
+            rubro_reg = (reg.get("camara") or "", reg.get("rubro") or "")
+            if contacto_norm and len(contacto_norm) > 3:
+                for otra_ent in por_contacto.get(contacto_norm, []):
+                    rubros_otra = {(m[0], m[1]) for m in otra_ent.membresias}
+                    if rubro_reg in rubros_otra or reg.get("camara") in {m[0] for m in otra_ent.membresias}:
+                        par = tuple(sorted([norm, otra_ent.campos["nombre_norm"] or ""]))
+                        if par not in pares_vistos:
+                            pares_vistos.add(par)
+                            candidatos.append({
+                                "nombre_a": reg["nombre"],
+                                "nombre_b": otra_ent.campos["nombre"],
+                                "similitud": 0.0,
+                                "regla": f"representante:{contacto_norm}",
+                            })
             ent = Entidad()
             entidades.append(ent)
         ent.absorber(reg)
@@ -143,6 +164,11 @@ def construir_entidades(registros: list) -> tuple[list, list]:
         por_compacto[ent.campos["nombre_norm"].replace(" ", "")] = ent
         for d in ent.dominios:
             por_dominio[d] = ent
+        # indexar por representante para regla 4
+        contacto_norm = normalizar_nombre(ent.campos.get("contacto_nombre") or "")
+        if contacto_norm and len(contacto_norm) > 3:
+            if ent not in por_contacto.setdefault(contacto_norm, []):
+                por_contacto[contacto_norm].append(ent)
     return entidades, candidatos
 
 
