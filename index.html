@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Directorio Minero Salta</title>
+<title>Agenda</title>
 <meta name="description" content="Directorio de empresas asociadas a CMS Minería, CAPEMISA y UIS — Salta, Argentina.">
 <meta name="theme-color" content="#0a0c10">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon.svg">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Dir. Minero">
+<meta name="apple-mobile-web-app-title" content="Agenda">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -133,7 +133,7 @@ dialog::backdrop{background:rgba(0,0,0,.65);backdrop-filter:blur(3px)}
 }
 .dato:hover{background:var(--surface2)}
 .dato .k{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;width:72px;flex:none}
-.dato .v{word-break:break-word}
+.dato .v{word-break:break-word;color:var(--text)}
 .dato .v a{color:var(--text);border-bottom:1px solid #3a4357}
 .sin-info{color:var(--muted);font-style:italic;opacity:.7}
 .cruzado{font-size:12px;color:var(--muted);margin-top:3px}
@@ -195,7 +195,7 @@ footer{
 
 <header>
   <div class="nav">
-    <div class="brand">Directorio Minero Salta<small>CMS · CAPEMISA · UIS</small></div>
+    <div class="brand">Agenda<small>CMS · CAPEMISA · UIS</small></div>
     <div class="nav-spacer"></div>
     <button class="icon-btn no-print" id="btnImprimir" title="Imprimir vista actual" aria-label="Imprimir">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
@@ -407,7 +407,7 @@ function compartirFicha(e) {
   });
 }
 $('#btnCompartir').onclick = () => compartir({
-  title: 'Directorio Minero Salta',
+  title: 'Agenda',
   text: 'Directorio de empresas asociadas a CMS, CAPEMISA y UIS',
   url: location.origin + location.pathname,
 });
