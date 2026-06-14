@@ -171,6 +171,46 @@ footer{
   font-size:11.5px;font-family:'DM Mono',monospace;border-top:1px solid var(--border);
 }
 
+/* ---------- inteligencia ---------- */
+.card{position:relative}
+.multi-badge{
+  position:absolute;top:8px;right:8px;width:18px;height:18px;border-radius:50%;
+  background:var(--accent);color:#000;font-size:9px;font-weight:800;
+  display:grid;place-items:center;pointer-events:none;
+}
+.stats-bar{max-width:1100px;margin:0 auto;padding:0 16px 10px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.stats-bar::-webkit-scrollbar{display:none}
+.stat-pill{
+  flex:none;background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  padding:10px 14px;min-width:94px;
+}
+.stat-pill .num{font-size:20px;font-weight:800;color:var(--accent);font-family:'DM Mono',monospace;display:block;line-height:1.1}
+.stat-pill .lbl{font-size:10.5px;color:var(--muted);margin-top:3px;display:block;line-height:1.3}
+.stat-pill.clickable{cursor:pointer}
+.stat-pill.clickable:hover{border-color:#3a4357}
+.stat-pill.activo{border-color:var(--accent);background:rgba(232,163,61,.08)}
+.chart-rubros{max-width:1100px;margin:0 auto;padding:0 16px 12px}
+.chart-rubros summary{
+  font-size:10.5px;color:var(--muted);cursor:pointer;padding:3px 0 6px;
+  letter-spacing:.08em;text-transform:uppercase;font-family:'DM Mono',monospace;
+  list-style:none;display:flex;align-items:center;gap:6px;
+}
+.chart-rubros summary::-webkit-details-marker{display:none}
+.chart-rubros summary::before{content:'▶';font-size:8px;transition:transform .15s;display:inline-block}
+.chart-rubros[open] summary::before{transform:rotate(90deg)}
+.rbar{display:flex;align-items:center;gap:8px;padding:2.5px 0}
+.rbar .rn{width:150px;flex:none;font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);cursor:pointer}
+.rbar .rn:hover{color:var(--text)}
+.rbar .rt{flex:1;height:6px;background:var(--surface);border-radius:3px;overflow:hidden}
+.rbar .rf{height:100%;background:var(--accent);border-radius:3px}
+.rbar .rc{width:28px;text-align:right;font-size:11px;font-family:'DM Mono',monospace;color:var(--muted)}
+.hub-item{display:flex;flex-direction:column;gap:4px;padding:10px;border-radius:9px}
+.hub-item:hover{background:var(--surface2)}
+.hub-nombre{font-weight:700;font-size:13.5px}
+.hub-empresas{font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px}
+.hub-empresas span{cursor:pointer;text-decoration:underline;text-decoration-color:var(--border)}
+.hub-empresas span:hover{color:var(--text)}
+
 /* ---------- impresión ---------- */
 @media print{
   body{background:#fff;color:#000;font-size:11pt}
@@ -220,6 +260,9 @@ footer{
   <div class="chips" id="chipsRubros"></div>
 </div>
 
+<div class="stats-bar no-print" id="statsBar"></div>
+<details class="chart-rubros no-print" id="chartRubros"></details>
+
 <div id="contador"></div>
 <main id="lista"><div id="vacio">Sin resultados para esa búsqueda.</div></main>
 
@@ -235,7 +278,7 @@ footer{
 const FLAGS = { boletin: false, boletinApi: '/api/buscar' };
 const $ = s => document.querySelector(s);
 let DB = { empresas: [], cambios: [], generado: null };
-let filtro = { q: '', camara: null, rubro: null };
+let filtro = { q: '', camara: null, rubro: null, multicamara: false };
 let porContacto = {};
 
 /* ---------- helpers ---------- */
@@ -268,6 +311,7 @@ function filtrar() {
   return DB.empresas.filter(e => {
     if (filtro.camara && !e.membresias.some(m => m.camara === filtro.camara)) return false;
     if (filtro.rubro && !e.membresias.some(m => m.rubro === filtro.rubro)) return false;
+    if (filtro.multicamara && new Set(e.membresias.map(m => m.camara)).size < 2) return false;
     if (!q) return true;
     return e._busqueda.includes(q);
   });
@@ -281,9 +325,11 @@ function renderLista() {
   $('#contador').textContent = `${items.length} empresa${items.length === 1 ? '' : 's'}`;
   const frag = document.createDocumentFragment();
   for (const e of items) {
+    const nCamaras = new Set(e.membresias.map(m => m.camara)).size;
     const card = document.createElement('article');
     card.className = 'card';
     card.innerHTML = `
+      ${nCamaras >= 2 ? `<div class="multi-badge" title="Presente en ${nCamaras} cámaras">${nCamaras}</div>` : ''}
       ${logoHtml(e)}
       <h3>${esc(e.nombre)}</h3>
       <div class="extra-print">
@@ -449,6 +495,89 @@ $('#btnNovedades').onclick = () => {
   actualizarBadge();
 };
 
+/* ---------- inteligencia ---------- */
+function renderStats() {
+  const multiCamara = DB.empresas.filter(e => new Set(e.membresias.map(m => m.camara)).size >= 2);
+  const contactosHub = Object.values(porContacto).filter(a => a.length >= 2);
+  const counts = {};
+  DB.empresas.forEach(e => [...new Set(e.membresias.map(m => m.rubro).filter(r => r))]
+    .forEach(r => counts[r] = (counts[r] || 0) + 1));
+  const nRubros = Object.keys(counts).length;
+  const topRubros = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  const maxCount = topRubros[0]?.[1] || 1;
+
+  $('#statsBar').innerHTML = `
+    <div class="stat-pill clickable${filtro.multicamara ? ' activo' : ''}" id="statMulti">
+      <span class="num">${multiCamara.length}</span>
+      <span class="lbl">en múlt. cámaras</span>
+    </div>
+    <div class="stat-pill clickable" id="statContactos">
+      <span class="num">${contactosHub.length}</span>
+      <span class="lbl">contactos en 2+ emp.</span>
+    </div>
+    <div class="stat-pill">
+      <span class="num">${nRubros}</span>
+      <span class="lbl">rubros activos</span>
+    </div>
+    <div class="stat-pill">
+      <span class="num">${DB.empresas.length}</span>
+      <span class="lbl">empresas totales</span>
+    </div>
+  `;
+
+  $('#statMulti').onclick = () => {
+    filtro.multicamara = !filtro.multicamara;
+    renderStats();
+    renderLista();
+  };
+  $('#statContactos').onclick = () => mostrarContactosHub(contactosHub);
+
+  const chart = $('#chartRubros');
+  chart.innerHTML = `<summary>Distribución por rubro (${topRubros.length})</summary>
+    ${topRubros.map(([r, n]) => `
+      <div class="rbar">
+        <div class="rn" data-rubro="${esc(r)}" title="${esc(r)}">${esc(r)}</div>
+        <div class="rt"><div class="rf" style="width:${(n / maxCount * 100).toFixed(0)}%"></div></div>
+        <div class="rc">${n}</div>
+      </div>`).join('')}
+  `;
+  chart.querySelectorAll('.rn').forEach(el => el.onclick = () => {
+    filtro.rubro = filtro.rubro === el.dataset.rubro ? null : el.dataset.rubro;
+    actualizarChips();
+    renderLista();
+  });
+}
+
+function mostrarContactosHub(contactosHub) {
+  const sorted = [...contactosHub].sort((a, b) => b.length - a.length);
+  const cont = $('#fichaContenido');
+  cont.innerHTML = `
+    <button class="cerrar" aria-label="Cerrar">✕</button>
+    <h2 style="font-size:17px;margin-bottom:4px">Red de contactos</h2>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:14px">
+      ${sorted.length} personas vinculadas a 2 o más empresas
+    </p>
+    <div class="datos-lista">
+      ${sorted.map(arr => `
+        <div class="hub-item">
+          <div class="hub-nombre">${esc(arr[0].contacto)}
+            <span class="badge" style="margin-left:6px;vertical-align:middle">${arr.length} empresas</span>
+          </div>
+          <div class="hub-empresas">
+            ${arr.map(e => `<span data-id="${e.id}">${esc(e.nombre)}</span>`).join('')}
+          </div>
+        </div>`).join('')}
+    </div>
+  `;
+  cont.querySelector('.cerrar').onclick = () => $('#modalFicha').close();
+  cont.querySelectorAll('.hub-empresas span').forEach(el =>
+    el.onclick = () => {
+      const e = DB.empresas.find(x => x.id === +el.dataset.id);
+      if (e) abrirFicha(e);
+    });
+  if (!$('#modalFicha').open) $('#modalFicha').showModal();
+}
+
 /* ---------- buscador ---------- */
 let debounce;
 $('#buscador').addEventListener('input', ev => {
@@ -479,6 +608,7 @@ $('#limpiar').onclick = () => {
   }
   $('#metaGenerado').textContent = DB.generado ? `actualizado ${DB.generado.slice(0, 10)}` : '';
   renderChips();
+  renderStats();
   renderLista();
   actualizarBadge();
   const slug = new URLSearchParams(location.search).get('empresa');
