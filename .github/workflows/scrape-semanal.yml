@@ -38,6 +38,10 @@ jobs:
           python matching.py
           python build_db.py
 
+      - name: Enriquecer gaps (campos vacíos)
+        working-directory: scraper
+        run: python enriquecer_gaps.py
+
       - name: Commit si hay cambios
         run: |
           git config user.name "scraper-bot"
