@@ -31,6 +31,8 @@ jobs:
           cp icon.svg dist/
           cp sw.js dist/
           cp data/empresas.json dist/data/
+          HASH=$(git rev-parse --short HEAD)
+          sed -i "s/const CACHE = 'dir-v1'/const CACHE = 'dir-$HASH'/" dist/sw.js
 
       - uses: actions/configure-pages@v4
 

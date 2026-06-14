@@ -43,7 +43,21 @@ self.addEventListener('fetch', ev => {
     return;
   }
 
-  // App shell: cache-first
+  // index.html: network-first para recibir actualizaciones inmediato
+  const url = new URL(request.url);
+  if (url.pathname === '/' || url.pathname.endsWith('/index.html') || request.url === SCOPE) {
+    ev.respondWith(
+      fetch(request)
+        .then(res => {
+          caches.open(CACHE).then(c => c.put(request, res.clone()));
+          return res;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  // Resto del shell (manifest, icon): cache-first
   ev.respondWith(
     caches.match(request).then(cached => cached ?? fetch(request))
   );
