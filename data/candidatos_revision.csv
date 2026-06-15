@@ -2,3 +2,6 @@ nombre_a,nombre_b,similitud,regla
 DAM INGENIERIA S.A.S.,AF INGENIERIA S.R.L.,0.857,levenshtein
 HIMET SERVICIOS INDUSTRIALES,DABER SERVICIOS INDUSTRIALES S.R.L.,0.857,levenshtein
 A B CONSTRUCCIONES S.R.L.,AGI CONSTRUCCIONES S.R.L.,0.889,levenshtein
+LOGISTICA DEL ALTO S.R.L.,CENTRO DISTRIBUIDOR S.A.,0.0,representante:virginia ramos
+SALUD INTEGRADA S.R.L.,FLYTEC,0.0,representante:mateo zambruno
+APANA,CORRALON CEDRORAN S.R.L.,0.0,representante:nicolas reston
