@@ -89,6 +89,7 @@ empresa_id,camara,rubro,url_ficha
 65,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/asset-s-r-l/
 66,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/bayton-sa/
 67,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/berge-bau-patagonia-sa/
+375,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/bocana-valores-s-a/
 68,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/campo-bravo-s-a-s/
 69,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/capital-humano-salta/
 70,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/cataldi-fleming-ernesto/
@@ -196,7 +197,6 @@ empresa_id,camara,rubro,url_ficha
 141,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/par-s-r-l/
 142,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/pussetto-salta-s-a/
 143,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/rani-s-a/
-144,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/rodamas-35/
 145,CAPEMISA,Geomembrana,https://capemisa.com.ar/socio/geosinteticos-ingenieria-y-obras-s-a/
 145,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/geosinteticos-ingenieria-y-obras-s-a/
 146,CAPEMISA,Geomembrana,https://capemisa.com.ar/socio/isg-s-a-s/
@@ -248,6 +248,7 @@ empresa_id,camara,rubro,url_ficha
 192,CAPEMISA,Insumos,https://capemisa.com.ar/socio/hierronort-s-r-l/
 193,CAPEMISA,Insumos,https://capemisa.com.ar/socio/implementos-industriales-srl/
 194,CAPEMISA,Insumos,https://capemisa.com.ar/socio/ingenieria-electrica-s-a-s/
+376,CAPEMISA,Insumos,https://capemisa.com.ar/socio/larocca-salta-neumaticos-s-a/
 195,CAPEMISA,Insumos,https://capemisa.com.ar/socio/lopez-diesel-sa/
 196,CAPEMISA,Insumos,https://capemisa.com.ar/socio/luxing-s-r-l/
 197,CAPEMISA,Insumos,https://capemisa.com.ar/socio/mar-andino-s-a-s/
@@ -256,6 +257,7 @@ empresa_id,camara,rubro,url_ficha
 199,CAPEMISA,Insumos,https://capemisa.com.ar/socio/mundo-pack-s-r-l/
 199,UIS,Ind. Gráfica,https://uis.com.ar/socios/mundo-pack/
 200,CAPEMISA,Insumos,https://capemisa.com.ar/socio/productos-quimicos-s-r-l/
+144,CAPEMISA,Insumos,https://capemisa.com.ar/socio/rodamas-35/
 201,CAPEMISA,Insumos,https://capemisa.com.ar/socio/salta-plast-polietilenos-s-r-l/
 202,CAPEMISA,Insumos,https://capemisa.com.ar/socio/san-juan-electricidad/
 203,CAPEMISA,Insumos,https://capemisa.com.ar/socio/segufer-s-a/
@@ -303,6 +305,7 @@ empresa_id,camara,rubro,url_ficha
 242,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/agv-falcon-drilling-srl/
 243,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/andina-perforaciones-srl/
 244,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/cuarzo-perforaciones-s-r-l/
+377,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/perfhid/
 245,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/santa-fe-lithium-rigs-s-r-l/
 246,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/wichi-toledo-s-r-l/
 247,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/albiero-sistemas-de-seguridad/
