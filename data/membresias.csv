@@ -100,6 +100,7 @@ empresa_id,camara,rubro,url_ficha
 75,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/finex-s-a/
 76,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/hr-people-impact-s-a-s/
 77,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/laboratorio-bioagronort-salta-s-r-l/
+378,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/marchetti-abogados/
 78,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/nuevas-energias/
 78,CAPEMISA,Construcción,https://capemisa.com.ar/socio/nuevas-energias/
 78,CAPEMISA,Energía,https://capemisa.com.ar/socio/nuevas-energias/
@@ -112,6 +113,7 @@ empresa_id,camara,rubro,url_ficha
 82,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/specterman-marcos-gustavo/
 83,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/sr-consultora/
 84,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/srk-consulting-argentina-s-a/
+379,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/sumaq-solutions-s-a-s/
 85,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/tuareg-s-r-l/
 86,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/xi-latam-s-a-s/
 87,CAPEMISA,Construcción,https://capemisa.com.ar/socio/3a-s-r-l/
@@ -134,6 +136,7 @@ empresa_id,camara,rubro,url_ficha
 99,CAPEMISA,Construcción,https://capemisa.com.ar/socio/invlac-construcciones-s-r-l/
 100,CAPEMISA,Construcción,https://capemisa.com.ar/socio/juan-pedro-garin-construcciones-s-a/
 101,CAPEMISA,Construcción,https://capemisa.com.ar/socio/kajai-s-a/
+380,CAPEMISA,Construcción,https://capemisa.com.ar/socio/las-cortes-s-r-l/
 102,CAPEMISA,Construcción,https://capemisa.com.ar/socio/ludrox-s-a-s/
 103,CAPEMISA,Construcción,https://capemisa.com.ar/socio/made-s-r-l/
 104,CAPEMISA,Construcción,https://capemisa.com.ar/socio/mega-s-r-l/
@@ -209,7 +212,6 @@ empresa_id,camara,rubro,url_ficha
 154,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/consorcio-de-cooperacion-bsd-geco/
 155,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/dam-ingenieria-s-a-s/
 156,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/futura-ingenieria-y-construccion-s-a-s/
-157,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/grupo-7d-ingenieria-vial-topografia/
 158,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/hoyos-ibarra-enrique/
 159,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/hormin-argentina-s-a/
 160,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/imec-engineering-company-s-r-l/
@@ -301,13 +303,13 @@ empresa_id,camara,rubro,url_ficha
 239,CAPEMISA,Medicina,https://capemisa.com.ar/socio/salud-integrada-s-r-l/
 240,CAPEMISA,Medicina,https://capemisa.com.ar/socio/servicios-medicos-mineros/
 241,CAPEMISA,Medicina,https://capemisa.com.ar/socio/tempus-s-r-l/
+381,CAPEMISA,Medicina,https://capemisa.com.ar/socio/vision-salud-s-r-l/
 242,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/agv-falcon-drilling-srl/
 243,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/andina-perforaciones-srl/
 244,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/cuarzo-perforaciones-s-r-l/
 377,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/perfhid/
 245,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/santa-fe-lithium-rigs-s-r-l/
 246,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/wichi-toledo-s-r-l/
-247,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/albiero-sistemas-de-seguridad/
 248,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/a-tiempo-seguridad-s-r-l/
 249,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/consultoria-y-servicios-afines-a-lamineria-s-a-s/
 250,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/guardian-s-r-l/
@@ -320,6 +322,7 @@ empresa_id,camara,rubro,url_ficha
 257,CAPEMISA,Servicios,https://capemisa.com.ar/socio/ad-argia-s-r-l/
 258,CAPEMISA,Servicios,https://capemisa.com.ar/socio/agro-mix-s-r-l/
 259,CAPEMISA,Servicios,https://capemisa.com.ar/socio/airox-argentina-s-a-s/
+382,CAPEMISA,Servicios,https://capemisa.com.ar/socio/albiero-sistemas-de-seguridad/
 260,CAPEMISA,Servicios,https://capemisa.com.ar/socio/amalgama-lithium-argentina-s-a-s/
 261,CAPEMISA,Servicios,https://capemisa.com.ar/socio/apana/
 262,CAPEMISA,Servicios,https://capemisa.com.ar/socio/artes-graficas-crivelli/
@@ -340,7 +343,6 @@ empresa_id,camara,rubro,url_ficha
 275,CAPEMISA,Servicios,https://capemisa.com.ar/socio/fma-bb-coliving-s-a-s/
 276,CAPEMISA,Servicios,https://capemisa.com.ar/socio/gaana-servicios-s-r-l/
 277,CAPEMISA,Servicios,https://capemisa.com.ar/socio/gelift-s-a-s/
-278,CAPEMISA,Servicios,https://capemisa.com.ar/socio/hotel-alejandro-i/
 279,CAPEMISA,Servicios,https://capemisa.com.ar/socio/huayra-group-servicios-mineros-s-a-s/
 280,CAPEMISA,Servicios,https://capemisa.com.ar/socio/ingenieria-sistemas-s-a-s/
 281,CAPEMISA,Servicios,https://capemisa.com.ar/socio/isitec/

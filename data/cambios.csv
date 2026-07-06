@@ -5,3 +5,15 @@ fecha,tipo,empresa_id,empresa_nombre,campo,valor_anterior,valor_nuevo
 2026-06-22 14:51:56,nuevo_rubro,144,RODAMAS 35,membresia,,CAPEMISA / Insumos
 2026-06-22 14:51:56,alta,377,PERFHID,,,
 2026-06-29 13:16:59,modificacion,271,CUMBRES MINERAS S.A.S.,email,virnafernandezg27@gmail.com,esteban.hanna@cumbresmineras.com.ar
+2026-07-06 12:56:41,alta,378,MARCHETTI ABOGADOS,,,
+2026-07-06 12:56:41,alta,379,SUMAQ SOLUTIONS S.A.S.,,,
+2026-07-06 12:56:41,alta,380,LAS CORTES S.R.L.,,,
+2026-07-06 12:56:41,modificacion,118,ENERGIA INFINITA S.A.S.,email,bersanchez@energy.net,bersanchez@ergy.net
+2026-07-06 12:56:41,modificacion,140,NOA GENERACION S.R.L,direccion,Mza 410 C Lote 6 B° Las Quintas San Lorenzo Chico (4401) Salta,"RN. 51 Av. John F. Kennedy Km 2,5. Salta"
+2026-07-06 12:56:41,modificacion,140,NOA GENERACION S.R.L,telefono,(0387) 155 729 701 / 718,(0387) 305 5444
+2026-07-06 12:56:41,modificacion,140,NOA GENERACION S.R.L,email,juang@noageneracion.com / avilam@noageneracion.com,info@noageneracion.com
+2026-07-06 12:56:41,alta,381,VISION SALUD S.R.L.,,,
+2026-07-06 12:56:41,alta,382,ALBIERO INGENIERÍA Y SERVICIOS S.A.S.,,,
+2026-07-06 12:56:41,baja,247,ALBIERO SISTEMAS DE SEGURIDAD,,ALBIERO SISTEMAS DE SEGURIDAD,
+2026-07-06 12:56:41,baja,157,GRUPO 7D INGENIERÍA VIAL & TOPOGRAFÍA,,GRUPO 7D INGENIERÍA VIAL & TOPOGRAFÍA,
+2026-07-06 12:56:41,baja,278,HOTEL ALEJANDRO I,,HOTEL ALEJANDRO I,
