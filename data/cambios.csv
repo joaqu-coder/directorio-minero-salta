@@ -20,3 +20,6 @@ fecha,tipo,empresa_id,empresa_nombre,campo,valor_anterior,valor_nuevo
 2026-07-13 12:10:51,alta,383,MERCOAGUAS,,,
 2026-07-13 12:10:51,alta,384,INGENIERÍA ELÉCTRICA SALTA S.A.S.,,,
 2026-07-13 12:10:51,baja,194,INGENIERÍA ELÉCTRICA S.A.S.,,INGENIERÍA ELÉCTRICA S.A.S.,
+2026-07-20 11:55:04,modificacion,383,MERCOAGUAS,actividad,Consultora hidrogeológica,Consultora hidrogeológica y ambiental
+2026-07-20 11:55:04,alta,385,MECMA S.R.L.,,,
+2026-07-20 11:55:04,modificacion,255,9AMAS,instagram,https://www.instagram.com/9amas,https://instagram.com/9amas
