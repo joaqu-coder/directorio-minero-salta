@@ -39,7 +39,6 @@ empresa_id,camara,rubro,url_ficha
 30,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/biotec-s-r-l/
 30,CAPEMISA,Construcción,https://capemisa.com.ar/socio/biotec-s-r-l/
 30,CAPEMISA,Logística,https://capemisa.com.ar/socio/biotec-s-r-l/
-31,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/cactus-s-r-l/
 32,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/carbian/
 33,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/control-andina-s-a-s/
 33,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/control-andina-s-a-s/
@@ -187,6 +186,7 @@ empresa_id,camara,rubro,url_ficha
 132,CAPEMISA,Logística,https://capemisa.com.ar/socio/gruas-san-antonio-s-r-l/
 133,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/grupo-doce-pilares-s-r-l/
 134,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/grupo-hys-s-r-l/
+134,CAPEMISA,Servicios,https://capemisa.com.ar/socio/grupo-hys-s-r-l/
 135,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/hms-productos-y-servicios-s-r-l/
 136,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/ing-ramon-russo/
 136,UIS,Ind. Metalmecanica,https://uis.com.ar/socios/ramon-salvador-russo-moschino/
@@ -339,9 +339,11 @@ empresa_id,camara,rubro,url_ficha
 269,UIS,Empresa de servicios,https://uis.com.ar/socios/cocel/
 270,CAPEMISA,Servicios,https://capemisa.com.ar/socio/coseguro-familiar/
 271,CAPEMISA,Servicios,https://capemisa.com.ar/socio/cumbres-mineras-s-a-s/
+386,CAPEMISA,Servicios,https://capemisa.com.ar/socio/eco-norte-s-r-l/
 272,CAPEMISA,Servicios,https://capemisa.com.ar/socio/escudero-inmobiliara-s-a-s/
 273,CAPEMISA,Servicios,https://capemisa.com.ar/socio/esencial-turismo/
 274,CAPEMISA,Servicios,https://capemisa.com.ar/socio/explora-mining-s-r-l/
+387,CAPEMISA,Servicios,https://capemisa.com.ar/socio/extingnort-s-r-l/
 275,CAPEMISA,Servicios,https://capemisa.com.ar/socio/fma-bb-coliving-s-a-s/
 276,CAPEMISA,Servicios,https://capemisa.com.ar/socio/gaana-servicios-s-r-l/
 277,CAPEMISA,Servicios,https://capemisa.com.ar/socio/gelift-s-a-s/
