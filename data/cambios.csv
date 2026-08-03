@@ -28,3 +28,10 @@ fecha,tipo,empresa_id,empresa_nombre,campo,valor_anterior,valor_nuevo
 2026-07-27 12:30:50,alta,386,ECO NORTE S.R.L.,,,
 2026-07-27 12:30:50,alta,387,EXTINGNORT S.R.L.,,,
 2026-07-27 12:30:50,baja,31,CACTUS S.R.L.,,CACTUS S.R.L.,
+2026-08-03 12:31:55,modificacion,207,CENTRO DISTRIBUIDOR S.A.,direccion,Canillitas S/N B° Torino (4400) Salta,"Canillitas S/N B° Torino, RN 9 Circunvalación, Salta"
+2026-08-03 12:31:55,modificacion,207,CENTRO DISTRIBUIDOR S.A.,contacto_nombre,Virginia Ramos,Micaela Ohse
+2026-08-03 12:31:55,modificacion,214,LOGISTICA DEL ALTO S.R.L.,direccion,"Dean Funes 771, Salta","Canillitas S/N B° Torino, RN 9 Circunvalación, Salta"
+2026-08-03 12:31:55,modificacion,214,LOGISTICA DEL ALTO S.R.L.,contacto_nombre,Virginia Ramos,Micaela Ohse
+2026-08-03 12:31:55,alta,388,GCM CONSULTORES,,,
+2026-08-03 12:31:55,modificacion,277,GEOLIFT S.A.S.,email,Jorge.mosconi@geoliftargentina.com,administracion@geoliftargentina.com
+2026-08-03 12:31:55,baja,71,CLAUDIO DEVITA CONSULTORES EN ABASTECIMIENTOS,,CLAUDIO DEVITA CONSULTORES EN ABASTECIMIENTOS,
