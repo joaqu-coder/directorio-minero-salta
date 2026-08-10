@@ -65,14 +65,11 @@ empresa_id,camara,rubro,url_ficha
 48,CAPEMISA,Catering,https://capemisa.com.ar/socio/catering-de-las-nubes-s-r-l/
 49,CAPEMISA,Catering,https://capemisa.com.ar/socio/delight-s-r-l/
 50,CAPEMISA,Catering,https://capemisa.com.ar/socio/el-huayra-s-a-s/
-51,CAPEMISA,Catering,https://capemisa.com.ar/socio/ermaya-s-r-l/
 52,CAPEMISA,Catering,https://capemisa.com.ar/socio/grupo-sierra-delta-s-r-l/
 53,CAPEMISA,Catering,https://capemisa.com.ar/socio/la-estrella/
 54,CAPEMISA,Catering,https://capemisa.com.ar/socio/servicios-andinos-s-r-l/
 54,CAPEMISA,Logística,https://capemisa.com.ar/socio/servicios-andinos-s-r-l/
 54,CAPEMISA,Servicios,https://capemisa.com.ar/socio/servicios-andinos-s-r-l/
-55,CAPEMISA,Catering,https://capemisa.com.ar/socio/servicios-integrales-salta-srl/
-55,CAPEMISA,Logística,https://capemisa.com.ar/socio/servicios-integrales-salta-srl/
 56,CAPEMISA,Comunicaciones,https://capemisa.com.ar/socio/4instal-s-a-s/
 57,CAPEMISA,Comunicaciones,https://capemisa.com.ar/socio/comtec/
 58,CAPEMISA,Comunicaciones,https://capemisa.com.ar/socio/ecin-soluciones-s-r-l/
@@ -161,7 +158,6 @@ empresa_id,camara,rubro,url_ficha
 116,CAPEMISA,Construcción,https://capemisa.com.ar/socio/zatec-soluciones-s-a-s/
 117,CAPEMISA,Energía,https://capemisa.com.ar/socio/bosch-s-r-l/
 118,CAPEMISA,Energía,https://capemisa.com.ar/socio/energia-infinita/
-119,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/alto-andina-soluciones-modulares/
 120,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/amarela-s-a/
 121,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/antonio-b-atenor-e-hijos-s-r-l/
 121,CAPEMISA,Insumos,https://capemisa.com.ar/socio/antonio-b-atenor-e-hijos-s-r-l/
@@ -233,7 +229,6 @@ empresa_id,camara,rubro,url_ficha
 176,CAPEMISA,Insumos,https://capemisa.com.ar/socio/bollini-s-a/
 177,CAPEMISA,Insumos,https://capemisa.com.ar/socio/bp-sa/
 178,CAPEMISA,Insumos,https://capemisa.com.ar/socio/carlos-flores-s-h/
-179,CAPEMISA,Insumos,https://capemisa.com.ar/socio/clicer-s-a-s/
 180,CAPEMISA,Insumos,https://capemisa.com.ar/socio/corralon-cedroran-s-r-l/
 181,CAPEMISA,Insumos,https://capemisa.com.ar/socio/corralon-la-tablada/
 182,CAPEMISA,Insumos,https://capemisa.com.ar/socio/crausaz-s-r-l/
@@ -320,10 +315,10 @@ empresa_id,camara,rubro,url_ficha
 254,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/vacu-s-r-l/
 255,CAPEMISA,Servicios,https://capemisa.com.ar/socio/9amas/
 256,CAPEMISA,Servicios,https://capemisa.com.ar/socio/acclimatare-s-r-l/
-257,CAPEMISA,Servicios,https://capemisa.com.ar/socio/ad-argia-s-r-l/
 258,CAPEMISA,Servicios,https://capemisa.com.ar/socio/agro-mix-s-r-l/
 259,CAPEMISA,Servicios,https://capemisa.com.ar/socio/airox-argentina-s-a-s/
 382,CAPEMISA,Servicios,https://capemisa.com.ar/socio/albiero-sistemas-de-seguridad/
+119,CAPEMISA,Servicios,https://capemisa.com.ar/socio/alto-andina-soluciones-modulares/
 260,CAPEMISA,Servicios,https://capemisa.com.ar/socio/amalgama-lithium-argentina-s-a-s/
 261,CAPEMISA,Servicios,https://capemisa.com.ar/socio/apana/
 262,CAPEMISA,Servicios,https://capemisa.com.ar/socio/artes-graficas-crivelli/
