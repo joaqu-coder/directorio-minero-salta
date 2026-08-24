@@ -30,6 +30,30 @@ pip install scrapling curl_cffi browserforge orjson playwright
 
 ---
 
+## 🔴 Regla de Fin de Jornada (OBLIGATORIO)
+
+**Todas las actualizaciones realizadas al final de una jornada de trabajo DEBEN estar visibles en la app en vivo.**
+
+- ✅ Cambios mergeados a `main`
+- ✅ GitHub Actions deploy completado (verde)
+- ✅ `https://joaqu-coder.github.io/directorio-minero-salta/` actualizada
+- ✅ Verificado en el navegador (Ctrl+Shift+R si es necesario)
+
+**Flujo de cierre:**
+1. Verificar `git status` — sin cambios pendientes
+2. Confirmar que el último commit está en `main` (no en rama temporal)
+3. Revisar GitHub Actions — último deploy debe ser `✓ success`
+4. Forzar refresh en la app si es necesario (Ctrl+Shift+R)
+5. Documentar qué cambios son visibles para confirmar
+
+**Si algo no está visible:**
+- No es fin de jornada hasta que esté deployado
+- `git merge` si está en rama
+- `git push origin main` si falta push
+- Forzar redeploy con commit vacío: `git commit --allow-empty -m "ci: force redeploy"`
+
+---
+
 ## Regla general de hosting (aplica a este y futuros proyectos)
 
 **Punto de partida siempre: GitHub Pages.**
