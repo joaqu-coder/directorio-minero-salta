@@ -53,6 +53,18 @@ header{
   display:none;place-items:center;line-height:17px;
 }
 
+/* ---------- banner de novedades ---------- */
+#bannerNovedades{
+  max-width:1100px;margin:0 auto;padding:12px 16px;background:linear-gradient(135deg, rgba(232,163,61,.08) 0%, rgba(77,143,232,.08) 100%);
+  border-bottom:1px solid var(--border);display:none;gap:12px;align-items:center;font-size:13px;
+}
+#bannerNovedades.visible{display:flex}
+#bannerNovedades .emoji{font-size:18px}
+#bannerNovedades .info{flex:1}
+#bannerNovedades .info strong{color:var(--accent)}
+#bannerNovedades .cerrar-banner{padding:4px 8px;color:var(--muted);font-size:18px;line-height:1}
+#bannerNovedades .cerrar-banner:hover{color:var(--text)}
+
 /* ---------- buscador + filtros ---------- */
 .controles{max-width:1100px;margin:0 auto;padding:14px 16px 4px}
 .search-wrap{position:relative}
@@ -254,6 +266,12 @@ footer{
     </button>
   </div>
 </header>
+
+<div id="bannerNovedades">
+  <span class="emoji" id="emojiNovedad">✨</span>
+  <div class="info" id="textoNovedad"></div>
+  <button class="cerrar-banner" onclick="cerrarBanner()" aria-label="Cerrar">✕</button>
+</div>
 
 <div class="controles no-print">
   <div class="search-wrap">
@@ -475,6 +493,37 @@ function actualizarBadge() {
   b.style.display = n ? 'grid' : 'none';
   b.textContent = n > 99 ? '99+' : n;
 }
+
+function actualizarBannerNovedades() {
+  // Mostrar banner con altas/bajas de los últimos 7 días
+  const ahora = new Date();
+  const hace7dias = new Date(ahora.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const hace7diasISO = hace7dias.toISOString().slice(0, 10);
+
+  const cambiosRecientes = DB.cambios.filter(c => c.fecha.slice(0, 10) >= hace7diasISO);
+  const altas = cambiosRecientes.filter(c => c.tipo === 'alta').length;
+  const bajas = cambiosRecientes.filter(c => c.tipo === 'baja').length;
+  const modifs = cambiosRecientes.filter(c => c.tipo === 'modificacion').length;
+
+  const banner = $('#bannerNovedades');
+  const texto = $('#textoNovedad');
+
+  if (altas > 0 || bajas > 0) {
+    let msg = [];
+    if (altas > 0) msg.push(`<strong>${altas}</strong> ${altas === 1 ? 'empresa nueva' : 'empresas nuevas'}`);
+    if (bajas > 0) msg.push(`<strong>${bajas}</strong> ${bajas === 1 ? 'empresa dada de baja' : 'empresas dadas de baja'}`);
+    texto.innerHTML = `${msg.join(', ')} esta semana. <a href="#" onclick="$('#btnNovedades').click(); return false">Ver detalles</a>`;
+    banner.classList.add('visible');
+    if (localStorage.getItem('bannerCerrado') !== 'true') {
+      banner.style.display = 'flex';
+    }
+  }
+}
+
+function cerrarBanner() {
+  $('#bannerNovedades').style.display = 'none';
+  localStorage.setItem('bannerCerrado', 'true');
+}
 $('#btnNovedades').onclick = () => {
   const cont = $('#novedadesContenido');
   const items = DB.cambios.slice(0, 60);
@@ -621,6 +670,7 @@ $('#limpiar').onclick = () => {
   renderStats();
   renderLista();
   actualizarBadge();
+  actualizarBannerNovedades();
   const slug = new URLSearchParams(location.search).get('empresa');
   if (slug) {
     const e = DB.empresas.find(x => x.slug === slug);
