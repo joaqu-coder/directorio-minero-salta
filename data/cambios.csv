@@ -40,3 +40,15 @@ fecha,tipo,empresa_id,empresa_nombre,campo,valor_anterior,valor_nuevo
 2026-08-10 10:26:50,baja,179,CLICER S.A.S.,,CLICER S.A.S.,
 2026-08-10 10:26:50,baja,51,ERMAYA S.R.L.,,ERMAYA S.R.L.,
 2026-08-10 10:26:50,baja,55,SERVICIOS INTEGRALES SALTA SRL,,SERVICIOS INTEGRALES SALTA SRL,
+2026-08-24 09:54:08,modificacion,50,EL HUAYRA S.A.S.,email,servicios@huayrahuasi.com,rcordoba@huayraservicios.com
+2026-08-24 09:54:08,modificacion,50,EL HUAYRA S.A.S.,contacto_nombre,Alfredo José Cabero,Rita Córdoba
+2026-08-24 09:54:08,alta,389,DENKI INGENIERIA S.R.L.,,,
+2026-08-24 09:54:08,modificacion,131,GOMEZ ROCO Y CIA SRL,instagram,https://www.instagram.com/gomezroco_ok/,https://www.instagram.com/gomezroco_ok
+2026-08-24 09:54:08,alta,390,FMF ARGENTINA S.R.L.,,,
+2026-08-24 09:54:08,modificacion,279,HUAYRA GROUP SERVICIOS MINEROS S.A.S.,telefono,(0387) 154 402 284,(0387) 156 857 172
+2026-08-24 09:54:08,modificacion,279,HUAYRA GROUP SERVICIOS MINEROS S.A.S.,email,comercial@huayragroup.com.ar / gustavo.chiri@huayragroup.com.ar,g.grouphuayra@gmail.com
+2026-08-24 09:54:08,modificacion,279,HUAYRA GROUP SERVICIOS MINEROS S.A.S.,contacto_nombre,Gustavo Chiri,Guadalupe Escobar / Verónica Moreno
+2026-08-24 09:54:08,alta,391,Ecomet S.R.L.,,,
+2026-08-24 09:54:08,baja,286,METALNOR S.R.L.,,METALNOR S.R.L.,
+2026-08-24 09:54:08,baja,144,RODAMAS 35,,RODAMAS 35,
+2026-08-24 09:54:08,baja,316,WKB GROUP,,WKB GROUP,

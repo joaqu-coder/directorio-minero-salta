@@ -171,6 +171,7 @@ empresa_id,camara,rubro,url_ficha
 125,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/big-north-argentina/
 126,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/compania-mercantil-agricola-e-industrial-s-a/
 127,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/david-maquinarias/
+389,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/denki-ingenieria-s-r-l/
 128,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/dessin-s-r-l/
 129,CAPEMISA,Equipamiento,https://capemisa.com.ar/socio/dm-noa-s-r-l/
 129,CAPEMISA,Insumos,https://capemisa.com.ar/socio/dm-noa-s-r-l/
@@ -207,6 +208,7 @@ empresa_id,camara,rubro,url_ficha
 153,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/ciclos-ingenieria-s-r-l/
 154,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/consorcio-de-cooperacion-bsd-geco/
 155,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/dam-ingenieria-s-a-s/
+390,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/fmf-argentina-s-r-l/
 156,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/futura-ingenieria-y-construccion-s-a-s/
 158,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/hoyos-ibarra-enrique/
 159,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/hormin-argentina-s-a/
@@ -253,7 +255,6 @@ empresa_id,camara,rubro,url_ficha
 199,CAPEMISA,Insumos,https://capemisa.com.ar/socio/mundo-pack-s-r-l/
 199,UIS,Ind. Gráfica,https://uis.com.ar/socios/mundo-pack/
 200,CAPEMISA,Insumos,https://capemisa.com.ar/socio/productos-quimicos-s-r-l/
-144,CAPEMISA,Insumos,https://capemisa.com.ar/socio/rodamas-35/
 201,CAPEMISA,Insumos,https://capemisa.com.ar/socio/salta-plast-polietilenos-s-r-l/
 202,CAPEMISA,Insumos,https://capemisa.com.ar/socio/san-juan-electricidad/
 203,CAPEMISA,Insumos,https://capemisa.com.ar/socio/segufer-s-a/
@@ -349,8 +350,6 @@ empresa_id,camara,rubro,url_ficha
 283,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mahr-hnos-construcciones-metalicas-s-r-l/
 284,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mam/
 285,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mardan-s-a-s/
-286,CAPEMISA,Servicios,https://capemisa.com.ar/socio/metalnor-s-r-l/
-286,UIS,Ind. Metalurgica,https://uis.com.ar/socios/ecomet-s-r-l/
 287,CAPEMISA,Servicios,https://capemisa.com.ar/socio/milimetric-s-a-s/
 288,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mining-technologies-s-a-s/
 289,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mva-s-r-l/
@@ -383,7 +382,6 @@ empresa_id,camara,rubro,url_ficha
 313,CAPEMISA,Servicios,https://capemisa.com.ar/socio/twin-s-r-l/
 314,CAPEMISA,Servicios,https://capemisa.com.ar/socio/ver-connection-s-a-s/
 315,CAPEMISA,Servicios,https://capemisa.com.ar/socio/victorio-binda/
-316,CAPEMISA,Servicios,https://capemisa.com.ar/socio/wkb-group/
 317,CAPEMISA,Servicios,https://capemisa.com.ar/socio/zelandez-argentina-services-s-r-l/
 318,CAPEMISA,Topografía,https://capemisa.com.ar/socio/tecnosuelo/
 319,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/cosalta-ltda/
@@ -406,6 +404,7 @@ empresa_id,camara,rubro,url_ficha
 335,UIS,Ind. Metalurgica,https://uis.com.ar/socios/cristalizando-s-r-l/
 336,UIS,Ind. Cuero,https://uis.com.ar/socios/curtiembre-arlei-sa/
 337,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/desdelsur/
+391,UIS,Ind. Metalurgica,https://uis.com.ar/socios/ecomet-s-r-l/
 338,UIS,Ind. Energía,https://uis.com.ar/socios/edesa-s-a/
 339,UIS,Ind. Metalmecanica,https://uis.com.ar/socios/equipos-electricos-salta-s-a/
 340,UIS,Servicios jurídicos,https://uis.com.ar/socios/estudio-aguilar-asociados/
