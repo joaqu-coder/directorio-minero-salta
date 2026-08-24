@@ -85,6 +85,13 @@ header{
 .chip[data-camara="CMS"].activo{border-color:var(--cms);background:rgba(232,118,45,.12)}
 .chip[data-camara="CAPEMISA"].activo{border-color:var(--capemisa);background:rgba(77,143,232,.12)}
 .chip[data-camara="UIS"].activo{border-color:var(--uis);background:rgba(214,69,69,.12)}
+.chip[data-sector="mineria"].activo{border-color:#d64545;background:rgba(214,69,69,.12)}
+.chip[data-sector="agroindustria"].activo{border-color:#50c878;background:rgba(80,200,120,.12)}
+.chip[data-sector="energia"].activo{border-color:#e8a33d;background:rgba(232,163,61,.1)}
+.chip[data-sector="construccion"].activo{border-color:#4d8fe8;background:rgba(77,143,232,.12)}
+.chip[data-sector="servicios"].activo{border-color:#a78bfa;background:rgba(167,139,250,.12)}
+.chip[data-sector="otros"].activo{border-color:#14b8a6;background:rgba(20,184,166,.12)}
+.chip svg{width:14px;height:14px;margin-right:4px;vertical-align:-2px}
 #contador{max-width:1100px;margin:0 auto;padding:2px 16px;font-size:12px;color:var(--muted)}
 
 /* ---------- grilla de cards ---------- */
@@ -213,7 +220,8 @@ footer{
 .chart-rubros summary::before{content:'▶';font-size:7px;transition:transform .15s;display:inline-block}
 .chart-rubros[open] summary::before{transform:rotate(90deg)}
 .rbar{display:flex;align-items:center;gap:8px;padding:2px 0}
-.rbar .rn{width:150px;flex:none;font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);cursor:pointer}
+.rbar .rn{width:150px;flex:none;font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:6px}
+.rbar .rn svg{width:14px;height:14px;flex:none}
 .rbar .rn:hover{color:var(--text)}
 .rbar .rt{flex:1;height:4px;background:var(--surface);border-radius:2px;overflow:hidden}
 .rbar .rf{height:100%;background:rgba(255,255,255,.12);border-radius:2px;transition:background .15s}
@@ -301,8 +309,51 @@ footer{
 const FLAGS = { boletin: false, boletinApi: '/api/buscar' };
 const $ = s => document.querySelector(s);
 let DB = { empresas: [], cambios: [], generado: null };
-let filtro = { q: '', camara: null, rubro: null, multicamara: false };
+let filtro = { q: '', camara: null, sector: null, multicamara: false };
 let porContacto = {};
+
+const SECTORES = {
+  'mineria': {
+    label: 'Minería',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/><line x1="12" y1="9" x2="12" y2="15"/></svg>',
+    rubros: ['Minería', 'Litio', 'Cobre', 'Oro', 'Plata', 'Boratos', 'Construcción minera', 'Exploración', 'Sal', 'Potasio', 'Exploración litio', 'Proyecto']
+  },
+  'agroindustria': {
+    label: 'Agroindustria',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+    rubros: ['Agroindustria', 'Alimentos', 'Bebidas', 'Ganadería', 'Frigorífico', 'Productos agrícolas']
+  },
+  'energia': {
+    label: 'Energía',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
+    rubros: ['Energía', 'Gas', 'Electricidad', 'Combustible', 'Distribución']
+  },
+  'construccion': {
+    label: 'Construcción e Ing.',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6-6 6 6M3 12h18M3 12v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7"/><line x1="9" y1="6" x2="9" y2="12"/><line x1="15" y1="6" x2="15" y2="12"/></svg>',
+    rubros: ['Construcción', 'Ingeniería', 'Obras civiles', 'Construcción e ingeniería', 'Ingeniería civil']
+  },
+  'servicios': {
+    label: 'Servicios y Consultoría',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    rubros: ['Servicios', 'Consultoría', 'Asesoramiento', 'Legal', 'Ambiental', 'Seguridad', 'Higiene', 'Consultoría hidrogeológica', 'Asesoramiento jurídico', 'Medicina laboral', 'Ingeniería eléctrica']
+  },
+  'otros': {
+    label: 'Otros',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>',
+    rubros: [] // catch-all para otros rubros
+  }
+};
+
+function obtenerSector(rubro) {
+  if (!rubro) return null;
+  for (const [id, sec] of Object.entries(SECTORES)) {
+    if (id !== 'otros' && sec.rubros.some(r => r.toLowerCase() === rubro.toLowerCase())) {
+      return id;
+    }
+  }
+  return 'otros';
+}
 
 /* ---------- helpers ---------- */
 const norm = s => (s || '').toLowerCase()
@@ -333,7 +384,7 @@ function filtrar() {
   const q = norm(filtro.q);
   return DB.empresas.filter(e => {
     if (filtro.camara && !e.membresias.some(m => m.camara === filtro.camara)) return false;
-    if (filtro.rubro && !e.membresias.some(m => m.rubro === filtro.rubro)) return false;
+    if (filtro.sector && !e.membresias.some(m => obtenerSector(m.rubro) === filtro.sector)) return false;
     if (filtro.multicamara && new Set(e.membresias.map(m => m.camara)).size < 2) return false;
     if (!q) return true;
     return e._busqueda.includes(q);
@@ -370,12 +421,21 @@ function renderChips() {
   const camaras = [...new Set(DB.empresas.flatMap(e => e.membresias.map(m => m.camara)))];
   $('#chipsCamaras').innerHTML = camaras.map(c =>
     `<button class="chip" data-camara="${c}">${c}</button>`).join('');
-  const counts = {};
-  DB.empresas.forEach(e => [...new Set(e.membresias.map(m => m.rubro).filter(r => r))]
-    .forEach(r => counts[r] = (counts[r] || 0) + 1));
-  const rubros = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
-  $('#chipsRubros').innerHTML = rubros.map(r =>
-    `<button class="chip" data-rubro="${esc(r)}">${esc(r)} <span class="mono">${counts[r]}</span></button>`).join('');
+
+  const sectorCounts = {};
+  DB.empresas.forEach(e => {
+    const sectoresEmpresa = [...new Set(e.membresias.map(m => obtenerSector(m.rubro)).filter(s => s))];
+    sectoresEmpresa.forEach(s => sectorCounts[s] = (sectorCounts[s] || 0) + 1);
+  });
+
+  const sectorButtons = Object.entries(SECTORES)
+    .filter(([id]) => id === 'otros' || sectorCounts[id] > 0)
+    .map(([id, sector]) => {
+      const count = sectorCounts[id] || 0;
+      return `<button class="chip" data-sector="${id}" title="${sector.label}">${sector.icon}${sector.label}${count > 0 ? ` <span class="mono">${count}</span>` : ''}</button>`;
+    }).join('');
+
+  $('#chipsRubros').innerHTML = sectorButtons;
 
   $('#chipsCamaras').addEventListener('click', ev => {
     const b = ev.target.closest('.chip'); if (!b) return;
@@ -384,7 +444,7 @@ function renderChips() {
   });
   $('#chipsRubros').addEventListener('click', ev => {
     const b = ev.target.closest('.chip'); if (!b) return;
-    filtro.rubro = filtro.rubro === b.dataset.rubro ? null : b.dataset.rubro;
+    filtro.sector = filtro.sector === b.dataset.sector ? null : b.dataset.sector;
     actualizarChips(); renderStats(); renderLista();
   });
 }
@@ -392,7 +452,7 @@ function actualizarChips() {
   document.querySelectorAll('#chipsCamaras .chip').forEach(c =>
     c.classList.toggle('activo', c.dataset.camara === filtro.camara));
   document.querySelectorAll('#chipsRubros .chip').forEach(c =>
-    c.classList.toggle('activo', c.dataset.rubro === filtro.rubro));
+    c.classList.toggle('activo', c.dataset.sector === filtro.sector));
 }
 
 /* ---------- ficha ---------- */
@@ -553,12 +613,18 @@ $('#btnNovedades').onclick = () => {
 function renderStats() {
   const multiCamara = DB.empresas.filter(e => new Set(e.membresias.map(m => m.camara)).size >= 2);
   const contactosHub = Object.values(porContacto).filter(a => a.length >= 2);
-  const counts = {};
-  DB.empresas.forEach(e => [...new Set(e.membresias.map(m => m.rubro).filter(r => r))]
-    .forEach(r => counts[r] = (counts[r] || 0) + 1));
-  const nRubros = Object.keys(counts).length;
-  const topRubros = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-  const maxCount = topRubros[0]?.[1] || 1;
+
+  const sectorCounts = {};
+  const rubrosCounts = {};
+  DB.empresas.forEach(e => {
+    const sectoresEmpresa = [...new Set(e.membresias.map(m => obtenerSector(m.rubro)).filter(s => s))];
+    sectoresEmpresa.forEach(s => sectorCounts[s] = (sectorCounts[s] || 0) + 1);
+    [...new Set(e.membresias.map(m => m.rubro).filter(r => r))].forEach(r => rubrosCounts[r] = (rubrosCounts[r] || 0) + 1);
+  });
+  const nRubros = Object.keys(rubrosCounts).length;
+
+  const topSectores = Object.entries(sectorCounts).sort((a, b) => b[1] - a[1]);
+  const maxCount = topSectores[0]?.[1] || 1;
 
   $('#statsBar').innerHTML = `
     <div class="stat-pill clickable${filtro.multicamara ? ' activo' : ''}" id="statMulti">
@@ -587,19 +653,22 @@ function renderStats() {
   $('#statContactos').onclick = () => mostrarContactosHub(contactosHub);
 
   const chart = $('#chartRubros');
-  chart.innerHTML = `<summary>Distribución por rubro (${topRubros.length})</summary>
-    ${topRubros.map(([r, n]) => `
+  chart.innerHTML = `<summary>Distribución por sector (${topSectores.length})</summary>
+    ${topSectores.map(([sec, n]) => {
+      const sector = SECTORES[sec];
+      return `
       <div class="rbar">
-        <div class="rn" data-rubro="${esc(r)}" title="${esc(r)}">${esc(r)}</div>
+        <div class="rn" data-sector="${sec}" title="${sector.label}">${sector.icon}<span style="margin-left:4px">${sector.label}</span></div>
         <div class="rt"><div class="rf" style="width:${(n / maxCount * 100).toFixed(0)}%"></div></div>
         <div class="rc">${n}</div>
-      </div>`).join('')}
+      </div>`;
+    }).join('')}
   `;
   chart.querySelectorAll('.rbar').forEach(row => {
     const rn = row.querySelector('.rn');
-    if (rn.dataset.rubro === filtro.rubro) row.classList.add('activo');
+    if (rn.dataset.sector === filtro.sector) row.classList.add('activo');
     rn.onclick = () => {
-      filtro.rubro = filtro.rubro === rn.dataset.rubro ? null : rn.dataset.rubro;
+      filtro.sector = filtro.sector === rn.dataset.sector ? null : rn.dataset.sector;
       actualizarChips();
       renderStats();
       renderLista();
