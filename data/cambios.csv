@@ -124,3 +124,5 @@ fecha,tipo,empresa_id,empresa_nombre,campo,valor_anterior,valor_nuevo
 2026-08-27 17:58:59,modificacion,81,SALTAPETROL SRL,cuit,,30681276285
 2026-08-27 17:58:59,modificacion,373,Semix,cuit,,30717273512
 2026-08-27 17:58:59,modificacion,54,SERVICIOS ANDINOS S.R.L.,cuit,,30710874227
+2026-08-27 18:03:22,modificacion,390,FMF ARGENTINA S.R.L.,cuit,,30711162514
+2026-08-27 18:03:22,alta,432,FMF Composite S.R.L,,,

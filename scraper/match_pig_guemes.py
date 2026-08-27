@@ -215,7 +215,20 @@ def indexar_directorio(empresas: list) -> dict:
     return idx
 
 
+# Decisiones manuales explícitas del usuario sobre casos que el script no
+# puede resolver solo (ver "revisar_fuzzy" en matchear). Confirmado:
+# "FMF Composite S.R.L." (sheet_id 10, CUIT 30716450984) y "FMF Argentina
+# S.R.L." (sheet_id 30, CUIT 30711162514) son empresas DISTINTAS que solo
+# comparten dominio (fmfsa.com) y ubicación (mismo grupo, mismo PIG) — no se
+# fusionan. Forzamos "nueva" para que Composite tenga su propio alta en vez
+# de quedar en revisión manual para siempre.
+FORZAR_NUEVA_SHEET_IDS = {"10"}
+
+
 def matchear(sheet_emp: dict, idx: dict) -> dict:
+    if sheet_emp["sheet_id"] in FORZAR_NUEVA_SHEET_IDS:
+        return {"nivel": "nueva", "metodo": "decision_manual_usuario", "similitud": 0.0, "match": None}
+
     norm = normalizar_nombre(sheet_emp["nombre_completo"])
     compacto = norm.replace(" ", "")
     dom = normalizar_dominio(sheet_emp.get("pag_web") or "")
