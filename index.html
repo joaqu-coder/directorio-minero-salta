@@ -402,10 +402,14 @@ function renderLista() {
     const nCamaras = new Set(e.membresias.map(m => m.camara)).size;
     const card = document.createElement('article');
     card.className = 'card';
+    const preview = e.actividad || e.direccion || e.ubicacion || 'Ver más información';
     card.innerHTML = `
       ${nCamaras >= 2 ? `<div class="multi-badge" title="Presente en ${nCamaras} cámaras">${nCamaras}</div>` : ''}
       ${logoHtml(e)}
       <h3>${esc(e.nombre)}</h3>
+      <p style="font-size:12px;color:var(--muted);line-height:1.4;margin:0">
+        ${esc(preview)}
+      </p>
       <div class="extra-print">
         ${esc([e.actividad, e.direccion, e.telefono, e.email, e.web].filter(Boolean).join(' · '))}
       </div>
