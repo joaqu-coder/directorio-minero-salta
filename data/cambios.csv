@@ -52,3 +52,75 @@ fecha,tipo,empresa_id,empresa_nombre,campo,valor_anterior,valor_nuevo
 2026-08-24 09:54:08,baja,286,METALNOR S.R.L.,,METALNOR S.R.L.,
 2026-08-24 09:54:08,baja,144,RODAMAS 35,,RODAMAS 35,
 2026-08-24 09:54:08,baja,316,WKB GROUP,,WKB GROUP,
+2026-08-27 17:48:10,modificacion,112,SALTAPOR S.R.L.,sitio_web,,https://saltapor.com/
+2026-08-27 17:48:10,modificacion,112,SALTAPOR S.R.L.,instagram,,https://www.instagram.com/accounts/login/?next=%2Fsaltaporsrl%2F&source=omni_redirect
+2026-08-27 17:48:10,modificacion,112,SALTAPOR S.R.L.,linkedin,,https://www.linkedin.com/company/saltapor-srl/?originalSubdomain=ar
+2026-08-27 17:48:10,modificacion,329,Cerámica Salteña S.A.,contacto_nombre,,Julio Fazio
+2026-08-27 17:48:10,modificacion,329,Cerámica Salteña S.A.,instagram,,https://www.instagram.com/ceramicasaltena/?hl=es
+2026-08-27 17:48:10,modificacion,329,Cerámica Salteña S.A.,linkedin,,https://www.linkedin.com/company/ceramica-saltena/?originalSubdomain=ar
+2026-08-27 17:48:10,modificacion,345,Ind. Frigoríficas Norte Grande S.A.,email,,eliasseven@gmail.com
+2026-08-27 17:48:10,modificacion,345,Ind. Frigoríficas Norte Grande S.A.,contacto_nombre,,Elias Gutierrez
+2026-08-27 17:48:10,modificacion,345,Ind. Frigoríficas Norte Grande S.A.,linkedin,,https://www.linkedin.com/company/industrias-frigorificas-norte-grande-s-a-/?originalSubdomain=ar
+2026-08-27 17:48:10,modificacion,371,Petit Plast,contacto_nombre,,Frank Leclerk
+2026-08-27 17:48:10,modificacion,371,Petit Plast,linkedin,,https://www.linkedin.com/company/petit-plast/?originalSubdomain=ar
+2026-08-27 17:48:10,modificacion,219,PETROANDINA,instagram,,https://www.instagram.com/accounts/login/?next=%2Fgrupopetroandina%2F&source=omni_redirect
+2026-08-27 17:48:10,modificacion,219,PETROANDINA,linkedin,,https://www.linkedin.com/company/grupopetroandina/?originalSubdomain=ar
+2026-08-27 17:48:10,modificacion,81,SALTAPETROL SRL,instagram,,https://www.instagram.com/grupopetroandina/
+2026-08-27 17:48:10,modificacion,81,SALTAPETROL SRL,linkedin,,https://www.linkedin.com/company/grupopetroandina/?originalSubdomain=ar
+2026-08-27 17:48:10,modificacion,373,Semix,contacto_nombre,,Juan Gutierrez
+2026-08-27 17:48:10,modificacion,373,Semix,instagram,,https://www.instagram.com/semix.arg/?hl=es
+2026-08-27 17:48:10,modificacion,54,SERVICIOS ANDINOS S.R.L.,sitio_web,,https://www.serviciosandinos.com.ar/
+2026-08-27 17:48:10,modificacion,54,SERVICIOS ANDINOS S.R.L.,linkedin,,https://www.linkedin.com/in/jose-diaz-12237641/?originalSubdomain=ar
+2026-08-27 17:48:10,alta,392,Adionics Argentina,,,
+2026-08-27 17:48:10,alta,393,Agroconstrucciones La Posta S.R.L,,,
+2026-08-27 17:48:10,alta,394,Agroindustria San Antonio S.A,,,
+2026-08-27 17:48:10,alta,395,Asociación de Apicultores,,,
+2026-08-27 17:48:10,alta,396,Crayón S.R.L,,,
+2026-08-27 17:48:10,alta,397,Super mercado Miguelito S.R.L,,,
+2026-08-27 17:48:10,alta,398,DJM MONTAJES,,,
+2026-08-27 17:48:10,alta,399,Elásticos M&M,,,
+2026-08-27 17:48:10,alta,400,SEI Ingeniería S.A.S Sistemas térmicos y recipientes a presión,,,
+2026-08-27 17:48:10,alta,401,Foodarg S.R.L,,,
+2026-08-27 17:48:10,alta,402,Forte,,,
+2026-08-27 17:48:10,alta,403,La Francisca,,,
+2026-08-27 17:48:10,alta,404,MANUCHAR Argentina,,,
+2026-08-27 17:48:10,alta,405,Molino Doña Ángela,,,
+2026-08-27 17:48:10,alta,406,NIKRON SUDAMERICANA S.A,,,
+2026-08-27 17:48:10,alta,407,Petrasud S.A,,,
+2026-08-27 17:48:10,alta,408,Pronto Pack S.R.L,,,
+2026-08-27 17:48:10,alta,409,Refinor S.A.,,,
+2026-08-27 17:48:10,alta,410,Rixom S.R.L.,,,
+2026-08-27 17:48:10,alta,411,Telefónica de Argentina S.A.,,,
+2026-08-27 17:48:10,alta,412,YPF Gas,,,
+2026-08-27 17:48:10,alta,413,Agsof S.A.,,,
+2026-08-27 17:48:10,alta,414,Alimar S.A.,,,
+2026-08-27 17:48:10,alta,415,Alisan S.A.,,,
+2026-08-27 17:48:10,alta,416,CN Logística S.A.,,,
+2026-08-27 17:48:10,alta,417,Distribuidora Maestro S.R.L.,,,
+2026-08-27 17:48:10,alta,418,FULLBLOCK,,,
+2026-08-27 17:48:10,alta,419,Ganfeng lithium LATAM S.A.,,,
+2026-08-27 17:48:10,alta,420,GRUAS Y MONTAJES ESPECIALES S.R.L.,,,
+2026-08-27 17:48:10,alta,421,Grupo CN S.A.,,,
+2026-08-27 17:48:10,alta,422,Mahe Salta S.R.L.,,,
+2026-08-27 17:48:10,alta,423,Mikuy S.R.L.,,,
+2026-08-27 17:48:10,alta,424,Minera Mari Mari,,,
+2026-08-27 17:48:10,alta,425,Mochec Laboratorios Chem.Eco Argentina,,,
+2026-08-27 17:48:10,alta,426,North Cool S.A.,,,
+2026-08-27 17:48:10,alta,427,Productos Alimenticios Sofía S.A.,,,
+2026-08-27 17:48:10,alta,428,Sánchez Huerta,,,
+2026-08-27 17:48:10,alta,429,Tecno Oíl S.R.L.,,,
+2026-08-27 17:48:10,alta,430,Transclor S.A.,,,
+2026-08-27 17:48:10,alta,431,V8 Productos de hormigón,,,
+2026-08-27 17:58:59,modificacion,112,SALTAPOR S.R.L.,cuit,,30707325824
+2026-08-27 17:58:59,modificacion,329,Cerámica Salteña S.A.,cuit,,3-52181759-9
+2026-08-27 17:58:59,modificacion,345,Ind. Frigoríficas Norte Grande S.A.,cuit,,30710204337
+2026-08-27 17:58:59,modificacion,259,AIROX ARGENTINA S.A.S.,cuit,,30709908959
+2026-08-27 17:58:59,modificacion,371,Petit Plast,cuit,,33715472649
+2026-08-27 17:58:59,modificacion,219,PETROANDINA,cuit,,30708835540
+2026-08-27 17:58:59,modificacion,22,POSCO Argentina SAU – Proyecto Sal de oro,email,,vjarias@poscoargentina.com
+2026-08-27 17:58:59,modificacion,22,POSCO Argentina SAU – Proyecto Sal de oro,telefono,,387-4815115
+2026-08-27 17:58:59,modificacion,22,POSCO Argentina SAU – Proyecto Sal de oro,contacto_nombre,,Arias Vicente Jose
+2026-08-27 17:58:59,modificacion,22,POSCO Argentina SAU – Proyecto Sal de oro,cuit,,30716139227
+2026-08-27 17:58:59,modificacion,81,SALTAPETROL SRL,cuit,,30681276285
+2026-08-27 17:58:59,modificacion,373,Semix,cuit,,30717273512
+2026-08-27 17:58:59,modificacion,54,SERVICIOS ANDINOS S.R.L.,cuit,,30710874227
