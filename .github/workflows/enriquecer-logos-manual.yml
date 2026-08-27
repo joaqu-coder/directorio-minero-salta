@@ -1,0 +1,43 @@
+name: Enriquecer logos (manual)
+
+# Solo workflow_dispatch a propósito: NO se agrega a scrape-semanal.yml
+# todavía porque es una corrida puntual (completar logos de las altas del
+# Parque Industrial Güemes, que llegaron sin logo). Si funciona bien acá,
+# se puede promover a un paso más del scrape semanal.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  enriquecer-logos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scraper/requirements.txt
+
+      - name: Instalar dependencias
+        run: pip install -r scraper/requirements.txt
+
+      - name: Enriquecer logos
+        working-directory: scraper
+        run: python enriquecer_logos.py
+
+      - name: Commit si hay cambios
+        run: |
+          git config user.name "scraper-bot"
+          git config user.email "actions@github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "Sin cambios."
+            exit 0
+          fi
+          git commit -m "feat(data): completar logos desde el sitio oficial de cada empresa"
+          git push
