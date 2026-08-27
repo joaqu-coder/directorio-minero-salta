@@ -96,6 +96,7 @@ CAMPOS_ENRIQUECIBLES = [
     ("sitio_web", "pag_web"),
     ("instagram", "instagram"),
     ("linkedin", "linkedin"),
+    ("cuit", "cuit"),
 ]
 
 CAMPOS_NUEVA_EMPRESA = [
@@ -252,7 +253,7 @@ def matchear(sheet_emp: dict, idx: dict) -> dict:
     return {"nivel": "nueva", "metodo": None, "similitud": round(mejor_sim, 3) if mejor else 0.0, "match": None}
 
 
-def armar_enriquecimiento(sheet_emp: dict, match_directorio: dict) -> dict | None:
+def armar_enriquecimiento(sheet_emp: dict, match_directorio: dict, resultado: dict) -> dict | None:
     campos = {}
     for campo_dir, campo_sheet in CAMPOS_ENRIQUECIBLES:
         valor_dir = (match_directorio.get(campo_dir) or "").strip()
@@ -261,19 +262,33 @@ def armar_enriquecimiento(sheet_emp: dict, match_directorio: dict) -> dict | Non
             campos[campo_dir] = valor_sheet
     if not campos:
         return None
-    return {
+    enr = {
         "empresa_id": int(match_directorio["id"]),
         "nombre_directorio": match_directorio["nombre"],
         "empresa_sheet": sheet_emp["empresa"],
         "campos_a_completar": campos,
         "rubro_sheet": sheet_emp["rubro"],
         "fuente": "sheet_pig_2024",
+        "nivel_match": resultado["nivel"],
     }
+    if resultado["nivel"] == "revisar_fuzzy":
+        # Match ambiguo (dominio compartido por un grupo con razón social
+        # distinta, o nombre 0.85-0.99 de similar): NO se fusiona el nombre
+        # ni se sobrescribe nada — solo se completan campos que ya estaban
+        # vacíos, a pedido explícito del usuario ("comparte la información
+        # que sea complementaria").
+        enr["nota"] = (
+            f"Match ambiguo ({resultado['metodo']}, similitud "
+            f"{resultado['similitud']}) con '{sheet_emp['nombre_completo']}' "
+            "— se completaron solo los campos vacíos, el nombre y la "
+            "actividad del directorio no se tocaron."
+        )
+    return enr
 
 
-def armar_nueva_empresa(sheet_emp: dict, resultado: dict) -> dict:
+def armar_nueva_empresa(sheet_emp: dict) -> dict:
     return {
-        "nivel": resultado["nivel"],  # "nueva" o "revisar_fuzzy" — decide si --aplicar la da de alta
+        "nivel": "nueva",
         "id": None,
         "nombre": sheet_emp["nombre_completo"],
         "nombre_norm": normalizar_nombre(sheet_emp["nombre_completo"]),
@@ -294,15 +309,7 @@ def armar_nueva_empresa(sheet_emp: dict, resultado: dict) -> dict:
         "rubro_sheet": sheet_emp["rubro"],
         "cargo_contacto": sheet_emp["cargo"],
         "logo_pendiente": True,
-        "nota": (
-            "Candidata a alta directa (con --aplicar). Logo pendiente: el "
-            "Sheet no trae uno."
-            if resultado["nivel"] == "nueva"
-            else f"Match difuso ({resultado['similitud']}) con "
-                 f"'{resultado['match']['nombre']}' (id {resultado['match']['id']}) "
-                 "— revisar a mano antes de fusionar o dar de alta. No se "
-                 "aplica con --aplicar."
-        ),
+        "nota": "Candidata a alta directa (con --aplicar). Logo pendiente: el Sheet no trae uno.",
     }
 
 
@@ -331,10 +338,12 @@ def escribir_csv_generico(path: Path, filas: list, campos: list):
             w.writerow({c: ("" if fila.get(c) is None else fila.get(c)) for c in campos})
 
 
-def aplicar(matches_auto: list, enriquecimientos: list, nuevas: list, directorio: list):
-    """matches_auto: TODOS los matches nivel="auto" (con o sin campos para
-    completar) — cada uno suma la membresía "Parque Industrial Güemes",
-    independiente de si había algún contacto vacío para rellenar."""
+def aplicar(matches_completar: list, enriquecimientos: list, nuevas: list, directorio: list):
+    """matches_completar: matches nivel "auto" o "revisar_fuzzy" (con o sin
+    campos para completar) — cada uno suma la membresía "Parque Industrial
+    Güemes" y, si había algo vacío, lo completa. NUNCA renombra ni fusiona
+    el registro existente — eso es justo la diferencia entre auto y
+    revisar_fuzzy con la nueva empresa que sí se da de alta aparte."""
     import datetime as _dt
 
     campos_empresa = list(directorio[0].keys()) if directorio else CAMPOS_NUEVA_EMPRESA
@@ -344,21 +353,44 @@ def aplicar(matches_auto: list, enriquecimientos: list, nuevas: list, directorio
     membresias_existentes = {(m["empresa_id"], m["camara"]) for m in membresias}
 
     por_id = {e["id"]: e for e in directorio}
-    enriquecimiento_por_id = {enr["empresa_id"]: enr for enr in enriquecimientos}
 
-    for m in matches_auto:
+    # Dos filas del Sheet pueden apuntar al MISMO empresa_id (ej. FMF
+    # Composite y FMF Argentina comparten el registro "FMF ARGENTINA S.R.L."
+    # en el directorio) y proponer valores DISTINTOS para el mismo campo
+    # vacío (CUIT de una razón social vs. la otra). Agrupamos antes de
+    # escribir: si dos fuentes proponen el mismo campo con valores
+    # distintos, no se aplica ninguno — se solapan datos de dos entidades
+    # y "cuál gana" no es una decisión que el script deba tomar solo.
+    propuestas = {}  # empresa_id -> {campo: {valor: [origen, ...]}}
+    for enr in enriquecimientos:
+        eid = enr["empresa_id"]
+        for campo, valor in enr["campos_a_completar"].items():
+            propuestas.setdefault(eid, {}).setdefault(campo, {}).setdefault(valor, []).append(enr["empresa_sheet"])
+
+    conflictos = []
+    conflictos_vistos = set()
+    for m in matches_completar:
         eid = m["empresa_id_directorio"]
-        enr = enriquecimiento_por_id.get(eid)
-        if enr:
-            fila = por_id[str(eid)]
-            for campo, valor in enr["campos_a_completar"].items():
-                viejo = fila.get(campo) or ""
-                fila[campo] = valor
-                cambios.append({
-                    "fecha": ahora, "tipo": "modificacion", "empresa_id": eid,
-                    "empresa_nombre": enr["nombre_directorio"], "campo": campo,
-                    "valor_anterior": viejo, "valor_nuevo": valor,
-                })
+        fila = por_id.get(str(eid))
+        if fila is None:
+            continue
+        for campo, valores in propuestas.get(eid, {}).items():
+            if fila.get(campo):
+                continue  # ya se completó (otra fila del Sheet coincidía) o ya tenía dato
+            if len(valores) > 1:
+                clave_conflicto = (eid, campo)
+                if clave_conflicto not in conflictos_vistos:
+                    conflictos_vistos.add(clave_conflicto)
+                    conflictos.append({"empresa_id": eid, "campo": campo, "propuestas": valores})
+                continue
+            (valor, origenes), = valores.items()
+            viejo = fila.get(campo) or ""
+            fila[campo] = valor
+            cambios.append({
+                "fecha": ahora, "tipo": "modificacion", "empresa_id": eid,
+                "empresa_nombre": fila["nombre"], "campo": campo,
+                "valor_anterior": viejo, "valor_nuevo": valor,
+            })
         clave = (str(eid), CAMARA_PIG)
         if clave not in membresias_existentes:
             membresias_existentes.add(clave)
@@ -389,8 +421,13 @@ def aplicar(matches_auto: list, enriquecimientos: list, nuevas: list, directorio
     escribir_csv_generico(DATA / "membresias.csv", membresias, CAMPOS_MEMBRESIA)
     escribir_csv_generico(DATA / "cambios.csv", cambios, CAMPOS_CAMBIO)
     altas = sum(1 for n in nuevas if n.get("nivel") == "nueva")
-    print(f"Aplicado: {len(matches_auto)} empresas con membresía PIG agregada "
+    print(f"Aplicado: {len(matches_completar)} empresas con membresía PIG agregada "
           f"({len(enriquecimientos)} con contactos completados), {altas} altas nuevas.")
+    if conflictos:
+        print(f"CONFLICTOS ({len(conflictos)}) — dos filas del Sheet proponen valores "
+              "distintos para el mismo campo vacío, no se aplicó ninguno:")
+        for c in conflictos:
+            print(f"  empresa_id={c['empresa_id']} campo={c['campo']}: {dict(c['propuestas'])}")
     print("Backups .bak junto a cada CSV. Falta correr build_db.py para refrescar directorio.db/empresas.json.")
 
 
@@ -424,12 +461,12 @@ def main():
         }
         matches.append(fila_match)
 
-        if r["nivel"] == "auto":
-            enr = armar_enriquecimiento(emp, r["match"])
+        if r["nivel"] in ("auto", "revisar_fuzzy"):
+            enr = armar_enriquecimiento(emp, r["match"], r)
             if enr:
                 enriquecimientos.append(enr)
         else:
-            nuevas.append(armar_nueva_empresa(emp, r))
+            nuevas.append(armar_nueva_empresa(emp))
 
     SALIDA.mkdir(parents=True, exist_ok=True)
 
@@ -456,8 +493,10 @@ def main():
     print(f"Salida en {SALIDA}/")
 
     if aplicar_de_verdad:
-        matches_auto = [m for m in matches if m["nivel"] == "auto"]
-        aplicar(matches_auto, enriquecimientos, nuevas, directorio)
+        # auto + revisar_fuzzy: ambos suman membresía PIG y completan campos
+        # vacíos. revisar_fuzzy nunca se renombra ni se da de alta aparte.
+        matches_completar = [m for m in matches if m["nivel"] in ("auto", "revisar_fuzzy")]
+        aplicar(matches_completar, enriquecimientos, nuevas, directorio)
 
 
 if __name__ == "__main__":
