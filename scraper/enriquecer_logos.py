@@ -27,6 +27,17 @@ CSV_EMPRESAS = DATA / "empresas.csv"
 
 CAMPOS_COMPLEMENTARIOS = ["email", "telefono", "instagram", "facebook", "linkedin"]
 
+# Ninguna URL, email o teléfono legítimo se acerca a esto. Un valor más largo
+# es basura scrapeada (típicamente una imagen embebida en base64): guardarla
+# rompe la relectura del CSV y voltea el rebuild, con lo que se pierde TODO el
+# trabajo de la corrida, no solo el campo malo. Pasó el 2026-08-27: 19 logos
+# scrapeados bien, descartados porque el rebuild murió después de escribirlos.
+MAX_LARGO_VALOR = 2000
+
+
+def valor_sano(v):
+    return bool(v) and len(str(v)) <= MAX_LARGO_VALOR
+
 
 def leer_csv(path):
     with path.open(newline="", encoding="utf-8") as f:
@@ -65,11 +76,11 @@ def main():
             continue
 
         cambios = {}
-        if info.get("logo_url") and not e.get("logo_url", "").strip():
+        if valor_sano(info.get("logo_url")) and not e.get("logo_url", "").strip():
             cambios["logo_url"] = info["logo_url"]
             cambios["logo_origen"] = "sitio_oficial"
         for campo in CAMPOS_COMPLEMENTARIOS:
-            if info.get(campo) and not e.get(campo, "").strip():
+            if valor_sano(info.get(campo)) and not e.get(campo, "").strip():
                 cambios[campo] = info[campo]
 
         if cambios:

@@ -27,21 +27,31 @@ RED_SOCIAL = {
 }
 
 
+def es_url_usable(s):
+    """Descarta imágenes embebidas como data URI. Guardar una en logo_url
+    mete la imagen ENTERA (cientos de KB en base64) en una celda del CSV:
+    rompe la relectura del CSV (field larger than field limit) y multiplica
+    el peso de empresas.json, que el celular baja en cada visita."""
+    return bool(s) and not s.strip().lower().startswith("data:")
+
+
 def extraer_logo(page, base_url):
     """Mejor logo disponible. Preferencia: <img> con 'logo' en SVG >
     icon SVG > <img> logo raster > og:image > icon raster."""
     candidatos = []  # (prioridad, url)
     for src in page.css("img::attr(src)").getall():
         s = str(src)
-        if "logo" in s.lower():
+        if "logo" in s.lower() and es_url_usable(s):
             prio = 0 if s.lower().split("?")[0].endswith(".svg") else 2
             candidatos.append((prio, s))
     for link in page.css('link[rel*="icon"]::attr(href)').getall():
         s = str(link)
+        if not es_url_usable(s):
+            continue
         prio = 1 if s.lower().split("?")[0].endswith(".svg") else 4
         candidatos.append((prio, s))
     og = attr(page, 'meta[property="og:image"]::attr(content)')
-    if og:
+    if og and es_url_usable(og):
         candidatos.append((3, og))
     if not candidatos:
         return None, False

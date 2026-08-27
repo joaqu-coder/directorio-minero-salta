@@ -63,6 +63,13 @@ CREATE TABLE representantes (
 """
 
 
+# El default de Python (128 KB por campo) alcanza para cualquier dato real del
+# directorio, pero si un scrape mete un valor gigante el build muere y se lleva
+# puesta la corrida entera. Con el límite alto el dato raro entra y se puede ver
+# y limpiar, en vez de dejar el sitio sin regenerar.
+csv.field_size_limit(10 * 1024 * 1024)
+
+
 def leer_csv(path: Path) -> list:
     if not path.exists():
         return []
