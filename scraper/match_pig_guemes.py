@@ -8,30 +8,37 @@ la normalización ya validada contra las 3 cámaras.
 Entrada: CSV del Sheet con columnas
   ID, Empresa, Razón Social, Actividad, Rubro, Cuit, email, Teléfono,
   Contacto, Ubicación, Cargo, Pag web, Instagram, LinkedIn
-(51 empresas del Parque Industrial Güemes, no vinculadas a CMS/CAPEMISA/UIS).
+(52 empresas del Parque Industrial Güemes, no vinculadas a CMS/CAPEMISA/UIS).
+El Sheet es la fuente completa — no hay un segundo registro (escaneado o de
+otro tipo) contra el cual confirmar existencia, así que toda empresa del
+Sheet sin match en el directorio pasa directo a "nueva" (candidata a alta).
 
 Salida en data/staging/parque_guemes/:
-  - directorio_matches.json (+ .csv): las 51 empresas del Sheet con su nivel
+  - directorio_matches.json (+ .csv): las 52 empresas del Sheet con su nivel
     de match contra data/empresas.csv (444 filas / 378 empresas reales).
   - enriquecimiento.json: para nivel="auto", solo los campos que estaban
     VACÍOS en el directorio y el Sheet sí trae (nunca pisa un dato existente
     — mismo criterio que aplicar_enriquecimiento() en matching.py).
   - nuevas_empresas.json: empresas del Sheet sin match confiable en el
-    directorio, pre-formateadas con el esquema de empresas.csv, listas para
-    alta MANUAL una vez cruzadas contra los registros escaneados del Parque
-    (ver nivel `pendiente_registro_escaneado` — este script NO tiene esos
-    registros todavía, así que no puede decidir semi-auto vs unmatched).
+    directorio, pre-formateadas con el esquema de empresas.csv. Sin logo
+    (pendiente, no viene en el Sheet).
 
 Niveles:
-  auto                       -> nombre exacto/compacto/dominio ya en el
-                                 directorio. Solo actualiza contactos.
-  revisar_fuzzy               -> similitud Levenshtein 0.85-0.99: candidato,
-                                 NO se fusiona solo (mismo criterio que
-                                 candidatos_revision.csv de matching.py).
-  pendiente_registro_escaneado -> sin match en el directorio. Falta cruzar
-                                 contra los registros escaneados del Parque
-                                 para decidir semi-auto (confirma existencia
-                                 real) vs unmatched (investigar).
+  auto          -> nombre exacto/compacto/dominio ya en el directorio. Solo
+                    actualiza contactos vacíos + agrega la membresía
+                    "Parque Industrial Güemes" (dato nuevo: confirma que
+                    esa empresa YA conocida también tiene planta en el PIG).
+  revisar_fuzzy -> match ambiguo (dominio compartido por un grupo con razón
+                    social distinta, o nombre 0.85-0.99 de similar) — NO se
+                    fusiona solo, mismo criterio que candidatos_revision.csv
+                    de matching.py. Requiere decisión humana, independiente
+                    de si hay o no un registro externo para confirmarlo.
+  nueva         -> sin match en el directorio. Candidata a alta directa con
+                    --aplicar.
+
+--aplicar escribe de verdad en data/empresas.csv, data/membresias.csv y
+data/cambios.csv (backup .bak antes de tocar cada uno). Sin el flag, el
+script solo genera los JSON/CSV de staging para revisión.
 """
 import csv
 import json
@@ -242,7 +249,7 @@ def matchear(sheet_emp: dict, idx: dict) -> dict:
     if mejor is not None and 0.85 <= mejor_sim < 1.0:
         return {"nivel": "revisar_fuzzy", "metodo": "levenshtein", "similitud": round(mejor_sim, 3), "match": mejor}
 
-    return {"nivel": "pendiente_registro_escaneado", "metodo": None, "similitud": round(mejor_sim, 3) if mejor else 0.0, "match": None}
+    return {"nivel": "nueva", "metodo": None, "similitud": round(mejor_sim, 3) if mejor else 0.0, "match": None}
 
 
 def armar_enriquecimiento(sheet_emp: dict, match_directorio: dict) -> dict | None:
@@ -259,12 +266,14 @@ def armar_enriquecimiento(sheet_emp: dict, match_directorio: dict) -> dict | Non
         "nombre_directorio": match_directorio["nombre"],
         "empresa_sheet": sheet_emp["empresa"],
         "campos_a_completar": campos,
+        "rubro_sheet": sheet_emp["rubro"],
         "fuente": "sheet_pig_2024",
     }
 
 
 def armar_nueva_empresa(sheet_emp: dict, resultado: dict) -> dict:
     return {
+        "nivel": resultado["nivel"],  # "nueva" o "revisar_fuzzy" — decide si --aplicar la da de alta
         "id": None,
         "nombre": sheet_emp["nombre_completo"],
         "nombre_norm": normalizar_nombre(sheet_emp["nombre_completo"]),
@@ -277,28 +286,118 @@ def armar_nueva_empresa(sheet_emp: dict, resultado: dict) -> dict:
         "facebook": "",
         "linkedin": sheet_emp["linkedin"],
         "logo_url": None,
-        "logo_origen": "sheet_pig_2024",
+        "logo_origen": None,
         "contacto_nombre": sheet_emp["contacto"],
         "descripcion": None,
         "ubicacion": "Parque Industrial Güemes, Salta",
         "cuit": sheet_emp["cuit"],
         "rubro_sheet": sheet_emp["rubro"],
         "cargo_contacto": sheet_emp["cargo"],
-        "estado_pendiente": "sin_confirmar_contra_registro_escaneado",
+        "logo_pendiente": True,
         "nota": (
-            "Candidato a alta manual (SEMI-AUTO o UNMATCHED según el "
-            "registro escaneado del Parque, todavía no cargado en este "
-            "match)."
-            if resultado["nivel"] == "pendiente_registro_escaneado"
+            "Candidata a alta directa (con --aplicar). Logo pendiente: el "
+            "Sheet no trae uno."
+            if resultado["nivel"] == "nueva"
             else f"Match difuso ({resultado['similitud']}) con "
                  f"'{resultado['match']['nombre']}' (id {resultado['match']['id']}) "
-                 "— revisar a mano antes de fusionar o dar de alta."
+                 "— revisar a mano antes de fusionar o dar de alta. No se "
+                 "aplica con --aplicar."
         ),
     }
 
 
+CAMARA_PIG = "Parque Industrial Güemes"
+
+CAMPOS_MEMBRESIA = ["empresa_id", "camara", "rubro", "url_ficha"]
+CAMPOS_CAMBIO = [
+    "fecha", "tipo", "empresa_id", "empresa_nombre", "campo",
+    "valor_anterior", "valor_nuevo",
+]
+
+
+def leer_csv_generico(path: Path) -> list:
+    if not path.exists():
+        return []
+    with path.open(encoding="utf-8", newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def escribir_csv_generico(path: Path, filas: list, campos: list):
+    path.with_suffix(path.suffix + ".bak").write_bytes(path.read_bytes()) if path.exists() else None
+    with path.open("w", encoding="utf-8", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=campos, extrasaction="ignore")
+        w.writeheader()
+        for fila in filas:
+            w.writerow({c: ("" if fila.get(c) is None else fila.get(c)) for c in campos})
+
+
+def aplicar(matches_auto: list, enriquecimientos: list, nuevas: list, directorio: list):
+    """matches_auto: TODOS los matches nivel="auto" (con o sin campos para
+    completar) — cada uno suma la membresía "Parque Industrial Güemes",
+    independiente de si había algún contacto vacío para rellenar."""
+    import datetime as _dt
+
+    campos_empresa = list(directorio[0].keys()) if directorio else CAMPOS_NUEVA_EMPRESA
+    ahora = _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    membresias = leer_csv_generico(DATA / "membresias.csv")
+    cambios = leer_csv_generico(DATA / "cambios.csv")
+    membresias_existentes = {(m["empresa_id"], m["camara"]) for m in membresias}
+
+    por_id = {e["id"]: e for e in directorio}
+    enriquecimiento_por_id = {enr["empresa_id"]: enr for enr in enriquecimientos}
+
+    for m in matches_auto:
+        eid = m["empresa_id_directorio"]
+        enr = enriquecimiento_por_id.get(eid)
+        if enr:
+            fila = por_id[str(eid)]
+            for campo, valor in enr["campos_a_completar"].items():
+                viejo = fila.get(campo) or ""
+                fila[campo] = valor
+                cambios.append({
+                    "fecha": ahora, "tipo": "modificacion", "empresa_id": eid,
+                    "empresa_nombre": enr["nombre_directorio"], "campo": campo,
+                    "valor_anterior": viejo, "valor_nuevo": valor,
+                })
+        clave = (str(eid), CAMARA_PIG)
+        if clave not in membresias_existentes:
+            membresias_existentes.add(clave)
+            membresias.append({
+                "empresa_id": eid, "camara": CAMARA_PIG,
+                "rubro": m.get("rubro_sheet") or "", "url_ficha": "",
+            })
+
+    max_id = max((int(e["id"]) for e in directorio), default=0)
+    for nueva in nuevas:
+        if nueva.get("nivel") != "nueva":
+            continue  # revisar_fuzzy: nunca se da de alta sola
+        max_id += 1
+        fila = {c: nueva.get(c) for c in campos_empresa}
+        fila["id"] = max_id
+        directorio.append(fila)
+        cambios.append({
+            "fecha": ahora, "tipo": "alta", "empresa_id": max_id,
+            "empresa_nombre": nueva["nombre"], "campo": "",
+            "valor_anterior": "", "valor_nuevo": "",
+        })
+        membresias.append({
+            "empresa_id": max_id, "camara": CAMARA_PIG,
+            "rubro": nueva.get("rubro_sheet") or "", "url_ficha": "",
+        })
+
+    escribir_csv_generico(DATA / "empresas.csv", directorio, campos_empresa)
+    escribir_csv_generico(DATA / "membresias.csv", membresias, CAMPOS_MEMBRESIA)
+    escribir_csv_generico(DATA / "cambios.csv", cambios, CAMPOS_CAMBIO)
+    altas = sum(1 for n in nuevas if n.get("nivel") == "nueva")
+    print(f"Aplicado: {len(matches_auto)} empresas con membresía PIG agregada "
+          f"({len(enriquecimientos)} con contactos completados), {altas} altas nuevas.")
+    print("Backups .bak junto a cada CSV. Falta correr build_db.py para refrescar directorio.db/empresas.json.")
+
+
 def main():
-    ruta_sheet = Path(sys.argv[1]) if len(sys.argv) > 1 else SALIDA / "contactos_pig_2024.csv"
+    aplicar_de_verdad = "--aplicar" in sys.argv
+    args_posicionales = [a for a in sys.argv[1:] if not a.startswith("--")]
+    ruta_sheet = Path(args_posicionales[0]) if args_posicionales else SALIDA / "contactos_pig_2024.csv"
     if not ruta_sheet.exists():
         raise SystemExit(f"No encuentro el CSV del Sheet: {ruta_sheet}")
 
@@ -307,7 +406,7 @@ def main():
     idx = indexar_directorio(directorio)
 
     matches, enriquecimientos, nuevas = [], [], []
-    conteo = {"auto": 0, "revisar_fuzzy": 0, "pendiente_registro_escaneado": 0}
+    conteo = {"auto": 0, "revisar_fuzzy": 0, "nueva": 0}
 
     for emp in sheet:
         r = matchear(emp, idx)
@@ -321,6 +420,7 @@ def main():
             "similitud": r["similitud"],
             "empresa_id_directorio": int(r["match"]["id"]) if r["match"] else None,
             "nombre_directorio": r["match"]["nombre"] if r["match"] else None,
+            "rubro_sheet": emp["rubro"],
         }
         matches.append(fila_match)
 
@@ -349,11 +449,15 @@ def main():
     )
 
     print(f"{len(sheet)} empresas del Sheet procesadas")
-    print(f"  auto (ya en el directorio):        {conteo['auto']}")
-    print(f"  revisar_fuzzy (candidato, no fusiona): {conteo['revisar_fuzzy']}")
-    print(f"  pendiente_registro_escaneado:       {conteo['pendiente_registro_escaneado']}")
+    print(f"  auto (ya en el directorio):    {conteo['auto']}")
+    print(f"  revisar_fuzzy (no se fusiona): {conteo['revisar_fuzzy']}")
+    print(f"  nueva (candidata a alta):      {conteo['nueva']}")
     print(f"{len(enriquecimientos)} empresas con campos nuevos para completar (nunca pisa datos existentes)")
     print(f"Salida en {SALIDA}/")
+
+    if aplicar_de_verdad:
+        matches_auto = [m for m in matches if m["nivel"] == "auto"]
+        aplicar(matches_auto, enriquecimientos, nuevas, directorio)
 
 
 if __name__ == "__main__":
