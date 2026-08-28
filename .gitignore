@@ -1,5 +1,6 @@
 # build artifacts — los CSVs en /data son el source of truth
 directorio.db
+test_directorio.db
 data/staging/
 data/resumen_run.json
 
