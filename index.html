@@ -724,7 +724,7 @@ $('#limpiar').onclick = () => {
 /* ---------- init ---------- */
 (async function init() {
   try {
-    const res = await fetch('data/empresas.json');
+    const res = await fetch('data/empresas_dummy.json');
     DB = await res.json();
   } catch (e) {
     $('#contador').textContent = 'Error cargando datos.';
