@@ -1,0 +1,227 @@
+{
+  "generado": "2026-08-28T01:18:18.954286",
+  "empresas": [
+    {
+      "id": 1,
+      "slug": "empresa_cms_test",
+      "nombre": "Empresa CMS Test",
+      "actividad": "Minería",
+      "direccion": "Calle 1",
+      "telefono": "1234567",
+      "email": "cms@test.com",
+      "web": "https://cms-test.com",
+      "instagram": null,
+      "facebook": null,
+      "contacto": "Test CMS",
+      "descripcion": "Una empresa de prueba CMS",
+      "ubicacion": "Salta",
+      "membresias": [
+        {
+          "id": 1,
+          "camara": "CMS",
+          "rubro": "Minería",
+          "url_ficha": "https://cms/empresa-1",
+          "unidad_id": null
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "slug": "empresa_capemisa_test",
+      "nombre": "Empresa CAPEMISA Test",
+      "actividad": "Construcción",
+      "direccion": "Calle 2",
+      "telefono": "7654321",
+      "email": "cap@test.com",
+      "web": null,
+      "instagram": null,
+      "facebook": null,
+      "contacto": "Test CAPEMISA",
+      "descripcion": "Una empresa de prueba CAPEMISA",
+      "ubicacion": "Salta",
+      "membresias": [
+        {
+          "id": 2,
+          "camara": "CAPEMISA",
+          "rubro": "Construcción",
+          "url_ficha": "https://capemisa/empresa-2",
+          "unidad_id": null
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "slug": "empresa_uis_test",
+      "nombre": "Empresa UIS Test",
+      "actividad": "Servicios",
+      "direccion": "Calle 3",
+      "telefono": "5555555",
+      "email": "uis@test.com",
+      "web": null,
+      "instagram": null,
+      "facebook": null,
+      "contacto": "Test UIS",
+      "descripcion": "Una empresa de prueba UIS",
+      "ubicacion": "Salta",
+      "membresias": [
+        {
+          "id": 3,
+          "camara": "UIS",
+          "rubro": "Servicios",
+          "url_ficha": "https://uis/empresa-3",
+          "unidad_id": null
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "slug": "salta-stone-sas",
+      "nombre": "SALTA STONE SAS",
+      "actividad": "Fabricación de Mármol",
+      "direccion": "Av. X 123",
+      "telefono": "387123456",
+      "email": "info@saltastone.com",
+      "web": null,
+      "instagram": null,
+      "facebook": null,
+      "contacto": "Juan Pérez",
+      "descripcion": null,
+      "ubicacion": "Parque Industrial Salta",
+      "membresias": [
+        {
+          "id": 4,
+          "camara": null,
+          "rubro": "Fabricación de Mármol",
+          "url_ficha": null,
+          "unidad_id": 1,
+          "_parque": "SALTA",
+          "_lote": "7",
+          "_matricula": "7",
+          "_superficie": "1000.18 m²",
+          "_titularidad": "SALTA STONE S.A.S",
+          "_estado": "EN ACTIVIDAD"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "slug": "temet-s.r.l",
+      "nombre": "TEMET S.R.L",
+      "actividad": "Servicios Eléctricos",
+      "direccion": "Av. Y 456",
+      "telefono": "387654321",
+      "email": "temet@test.com",
+      "web": null,
+      "instagram": null,
+      "facebook": null,
+      "contacto": "Carlos López",
+      "descripcion": null,
+      "ubicacion": "Parque Industrial Salta",
+      "membresias": [
+        {
+          "id": 5,
+          "camara": null,
+          "rubro": "Servicios Eléctricos",
+          "url_ficha": null,
+          "unidad_id": 2,
+          "_parque": "SALTA",
+          "_lote": "69",
+          "_matricula": "69",
+          "_superficie": "3545.0 m²",
+          "_titularidad": "Armando Galloni",
+          "_estado": "EN ACTIVIDAD"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "slug": "tomasini-marcela",
+      "nombre": "TOMASINI MARCELA",
+      "actividad": "Servicios",
+      "direccion": "Av. Z 789",
+      "telefono": "387999999",
+      "email": "tomasini@test.com",
+      "web": null,
+      "instagram": null,
+      "facebook": null,
+      "contacto": "Marcela Tomasini",
+      "descripcion": null,
+      "ubicacion": "Parque Industrial Salta",
+      "membresias": [
+        {
+          "id": 6,
+          "camara": null,
+          "rubro": "Servicios",
+          "url_ficha": null,
+          "unidad_id": 2,
+          "_parque": "SALTA",
+          "_lote": "69",
+          "_matricula": "69",
+          "_superficie": "3545.0 m²",
+          "_titularidad": "Armando Galloni",
+          "_estado": "EN ACTIVIDAD"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "slug": "pallets-san-antonio",
+      "nombre": "PALLETS SAN ANTONIO",
+      "actividad": "Elaboración de Pallets",
+      "direccion": "Av. Delgadillo 2278",
+      "telefono": "387473107",
+      "email": "pallets@test.com",
+      "web": null,
+      "instagram": null,
+      "facebook": null,
+      "contacto": "Juan Anderson",
+      "descripcion": null,
+      "ubicacion": "Parque Industrial Salta",
+      "membresias": [
+        {
+          "id": 7,
+          "camara": null,
+          "rubro": "Elaboración de Pallets",
+          "url_ficha": null,
+          "unidad_id": 3,
+          "_parque": "SALTA",
+          "_lote": "6",
+          "_matricula": "6",
+          "_superficie": "4991.96 m²",
+          "_titularidad": "ENTE GENERAL DE PARQUES",
+          "_estado": "EN ACTIVIDAD"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "slug": "sepelios-rigo-s.r.l",
+      "nombre": "SEPELIOS RIGO S.R.L",
+      "actividad": "Fabricación de Ataúdes",
+      "direccion": "Av. Delgadillo 2270",
+      "telefono": "4393681",
+      "email": "rigo@test.com",
+      "web": null,
+      "instagram": null,
+      "facebook": null,
+      "contacto": "Emilce",
+      "descripcion": null,
+      "ubicacion": "Parque Industrial Salta",
+      "membresias": [
+        {
+          "id": 8,
+          "camara": null,
+          "rubro": "Fabricación de Ataúdes",
+          "url_ficha": null,
+          "unidad_id": 3,
+          "_parque": "SALTA",
+          "_lote": "6",
+          "_matricula": "6",
+          "_superficie": "4991.96 m²",
+          "_titularidad": "ENTE GENERAL DE PARQUES",
+          "_estado": "EN ACTIVIDAD"
+        }
+      ]
+    }
+  ]
+}
