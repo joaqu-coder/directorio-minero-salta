@@ -1,6 +1,6 @@
 'use strict';
 // Incrementar CACHE al actualizar index.html para forzar recarga en clientes.
-const CACHE = 'dir-v1';
+const CACHE = 'dir-v2';
 const SCOPE = self.registration.scope;
 
 const APP_SHELL = [
