@@ -194,6 +194,14 @@ function handleRedSocial(url) {
   const partes = limpio.split('/').filter(Boolean);
   return partes[partes.length - 1] || limpio;
 }
+// Los datos de web/instagram/facebook vienen de un CSV editado a mano —
+// nada obliga a que traigan un esquema http(s). Sin este chequeo, un
+// valor tipo "javascript:..." se renderiza como link cliqueable y
+// ejecuta script en la página. Si no pasa el esquema, no se muestra el
+// dato en vez de arriesgar un href raro.
+function urlSegura(url) {
+  return /^https?:\/\//i.test(url || '') ? url : null;
+}
 const claseEstado = estado => estado === 'escriturada' ? 'escriturada' : (estado === 'no escriturada' ? 'no-escriturada' : 'desconocido');
 const labelEstado = estado => estado === 'escriturada' ? 'Escriturada' : (estado === 'no escriturada' ? 'No escriturada' : 'Sin dato');
 
@@ -306,9 +314,9 @@ function abrirFicha(e, pushUrl = true) {
       ${dato('Contacto', e.contacto ? esc(e.contacto) : null)}
       ${dato('Teléfono', [e.telefono_1, e.telefono_2].filter(Boolean).map(t => `<a href="tel:${esc(t.replace(/[^\d+]/g, ''))}" class="mono">${esc(t)}</a>`).join(', ') || null)}
       ${dato('Email', [e.email_1, e.email_2].filter(Boolean).map(m => `<a href="mailto:${esc(m)}" class="mono">${esc(m)}</a>`).join(', ') || null)}
-      ${dato('Web', e.web ? `<a href="${esc(e.web)}" target="_blank" rel="noopener" class="mono">${esc(e.web.replace(/^https?:\/\//, '').replace(/\/$/, ''))}</a>` : null)}
-      ${dato('Instagram', e.instagram ? `<a href="${esc(e.instagram)}" target="_blank" rel="noopener" class="mono">${esc(handleRedSocial(e.instagram))}</a>` : null)}
-      ${dato('Facebook', e.facebook ? `<a href="${esc(e.facebook)}" target="_blank" rel="noopener" class="mono">${esc(handleRedSocial(e.facebook))}</a>` : null)}
+      ${dato('Web', urlSegura(e.web) ? `<a href="${esc(e.web)}" target="_blank" rel="noopener" class="mono">${esc(e.web.replace(/^https?:\/\//, '').replace(/\/$/, ''))}</a>` : null)}
+      ${dato('Instagram', urlSegura(e.instagram) ? `<a href="${esc(e.instagram)}" target="_blank" rel="noopener" class="mono">${esc(handleRedSocial(e.instagram))}</a>` : null)}
+      ${dato('Facebook', urlSegura(e.facebook) ? `<a href="${esc(e.facebook)}" target="_blank" rel="noopener" class="mono">${esc(handleRedSocial(e.facebook))}</a>` : null)}
     </div>
     ${cruzadoHtml(e)}
     ${lotesHtml(e)}

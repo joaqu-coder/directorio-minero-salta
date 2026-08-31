@@ -31,12 +31,14 @@ jobs:
       - name: Armar dist
         if: steps.cred.outputs.listo == 'true'
         run: |
-          mkdir -p dist/data
+          mkdir -p dist/data dist/parques/data
           cp index.html dist/
           cp manifest.json dist/
           cp icon.svg dist/
           cp sw.js dist/
           cp data/empresas.json dist/data/
+          cp parques/index.html dist/parques/
+          cp parques/data/parques.json parques/data/cruce.json dist/parques/data/
 
       - name: Crear proyecto Pages si no existe
         if: steps.cred.outputs.listo == 'true'

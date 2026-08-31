@@ -67,12 +67,29 @@ def leer_csv(path: Path) -> list:
         return list(csv.DictReader(f))
 
 
+# Copia exacta de scraper/common.py::normalizar_nombre (incluye el
+# stripping de formas legales — sin esto los slugs de acá quedaban más
+# largos y con un criterio distinto al resto del repo, ej.
+# "zozzoli-colchones-s-a" en vez de "zozzoli-colchones").
+_FORMAS_LEGALES = re.compile(
+    r"\s+(s\s?a\s?p\s?e\s?m|s\s?a\s?c\s?i\s?f?\s?i?\s?a?|s\s?a\s?i\s?c\s?f?|"
+    r"s\s?r\s?l|s\s?a\s?s|s\s?a\s?u|s\s?c\s?a|s\s?c\s?s|s\s?h|s\s?e|s\s?a|"
+    r"ltda|srl|sas|sau|sa|inc|llc|corp|group|y\s?cia|cia|"
+    r"coop(?:erativa)?(?:\s+de\s+trabajo)?(?:\s+ltda)?)\s*$"
+)
+
+
 def normalizar_nombre(nombre: str) -> str:
     s = nombre.lower().strip()
     s = unicodedata.normalize("NFD", s)
     s = "".join(c for c in s if unicodedata.category(c) != "Mn")
     s = re.sub(r"[^a-z0-9ñ]+", " ", s)
-    return re.sub(r"\s+", " ", s).strip()
+    s = re.sub(r"\s+", " ", s).strip()
+    previo = None
+    while previo != s:
+        previo = s
+        s = _FORMAS_LEGALES.sub("", s).strip()
+    return s
 
 
 def slugificar(nombre: str) -> str:

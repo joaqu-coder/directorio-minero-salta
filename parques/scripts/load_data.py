@@ -48,6 +48,7 @@ Dry-run por defecto: sin --aplicar solo imprime conteos, no escribe nada.
 import csv
 import re
 import sys
+import unicodedata
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent  # parques/
@@ -112,6 +113,53 @@ def normalizar_estado(valor: str) -> str:
     if v in ("no", "no escriturada", "no escriturado"):
         return "no escriturada"
     return ""  # desconocido — no se fabrica
+
+
+# Copia exacta de scraper/common.py::normalizar_nombre (sin importar
+# common.py: arrastra scrapling/curl_cffi solo por 2 funciones puras de
+# string, mismo criterio que ya resolvió scraper/match_pig_guemes.py).
+# Usarla como clave de dedupe en vez de un simple .strip().lower() importa
+# acá: sin sacar tildes y formas legales, "Elásticos M&M" (Güemes) y
+# "ELASTICOS M&M S.R.L" (Salta) — la MISMA empresa, mismo CUIT — quedaban
+# como 2 registros separados con los datos partidos a la mitad.
+_FORMAS_LEGALES = re.compile(
+    r"\s+(s\s?a\s?p\s?e\s?m|s\s?a\s?c\s?i\s?f?\s?i?\s?a?|s\s?a\s?i\s?c\s?f?|"
+    r"s\s?r\s?l|s\s?a\s?s|s\s?a\s?u|s\s?c\s?a|s\s?c\s?s|s\s?h|s\s?e|s\s?a|"
+    r"ltda|srl|sas|sau|sa|inc|llc|corp|group|y\s?cia|cia|"
+    r"coop(?:erativa)?(?:\s+de\s+trabajo)?(?:\s+ltda)?)\s*$"
+)
+
+
+def normalizar_nombre(nombre: str) -> str:
+    s = nombre.lower().strip()
+    s = unicodedata.normalize("NFD", s)
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+    s = re.sub(r"[^a-z0-9ñ]+", " ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    previo = None
+    while previo != s:
+        previo = s
+        s = _FORMAS_LEGALES.sub("", s).strip()
+    return s
+
+
+def levenshtein(a: str, b: str) -> int:
+    if len(a) < len(b):
+        a, b = b, a
+    fila = list(range(len(b) + 1))
+    for i, ca in enumerate(a, 1):
+        nueva = [i]
+        for j, cb in enumerate(b, 1):
+            nueva.append(min(fila[j] + 1, nueva[-1] + 1, fila[j - 1] + (ca != cb)))
+        fila = nueva
+    return fila[-1]
+
+
+def similitud(a: str, b: str) -> float:
+    if not a or not b:
+        return 0.0
+    m = max(len(a), len(b))
+    return 1.0 - levenshtein(a, b) / m if m else 1.0
 
 
 # ----------------------------------------------------------------------
@@ -325,9 +373,20 @@ def cargar_salta(path: Path):
 # duplicar la ficha de contacto por cada lote.
 # ----------------------------------------------------------------------
 
+CAMPOS_COMPLETABLES_EMPRESA = (
+    "cuit", "rubro", "situacion", "contacto_nombre", "telefono_1",
+    "telefono_2", "email_1", "email_2", "direccion", "pagina_web",
+    "instagram", "facebook",
+)
+
+
 def consolidar(filas_crudas: list):
     empresas, lotes, matriculas = [], [], []
-    empresa_id_por_nombre = {}
+    # Tier 1: nombre normalizado exacto (tildes/formas legales fuera).
+    empresa_id_por_norm = {}
+    cuit_por_eid = {}
+    norm_por_eid = {}
+    fusiones_cuit = []  # [(nombre_fila_nueva, nombre_empresa_existente)]
     # El número de lote es un identificador catastral único dentro del
     # parque (confirmado contra los tabs crudos de "Contactos PI Salta" y
     # "Sistema güemes": un mismo ID_LOTES se repite en varias filas cuando
@@ -343,11 +402,31 @@ def consolidar(filas_crudas: list):
     siguiente_matricula_id = 1
 
     for fila in filas_crudas:
-        clave = fila["nombre"].strip().lower()
-        if clave not in empresa_id_por_nombre:
+        norm = normalizar_nombre(fila["nombre"]) or fila["nombre"].strip().lower()
+        cuit = fila["cuit"]
+        eid = empresa_id_por_norm.get(norm)
+
+        if eid is None and cuit:
+            # Tier 2: mismo CUIT (identificador fuerte) + nombre lo bastante
+            # parecido (Levenshtein >= 0.85, mismo umbral que matching.py del
+            # sitio de cámaras) => misma empresa real escrita distinto entre
+            # las 2 fuentes (ej. "Elásticos M&M" en Güemes vs "ELASTICOS M&M
+            # S.R.L." en Salta, o "SaltaPor" vs "SALTA POR"). El CUIT solo NO
+            # alcanza: ZOZZOLI Colchones/Muebles/Sillas comparten CUIT de
+            # grupo y son 3 empresas reales distintas — ahí la similitud de
+            # nombre es baja (~0.5) y no se fusionan, igual que matching.py
+            # tampoco fusiona candidatos difusos sin más evidencia.
+            for otro_eid, otro_norm in norm_por_eid.items():
+                if cuit_por_eid.get(otro_eid) == cuit and similitud(norm, otro_norm) >= 0.85:
+                    eid = otro_eid
+                    break
+
+        if eid is None:
             eid = siguiente_empresa_id
             siguiente_empresa_id += 1
-            empresa_id_por_nombre[clave] = eid
+            empresa_id_por_norm[norm] = eid
+            cuit_por_eid[eid] = cuit
+            norm_por_eid[eid] = norm
             empresas.append({
                 "id": eid, "nombre": fila["nombre"], "cuit": fila["cuit"],
                 "rubro": fila["rubro"], "situacion": fila["situacion"],
@@ -357,7 +436,17 @@ def consolidar(filas_crudas: list):
                 "direccion": fila["direccion"], "pagina_web": fila["pagina_web"],
                 "instagram": fila["instagram"], "facebook": fila["facebook"],
             })
-        eid = empresa_id_por_nombre[clave]
+        else:
+            existente = next(e for e in empresas if e["id"] == eid)
+            if normalizar_nombre(existente["nombre"]) != norm:
+                fusiones_cuit.append((fila["nombre"], existente["nombre"]))
+            empresa_id_por_norm.setdefault(norm, eid)
+            # completar solo los campos vacíos — nunca pisa un dato que ya
+            # estaba (mismo criterio que aplicar_enriquecimiento() en
+            # scraper/matching.py).
+            for campo in CAMPOS_COMPLETABLES_EMPRESA:
+                if not existente.get(campo) and fila.get(campo):
+                    existente[campo] = fila[campo]
 
         parque_id = fila["_lote"]["parque_id"]
         numero = fila["_lote"]["numero"] or ""
@@ -385,7 +474,27 @@ def consolidar(filas_crudas: list):
             "observacion": fila["_matricula"]["observacion"] or "",
         })
 
-    return empresas, lotes, matriculas
+    if fusiones_cuit:
+        print(f"[Consolidar] {len(fusiones_cuit)} filas fusionadas a una empresa ya existente por mismo CUIT + nombre similar:")
+        for nuevo, existente in fusiones_cuit:
+            print(f"   '{nuevo}' -> '{existente}'")
+
+    # Si una empresa fusionó el placeholder "sin datos catastrales" de
+    # Güemes con matrículas reales (de Salta, o de otra fila con catastro),
+    # el placeholder queda redundante y confuso al lado de datos reales —
+    # se descarta. Se conserva tal cual si la empresa NO tiene ninguna
+    # matrícula real (Güemes puro, sigue sin catastro como se espera).
+    por_empresa = {}
+    for m in matriculas:
+        por_empresa.setdefault(m["empresa_id"], []).append(m)
+    matriculas_finales = []
+    for ms in por_empresa.values():
+        reales = [m for m in ms if m["numero_matricula"] or m["titularidad"]]
+        matriculas_finales.extend(reales if reales and len(reales) < len(ms) else ms)
+    lote_ids_vivos = {m["lote_id"] for m in matriculas_finales}
+    lotes = [l for l in lotes if l["id"] in lote_ids_vivos]
+
+    return empresas, lotes, matriculas_finales
 
 
 def escribir_csv(path: Path, filas: list, campos: list):
