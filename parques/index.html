@@ -186,6 +186,14 @@ const esc = s => (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>'
 const iniciales = n => n.split(/\s+/).filter(w => /\w/.test(w)).slice(0, 2).map(w => w[0]).join('').toUpperCase();
 const hue = n => { let h = 0; for (const c of n) h = (h * 31 + c.charCodeAt(0)) % 360; return h; };
 const claseParque = p => p === 'Parque Güemes' ? 'guemes' : 'salta';
+// las URLs de redes sociales de la fuente de Salta traen query strings
+// (ej. ".../alberdiceramica/?hl=es") — sacarlas antes de tomar el último
+// segmento, si no el link muestra "?hl=es" en vez del usuario.
+function handleRedSocial(url) {
+  const limpio = url.split('?')[0].split('#')[0].replace(/\/+$/, '');
+  const partes = limpio.split('/').filter(Boolean);
+  return partes[partes.length - 1] || limpio;
+}
 const claseEstado = estado => estado === 'escriturada' ? 'escriturada' : (estado === 'no escriturada' ? 'no-escriturada' : 'desconocido');
 const labelEstado = estado => estado === 'escriturada' ? 'Escriturada' : (estado === 'no escriturada' ? 'No escriturada' : 'Sin dato');
 
@@ -299,8 +307,8 @@ function abrirFicha(e, pushUrl = true) {
       ${dato('Teléfono', [e.telefono_1, e.telefono_2].filter(Boolean).map(t => `<a href="tel:${esc(t.replace(/[^\d+]/g, ''))}" class="mono">${esc(t)}</a>`).join(', ') || null)}
       ${dato('Email', [e.email_1, e.email_2].filter(Boolean).map(m => `<a href="mailto:${esc(m)}" class="mono">${esc(m)}</a>`).join(', ') || null)}
       ${dato('Web', e.web ? `<a href="${esc(e.web)}" target="_blank" rel="noopener" class="mono">${esc(e.web.replace(/^https?:\/\//, '').replace(/\/$/, ''))}</a>` : null)}
-      ${dato('Instagram', e.instagram ? `<a href="${esc(e.instagram)}" target="_blank" rel="noopener" class="mono">${esc(e.instagram.replace(/\/$/, '').split('/').pop())}</a>` : null)}
-      ${dato('Facebook', e.facebook ? `<a href="${esc(e.facebook)}" target="_blank" rel="noopener" class="mono">${esc(e.facebook.replace(/\/$/, '').split('/').pop())}</a>` : null)}
+      ${dato('Instagram', e.instagram ? `<a href="${esc(e.instagram)}" target="_blank" rel="noopener" class="mono">${esc(handleRedSocial(e.instagram))}</a>` : null)}
+      ${dato('Facebook', e.facebook ? `<a href="${esc(e.facebook)}" target="_blank" rel="noopener" class="mono">${esc(handleRedSocial(e.facebook))}</a>` : null)}
     </div>
     ${cruzadoHtml(e)}
     ${lotesHtml(e)}

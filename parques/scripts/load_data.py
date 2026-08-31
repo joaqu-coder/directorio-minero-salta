@@ -8,22 +8,25 @@ Fuentes:
                              sin lote/matrícula/superficie/titularidad).
                              Mismo formato que ya procesaba
                              scraper/match_pig_guemes.py.
-  data/raw/pi_salta.csv   — export CSV de PI_Salta_Normalizado.xlsx, hoja
-                             Resumen_Empresas. Columnas esperadas: Empresa,
-                             CUIT, Lotes, Matriculas, Superficie_Total,
-                             Titularidad, Ocupante_Actual, Rubro, Situacion,
-                             Contacto, Direccion, Telefonos, Emails,
-                             Estado_Matrícula, Observación.
-                             PROVISORIO: a la fecha de escribir esto el
-                             archivo normalizado todavía no existe (se
-                             confirmó con el usuario que lo va a proveer
-                             aparte) — este parser está escrito contra la
-                             descripción de columnas dada, sin poder
-                             validarlo contra datos reales todavía. El
-                             dry-run de esta corrida es la red de
-                             seguridad: si el archivo real no calza con
-                             estos supuestos, va a mostrar 0 filas o
-                             conteos raros en vez de escribir basura.
+  data/raw/pi_salta.csv   — export CSV de la hoja Resumen_Empresas de
+                             PI_Salta_Normalizado.xlsx (130 empresas).
+                             Columnas: Empresa, CUIT, Lotes, Matriculas,
+                             Superficie_Total, Titularidad, Ocupante_Actual,
+                             Rubro, Situacion, Contacto, Direccion,
+                             Telefono_1, Telefono_2, Email_1, Email_2,
+                             Presencia_Digital ("web | instagram |
+                             facebook", siempre 3 partes), Estado_Matrícula,
+                             Observación. "Lotes" es 1 solo número de lote
+                             por fila (no una lista); "Matriculas" sí puede
+                             traer varias separadas por coma — todas cuelgan
+                             del mismo lote (confirmado con CERAMICA
+                             ALBERDI: Lotes=1, 3 matrículas). "Titularidad"
+                             puede traer varios valores separados por "|"
+                             (copropietarios) que NO siempre alinean 1:1
+                             con la cantidad de matrículas (27/130 filas
+                             desalinean) — no se intenta repartir por
+                             matrícula, se guarda el string completo tal
+                             cual en cada matrícula del lote.
 
 Reglas de negocio (no reinterpretar):
   - Todas las empresas de un parque son propietarias (escrituradas o no).
@@ -215,7 +218,8 @@ def cargar_salta(path: Path):
     columnas_esperadas = {
         "Empresa", "CUIT", "Lotes", "Matriculas", "Superficie_Total",
         "Titularidad", "Ocupante_Actual", "Rubro", "Situacion", "Contacto",
-        "Direccion", "Telefonos", "Emails", "Estado_Matrícula", "Observación",
+        "Direccion", "Telefono_1", "Telefono_2", "Email_1", "Email_2",
+        "Presencia_Digital", "Estado_Matrícula", "Observación",
     }
     with path.open(encoding="utf-8", newline="") as f:
         lector = csv.DictReader(f)
@@ -233,8 +237,15 @@ def cargar_salta(path: Path):
         empresa = limpiar(reg.get("Empresa", ""))
         if not empresa:
             continue
-        tel1, tel2 = dos_valores(reg.get("Telefonos", ""))
-        mail1, mail2 = dos_valores(reg.get("Emails", ""))
+        tel1, tel2 = limpiar(reg.get("Telefono_1", "")), limpiar(reg.get("Telefono_2", ""))
+        mail1, mail2 = limpiar(reg.get("Email_1", "")), limpiar(reg.get("Email_2", ""))
+
+        # "web | instagram | facebook", siempre 3 partes (o "No disponible"
+        # en cada una) — confirmado contra las 130 filas reales.
+        web, insta, face = "", "", ""
+        partes_digital = (reg.get("Presencia_Digital") or "").split("|")
+        if len(partes_digital) >= 3:
+            web, insta, face = (limpiar(p) for p in partes_digital[:3])
 
         numeros_lote = separar_lista(reg.get("Lotes", "")) or [None]
         numeros_matricula = separar_lista(reg.get("Matriculas", ""))
@@ -288,7 +299,7 @@ def cargar_salta(path: Path):
             "telefono_1": tel1, "telefono_2": tel2,
             "email_1": mail1, "email_2": mail2,
             "direccion": limpiar(reg.get("Direccion", "")),
-            "pagina_web": "", "instagram": "", "facebook": "",
+            "pagina_web": web, "instagram": insta, "facebook": face,
         }
         # una fila de empresas por cada lote/matrícula (comparten los
         # mismos datos de contacto — se resuelve al renumerar ids)
