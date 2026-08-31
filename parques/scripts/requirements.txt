@@ -1,0 +1,3 @@
+# Sin dependencias externas: csv, sqlite3 y json son stdlib.
+# Si más adelante hace falta leer .xlsx directo (en vez de un CSV exportado
+# a mano), agregar acá openpyxl.

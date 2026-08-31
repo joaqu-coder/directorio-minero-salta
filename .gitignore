@@ -4,6 +4,10 @@ test_directorio.db
 data/staging/
 data/resumen_run.json
 
+# /parques — mismo criterio, parques.db es build artifact
+parques/parques.db
+parques/data/staging/
+
 # desarrollo local
 _dev/
 __pycache__/
