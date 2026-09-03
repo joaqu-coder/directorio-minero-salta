@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>Fitness Tracker</title>
+<style>
+  :root{
+    --bg:#0a0d11;
+    --bg-elev:#141922;
+    --bg-elev2:#1c2330;
+    --border:#262e3b;
+    --text:#e9edf3;
+    --text-dim:#8996a8;
+    --accent:#34d399;
+    --accent-dark:#0f2e24;
+    --danger:#f76c6c;
+    --danger-dark:#3a1616;
+    --blue:#5b9dff;
+    --blue-dark:#152238;
+    --radius:14px;
+    font-size:16px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-tap-highlight-color:transparent;
+    padding-bottom:78px;
+    min-height:100vh;
+  }
+  .mono{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Courier New",monospace;}
+  header{
+    padding:18px 16px 10px;
+    text-align:center;
+  }
+  header h1{margin:0;font-size:1.15rem;font-weight:700;letter-spacing:.2px;}
+  header .fecha{color:var(--text-dim);font-size:.8rem;margin-top:2px;}
+  main{
+    max-width:480px;
+    margin:0 auto;
+    padding:0 16px;
+  }
+  .view{display:none;}
+  .view.active{display:block;}
+
+  .card{
+    background:var(--bg-elev);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:16px;
+    margin-bottom:14px;
+  }
+
+  /* ---- Caminata ---- */
+  .timer-box{
+    text-align:center;
+    padding:26px 10px 18px;
+  }
+  .timer-display{
+    font-size:3rem;
+    font-weight:700;
+    letter-spacing:1px;
+  }
+  .timer-sub{color:var(--text-dim);font-size:.78rem;margin-top:4px;}
+  .badges{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:14px;
+  }
+  .badge{
+    background:var(--bg-elev2);
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:6px 12px;
+    font-size:.78rem;
+    color:var(--text-dim);
+    display:flex;
+    align-items:center;
+    gap:5px;
+  }
+  .badge b{color:var(--text);font-weight:600;}
+  .btn-row{display:flex;gap:10px;margin-top:18px;}
+  .btn{
+    flex:1;
+    border:none;
+    border-radius:12px;
+    padding:15px 10px;
+    font-size:1rem;
+    font-weight:700;
+    cursor:pointer;
+    transition:transform .08s ease, opacity .15s ease;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn:disabled{opacity:.35;cursor:not-allowed;}
+  .btn-start{background:var(--accent);color:#03211a;}
+  .btn-stop{background:var(--danger);color:#3a0e0e;}
+  .btn-save{background:var(--blue);color:#08172f;width:100%;margin-top:14px;padding:15px;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;}
+  .btn-save:disabled{opacity:.3;cursor:not-allowed;}
+  .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text-dim);}
+
+  .field{margin-top:12px;}
+  .field label{display:block;font-size:.78rem;color:var(--text-dim);margin-bottom:6px;}
+  .field input{
+    width:100%;
+    background:var(--bg-elev2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:11px 12px;
+    color:var(--text);
+    font-size:1rem;
+  }
+  .field input:focus{outline:1px solid var(--accent);}
+  .hint{font-size:.72rem;color:var(--text-dim);margin-top:6px;line-height:1.4;}
+  [hidden]{display:none!important;}
+
+  /* ---- Musculacion ---- */
+  .counter-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 4px;
+    border-bottom:1px solid var(--border);
+  }
+  .counter-row:last-child{border-bottom:none;}
+  .counter-name{font-weight:600;font-size:.95rem;}
+  .counter-controls{display:flex;align-items:center;gap:14px;}
+  .counter-btn{
+    width:38px;height:38px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    background:var(--bg-elev2);
+    color:var(--text);
+    font-size:1.3rem;
+    font-weight:700;
+    cursor:pointer;
+    line-height:1;
+  }
+  .counter-btn:active{transform:scale(.92);}
+  .counter-val{
+    min-width:34px;
+    text-align:center;
+    font-size:1.2rem;
+    font-weight:700;
+  }
+
+  /* ---- Historial ---- */
+  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .stat{
+    background:var(--bg-elev2);
+    border-radius:10px;
+    padding:12px 6px;
+    text-align:center;
+  }
+  .stat .num{font-size:1.15rem;font-weight:700;}
+  .stat .lbl{font-size:.68rem;color:var(--text-dim);margin-top:2px;}
+
+  .chart{
+    display:flex;
+    align-items:flex-end;
+    gap:8px;
+    height:120px;
+    margin-top:14px;
+    padding-top:10px;
+  }
+  .chart-col{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-end;
+    height:100%;
+  }
+  .chart-bar{
+    width:100%;
+    max-width:28px;
+    background:linear-gradient(180deg,var(--accent),#1f6b52);
+    border-radius:5px 5px 2px 2px;
+    min-height:3px;
+  }
+  .chart-val{font-size:.62rem;color:var(--text-dim);margin-bottom:4px;}
+  .chart-lbl{font-size:.68rem;color:var(--text-dim);margin-top:6px;text-transform:capitalize;}
+
+  .hist-item{
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px;
+    margin-bottom:8px;
+    background:var(--bg-elev2);
+  }
+  .hist-top{display:flex;justify-content:space-between;align-items:center;}
+  .hist-fecha{font-weight:700;font-size:.9rem;}
+  .hist-del{background:none;border:none;color:var(--text-dim);font-size:1rem;cursor:pointer;padding:4px 6px;}
+  .hist-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;font-size:.76rem;color:var(--text-dim);}
+  .hist-ej{margin-top:6px;font-size:.76rem;color:var(--text-dim);}
+  .empty{color:var(--text-dim);font-size:.85rem;text-align:center;padding:20px 0;}
+
+  .export-btn{
+    width:100%;
+    background:var(--bg-elev2);
+    border:1px solid var(--accent);
+    color:var(--accent);
+    border-radius:12px;
+    padding:13px;
+    font-weight:700;
+    font-size:.92rem;
+    cursor:pointer;
+    margin-bottom:14px;
+  }
+
+  .toast{
+    position:fixed;
+    left:50%;
+    bottom:88px;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--accent);
+    color:#03211a;
+    padding:10px 18px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:.85rem;
+    opacity:0;
+    transition:opacity .25s ease, transform .25s ease;
+    pointer-events:none;
+    z-index:50;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  nav.tabbar{
+    position:fixed;
+    bottom:0;left:0;right:0;
+    display:flex;
+    background:var(--bg-elev);
+    border-top:1px solid var(--border);
+    padding-bottom:env(safe-area-inset-bottom);
+    z-index:40;
+  }
+  nav.tabbar button{
+    flex:1;
+    background:none;
+    border:none;
+    color:var(--text-dim);
+    padding:12px 4px 10px;
+    font-size:.72rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    cursor:pointer;
+  }
+  nav.tabbar button .ico{font-size:1.3rem;}
+  nav.tabbar button.active{color:var(--accent);}
+  h2.section-title{font-size:.95rem;margin:18px 0 10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏃 Fitness Tracker</h1>
+  <div class="fecha" id="fechaHoy"></div>
+</header>
+
+<main>
+
+  <!-- ===== CAMINATA ===== -->
+  <section class="view active" id="view-caminata">
+    <div class="card timer-box">
+      <div class="timer-display mono" id="timerDisplay">00:00:00</div>
+      <div class="timer-sub" id="timerSub">Listo para empezar</div>
+
+      <div class="badges">
+        <span class="badge">🌡️ <b id="badgeTemp">--°C</b></span>
+        <span class="badge">🕐 <b id="badgeHora">--:--</b></span>
+        <span class="badge">🌗 <b id="badgePeriodo">--</b></span>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-start" id="btnStart" onclick="startCaminata()">▶ START</button>
+        <button class="btn btn-stop" id="btnStop" onclick="stopCaminata()" disabled>■ STOP</button>
+      </div>
+
+      <div id="tempManualWrap" class="field" hidden>
+        <label id="tempManualLabel">Temperatura no disponible — ingresá manual (°C)</label>
+        <input type="number" id="tempManualInput" placeholder="Ej: 22" step="0.1" oninput="onTempManual(this.value)">
+      </div>
+
+      <div class="field">
+        <label>Distancia recorrida (km)</label>
+        <input type="number" id="distanciaInput" placeholder="Ej: 3.5" step="0.01" min="0" oninput="onDistanciaChange(this.value)">
+      </div>
+    </div>
+
+    <button class="btn-save" id="btnGuardarCaminata" onclick="guardarSesion()" disabled>💾 GUARDAR SESIÓN</button>
+    <div class="hint">Se guarda caminata + musculación juntas si cargaste ambas hoy.</div>
+  </section>
+
+  <!-- ===== MUSCULACION ===== -->
+  <section class="view" id="view-musculacion">
+    <div class="card">
+      <div class="counter-row">
+        <span class="counter-name">Flexiones</span>
+        <span class="counter-controls">
+          <button class="counter-btn" onclick="changeCounter('flexiones',-1)">−</button>
+          <span class="counter-val mono" id="val-flexiones">0</span>
+          <button class="counter-btn" onclick="changeCounter('flexiones',1)">+</button>
+        </span>
+      </div>
+      <div class="counter-row">
+        <span class="counter-name">Sentadillas</span>
+        <span class="counter-controls">
+          <button class="counter-btn" onclick="changeCounter('sentadillas',-1)">−</button>
+          <span class="counter-val mono" id="val-sentadillas">0</span>
+          <button class="counter-btn" onclick="changeCounter('sentadillas',1)">+</button>
+        </span>
+      </div>
+      <div class="counter-row">
+        <span class="counter-name">Dominadas</span>
+        <span class="counter-controls">
+          <button class="counter-btn" onclick="changeCounter('dominadas',-1)">−</button>
+          <span class="counter-val mono" id="val-dominadas">0</span>
+          <button class="counter-btn" onclick="changeCounter('dominadas',1)">+</button>
+        </span>
+      </div>
+      <div class="counter-row">
+        <span class="counter-name">Fricciones</span>
+        <span class="counter-controls">
+          <button class="counter-btn" onclick="changeCounter('fricciones',-1)">−</button>
+          <span class="counter-val mono" id="val-fricciones">0</span>
+          <button class="counter-btn" onclick="changeCounter('fricciones',1)">+</button>
+        </span>
+      </div>
+    </div>
+
+    <button class="btn-save" id="btnGuardarMusculacion" onclick="guardarSesion()" disabled>💾 GUARDAR SESIÓN</button>
+    <div class="hint">Podés guardar musculación sola, sin caminata. Si ya iniciaste una caminata hoy, se guarda todo junto al tocar Guardar (desde cualquier pestaña).</div>
+  </section>
+
+  <!-- ===== HISTORIAL ===== -->
+  <section class="view" id="view-historial">
+    <button class="export-btn" onclick="exportarExcel()">📊 Exportar historial a Excel</button>
+
+    <div class="card">
+      <div class="stats-grid">
+        <div class="stat"><div class="num mono" id="statKm">0</div><div class="lbl">Total km</div></div>
+        <div class="stat"><div class="num mono" id="statSesiones">0</div><div class="lbl">Sesiones</div></div>
+        <div class="stat"><div class="num mono" id="statPromedio">0</div><div class="lbl">Prom. km/sesión</div></div>
+      </div>
+
+      <h2 class="section-title">Últimos 7 días</h2>
+      <div class="chart" id="chart7"></div>
+    </div>
+
+    <h2 class="section-title">Historial completo</h2>
+    <div id="historialList"></div>
+  </section>
+
+</main>
+
+<div class="toast" id="toast">Guardado ✓</div>
+
+<nav class="tabbar">
+  <button class="tab-btn active" data-tab="caminata" onclick="switchTab('caminata')">
+    <span class="ico">🚶</span>Caminata
+  </button>
+  <button class="tab-btn" data-tab="musculacion" onclick="switchTab('musculacion')">
+    <span class="ico">💪</span>Musculación
+  </button>
+  <button class="tab-btn" data-tab="historial" onclick="switchTab('historial')">
+    <span class="ico">📈</span>Historial
+  </button>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var LS_REGISTROS = 'ft_registros_v1';
+  var LS_DRAFT = 'ft_draft_v1';
+
+  function defaultDraft(){
+    return {
+      fecha: null, horaInicio: null, horaFin: null, periodo: null,
+      temperatura: null, temperaturaManual: false,
+      duracionSeg: 0, distanciaKm: '',
+      flexiones: 0, sentadillas: 0, dominadas: 0, fricciones: 0,
+      timerRunning: false, timerStartTs: null, timerAccumMs: 0
+    };
+  }
+
+  var registros = [];
+  try { registros = JSON.parse(localStorage.getItem(LS_REGISTROS) || '[]'); } catch(e){ registros = []; }
+
+  var draft = defaultDraft();
+  try {
+    var stored = JSON.parse(localStorage.getItem(LS_DRAFT) || 'null');
+    if (stored) draft = Object.assign(defaultDraft(), stored);
+  } catch(e){ draft = defaultDraft(); }
+
+  var timerInterval = null;
+
+  function saveDraft(){ localStorage.setItem(LS_DRAFT, JSON.stringify(draft)); }
+  function saveRegistros(){ localStorage.setItem(LS_REGISTROS, JSON.stringify(registros)); }
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function fmtHora(d){ return pad(d.getHours())+':'+pad(d.getMinutes()); }
+  function fmtFecha(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  function getPeriodo(hour){ if(hour<12) return 'Mañana'; if(hour<19) return 'Tarde'; return 'Noche'; }
+  function fmtDuracion(segFloat){
+    var seg = Math.max(0, Math.round(segFloat));
+    var h = Math.floor(seg/3600), m = Math.floor((seg%3600)/60), s = seg%60;
+    return pad(h)+':'+pad(m)+':'+pad(s);
+  }
+
+  // ---------- Tabs ----------
+  window.switchTab = function(tab){
+    document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+    document.getElementById('view-'+tab).classList.add('active');
+    document.querySelectorAll('.tab-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-tab')===tab);
+    });
+    if (tab === 'historial') renderHistorial();
+  };
+
+  // ---------- Timer ----------
+  function elapsedMs(){
+    return draft.timerAccumMs + (draft.timerRunning ? (Date.now() - draft.timerStartTs) : 0);
+  }
+  function tickTimer(){
+    document.getElementById('timerDisplay').textContent = fmtDuracion(elapsedMs()/1000);
+  }
+  function startTimerLoop(){
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(tickTimer, 1000);
+    tickTimer();
+  }
+
+  window.startCaminata = function(){
+    if (draft.timerRunning) return;
+    var now = new Date();
+    draft.fecha = draft.fecha || fmtFecha(now);
+    draft.horaInicio = draft.horaInicio || fmtHora(now);
+    draft.periodo = draft.periodo || getPeriodo(now.getHours());
+    draft.timerRunning = true;
+    draft.timerStartTs = Date.now();
+    saveDraft();
+    startTimerLoop();
+    renderCaminata();
+    fetchTemperatura();
+  };
+
+  window.stopCaminata = function(){
+    if (!draft.timerRunning) return;
+    draft.timerAccumMs = elapsedMs();
+    draft.timerRunning = false;
+    draft.duracionSeg = Math.round(draft.timerAccumMs/1000);
+    draft.horaFin = fmtHora(new Date());
+    clearInterval(timerInterval);
+    saveDraft();
+    renderCaminata();
+  };
+
+  // ---------- Temperatura ----------
+  function setTempStatus(msg){
+    document.getElementById('timerSub').textContent = msg;
+  }
+
+  function enableManualTemp(msg){
+    setTempStatus(msg);
+    document.getElementById('tempManualWrap').hidden = false;
+  }
+
+  function fetchTemperatura(){
+    setTempStatus('Caminando...');
+    if (!('geolocation' in navigator)) {
+      enableManualTemp('Geolocalización no disponible — ingresá la temperatura manual.');
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(function(pos){
+      var lat = pos.coords.latitude, lon = pos.coords.longitude;
+      fetch('https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current_weather=true')
+        .then(function(r){ return r.json(); })
+        .then(function(data){
+          var t = data && data.current_weather && data.current_weather.temperature;
+          if (typeof t === 'number') {
+            draft.temperatura = t;
+            draft.temperaturaManual = false;
+            saveDraft();
+            renderCaminata();
+          } else {
+            enableManualTemp('No se pudo leer el clima — ingresá la temperatura manual.');
+          }
+        })
+        .catch(function(){
+          enableManualTemp('Sin conexión para consultar el clima — ingresá la temperatura manual.');
+        });
+    }, function(){
+      enableManualTemp('Ubicación denegada o no disponible — ingresá la temperatura manual.');
+    }, { timeout: 8000, maximumAge: 600000 });
+  }
+
+  window.onTempManual = function(val){
+    draft.temperatura = val === '' ? null : Number(val);
+    draft.temperaturaManual = true;
+    saveDraft();
+    updateGuardarButtons();
+  };
+
+  window.onDistanciaChange = function(val){
+    draft.distanciaKm = val;
+    saveDraft();
+    updateGuardarButtons();
+  };
+
+  // ---------- Musculacion ----------
+  window.changeCounter = function(name, delta){
+    draft[name] = Math.max(0, (draft[name]||0) + delta);
+    saveDraft();
+    renderMusculacion();
+  };
+
+  // ---------- Guardar ----------
+  function puedeGuardar(){
+    var dist = Number(draft.distanciaKm) || 0;
+    return draft.duracionSeg > 0 || dist > 0 ||
+      draft.flexiones > 0 || draft.sentadillas > 0 || draft.dominadas > 0 || draft.fricciones > 0;
+  }
+
+  function updateGuardarButtons(){
+    var disabled = !puedeGuardar();
+    document.getElementById('btnGuardarCaminata').disabled = disabled;
+    document.getElementById('btnGuardarMusculacion').disabled = disabled;
+  }
+
+  function showToast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 1600);
+  }
+
+  window.guardarSesion = function(){
+    if (!puedeGuardar()) return;
+    var now = new Date();
+    var registro = {
+      id: Date.now() + '-' + Math.random().toString(36).slice(2,7),
+      fecha: draft.fecha || fmtFecha(now),
+      horaInicio: draft.horaInicio || fmtHora(now),
+      horaFin: draft.horaFin || null,
+      periodo: draft.periodo || getPeriodo(now.getHours()),
+      temperatura: (draft.temperatura === null || draft.temperatura === undefined || draft.temperatura === '') ? null : Number(draft.temperatura),
+      duracionSeg: draft.duracionSeg || 0,
+      distanciaKm: draft.distanciaKm !== '' && draft.distanciaKm !== null ? Number(draft.distanciaKm) : null,
+      flexiones: draft.flexiones || 0,
+      sentadillas: draft.sentadillas || 0,
+      dominadas: draft.dominadas || 0,
+      fricciones: draft.fricciones || 0
+    };
+    registros.push(registro);
+    saveRegistros();
+    resetDraft();
+    renderAll();
+    showToast('Guardado ✓');
+  };
+
+  function resetDraft(){
+    clearInterval(timerInterval);
+    timerInterval = null;
+    draft = defaultDraft();
+    saveDraft();
+  }
+
+  window.borrarRegistro = function(id){
+    if (!confirm('¿Borrar este registro del historial?')) return;
+    registros = registros.filter(function(r){ return r.id !== id; });
+    saveRegistros();
+    renderHistorial();
+  };
+
+  // ---------- Render ----------
+  function renderCaminata(){
+    document.getElementById('btnStart').disabled = draft.timerRunning;
+    document.getElementById('btnStop').disabled = !draft.timerRunning;
+    document.getElementById('timerDisplay').textContent = fmtDuracion(elapsedMs()/1000);
+    if (!draft.timerRunning && draft.duracionSeg === 0) {
+      document.getElementById('timerSub').textContent = 'Listo para empezar';
+    } else if (draft.timerRunning) {
+      document.getElementById('timerSub').textContent = 'Caminando...';
+    } else {
+      document.getElementById('timerSub').textContent = 'Detenido';
+    }
+    document.getElementById('badgeTemp').textContent =
+      (draft.temperatura === null || draft.temperatura === undefined || draft.temperatura === '') ? '--°C' : (draft.temperatura + '°C');
+    document.getElementById('badgeHora').textContent = draft.horaInicio || '--:--';
+    document.getElementById('badgePeriodo').textContent = draft.periodo || '--';
+    document.getElementById('distanciaInput').value = draft.distanciaKm || '';
+    document.getElementById('tempManualInput').value = draft.temperaturaManual && draft.temperatura !== null ? draft.temperatura : '';
+    updateGuardarButtons();
+  }
+
+  function renderMusculacion(){
+    ['flexiones','sentadillas','dominadas','fricciones'].forEach(function(k){
+      document.getElementById('val-'+k).textContent = draft[k] || 0;
+    });
+    updateGuardarButtons();
+  }
+
+  function renderHistorial(){
+    var caminatas = registros.filter(function(r){ return r.duracionSeg > 0; });
+    var totalKm = registros.reduce(function(s,r){ return s + (r.distanciaKm || 0); }, 0);
+    var sesiones = caminatas.length;
+    var promedio = sesiones ? (totalKm / sesiones) : 0;
+
+    document.getElementById('statKm').textContent = totalKm.toFixed(1);
+    document.getElementById('statSesiones').textContent = sesiones;
+    document.getElementById('statPromedio').textContent = promedio.toFixed(1);
+
+    // Chart últimos 7 días
+    var dias = [];
+    for (var i = 6; i >= 0; i--) {
+      var d = new Date();
+      d.setDate(d.getDate() - i);
+      var key = fmtFecha(d);
+      var km = registros.filter(function(r){ return r.fecha === key; })
+                         .reduce(function(s,r){ return s + (r.distanciaKm || 0); }, 0);
+      dias.push({ label: d.toLocaleDateString('es-AR', { weekday: 'short' }).replace('.','').slice(0,2), km: km });
+    }
+    var max = Math.max(1, Math.max.apply(null, dias.map(function(x){ return x.km; })));
+    var chartHtml = dias.map(function(x){
+      var h = Math.round((x.km / max) * 100);
+      return '<div class="chart-col">' +
+        '<div class="chart-val">' + (x.km > 0 ? x.km.toFixed(1) : '') + '</div>' +
+        '<div class="chart-bar" style="height:' + Math.max(h,2) + '%"></div>' +
+        '<div class="chart-lbl">' + x.label + '</div>' +
+      '</div>';
+    }).join('');
+    document.getElementById('chart7').innerHTML = chartHtml;
+
+    // Lista completa
+    var ordenados = registros.slice().sort(function(a,b){
+      var ka = a.fecha + (a.horaInicio||'');
+      var kb = b.fecha + (b.horaInicio||'');
+      return kb.localeCompare(ka);
+    });
+
+    if (ordenados.length === 0) {
+      document.getElementById('historialList').innerHTML = '<div class="empty">Todavía no hay sesiones guardadas.</div>';
+      return;
+    }
+
+    var listHtml = ordenados.map(function(r){
+      var ejParts = [];
+      if (r.flexiones) ejParts.push('Flex ' + r.flexiones);
+      if (r.sentadillas) ejParts.push('Sent ' + r.sentadillas);
+      if (r.dominadas) ejParts.push('Dom ' + r.dominadas);
+      if (r.fricciones) ejParts.push('Fric ' + r.fricciones);
+      var ejStr = ejParts.length ? '💪 ' + ejParts.join(' · ') : '';
+      var metaParts = [];
+      if (r.duracionSeg) metaParts.push('⏱ ' + fmtDuracion(r.duracionSeg));
+      if (r.distanciaKm) metaParts.push('📏 ' + r.distanciaKm + ' km');
+      if (r.temperatura !== null && r.temperatura !== undefined) metaParts.push('🌡️ ' + r.temperatura + '°C');
+      if (r.horaInicio) metaParts.push('🕐 ' + r.horaInicio);
+      if (r.periodo) metaParts.push('🌗 ' + r.periodo);
+      return '<div class="hist-item">' +
+        '<div class="hist-top">' +
+          '<span class="hist-fecha">' + r.fecha + '</span>' +
+          '<button class="hist-del" onclick="borrarRegistro(\'' + r.id + '\')">🗑</button>' +
+        '</div>' +
+        '<div class="hist-meta">' + metaParts.map(function(m){ return '<span>'+m+'</span>'; }).join('') + '</div>' +
+        (ejStr ? '<div class="hist-ej">' + ejStr + '</div>' : '') +
+      '</div>';
+    }).join('');
+    document.getElementById('historialList').innerHTML = listHtml;
+  }
+
+  function renderAll(){
+    renderCaminata();
+    renderMusculacion();
+    renderHistorial();
+  }
+
+  // ---------- Export ----------
+  window.exportarExcel = function(){
+    if (registros.length === 0) {
+      showToast('No hay datos para exportar');
+      return;
+    }
+    var rows = registros.slice().sort(function(a,b){
+      return (a.fecha+(a.horaInicio||'')).localeCompare(b.fecha+(b.horaInicio||''));
+    }).map(function(r){
+      var ejStr = 'Flexiones: ' + (r.flexiones||0) +
+        ', Sentadillas: ' + (r.sentadillas||0) +
+        ', Dominadas: ' + (r.dominadas||0) +
+        ', Fricciones: ' + (r.fricciones||0);
+      return {
+        'Fecha': r.fecha,
+        'Hora': r.horaInicio || '',
+        'Período': r.periodo || '',
+        'Duración': r.duracionSeg ? fmtDuracion(r.duracionSeg) : '',
+        'Distancia (km)': r.distanciaKm !== null && r.distanciaKm !== undefined ? r.distanciaKm : '',
+        'Temperatura (°C)': r.temperatura !== null && r.temperatura !== undefined ? r.temperatura : '',
+        'Ejercicios': ejStr
+      };
+    });
+    var ws = XLSX.utils.json_to_sheet(rows);
+    var wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Historial');
+    var fecha = fmtFecha(new Date());
+    XLSX.writeFile(wb, 'fitness_historial_' + fecha + '.xlsx');
+  };
+
+  // ---------- Init ----------
+  document.getElementById('fechaHoy').textContent =
+    new Date().toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' });
+
+  if (draft.timerRunning) startTimerLoop();
+  if (draft.temperaturaManual === false && (draft.temperatura === null || draft.temperatura === undefined)) {
+    // no forzar fetch automático al recargar; el usuario puede reiniciar si hace falta
+  }
+  renderAll();
+
+})();
+</script>
+</body>
+</html>
