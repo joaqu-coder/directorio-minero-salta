@@ -187,32 +187,6 @@ Single-file `index.html`. Sin dependencias externas salvo Google Fonts (Manrope,
 - **Imprimir**: `@media print` → lista filtrada limpia en A4, una empresa por bloque.
 - Dark theme default. Diseño consistente con Antigravity v2.
 
-## Estructura del repo
-
-```
-/
-├── CLAUDE.md
-├── index.html                  # frontend completo
-├── data/
-│   ├── empresas.csv            # source of truth
-│   ├── membresias.csv
-│   ├── cambios.csv             # changelog acumulado
-│   ├── candidatos_revision.csv # matches difusos para revisión manual
-│   └── empresas.json           # export para frontend (generado)
-├── scraper/
-│   ├── common.py               # fetch + normalización + helpers selectores
-│   ├── scrape_cms.py
-│   ├── scrape_capemisa.py
-│   ├── scrape_uis.py
-│   ├── enriquecer.py
-│   ├── matching.py
-│   ├── build_db.py
-│   └── requirements.txt
-└── .github/workflows/
-    ├── scrape-semanal.yml      # cron lunes 06:00 ART (+ deploy al final)
-    └── deploy.yml              # deploy Pages en cada push a main
-```
-
 Repo: `https://github.com/joaqu-coder/directorio-minero-salta` (privado).
 Deploy: ambos workflows omiten el deploy con un notice si falta `CLOUDFLARE_API_TOKEN`.
 Para activarlo (una sola vez, token en dash.cloudflare.com → My Profile → API Tokens → template "Edit Cloudflare Workers" o permiso `Cloudflare Pages:Edit`):
