@@ -169,3 +169,6 @@ fecha,tipo,empresa_id,empresa_nombre,campo,valor_anterior,valor_nuevo
 2026-08-31 16:53:00,baja,430,Transclor S.A.,,Transclor S.A.,
 2026-08-31 16:53:00,baja,431,V8 Productos de hormigón,,V8 Productos de hormigón,
 2026-08-31 16:53:00,baja,432,FMF Composite S.R.L,,FMF Composite S.R.L,
+2026-09-07 14:56:36,alta,434,CondorLink SA,,,
+2026-09-07 14:56:36,nuevo_rubro,362,Agro San Pedro (Dulces Campo Quijano),membresia,,UIS / Ind. Agroindustrias y Alimentos
+2026-09-07 14:56:36,baja,343,HIJOS DE SALVADOR MUÑOZ SRL,,HIJOS DE SALVADOR MUÑOZ SRL,

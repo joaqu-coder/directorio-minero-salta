@@ -263,6 +263,7 @@ empresa_id,camara,rubro,url_ficha
 206,CAPEMISA,Logística,https://capemisa.com.ar/socio/aramis-s-a-s/
 206,CAPEMISA,Servicios,https://capemisa.com.ar/socio/aramis-s-a-s/
 207,CAPEMISA,Logística,https://capemisa.com.ar/socio/centro-distribuidor-s-a/
+434,CAPEMISA,Logística,https://capemisa.com.ar/socio/condorlink-sa/
 208,CAPEMISA,Logística,https://capemisa.com.ar/socio/cuenca-del-pilcomayo-s-r-l/
 209,CAPEMISA,Logística,https://capemisa.com.ar/socio/flytec/
 210,CAPEMISA,Logística,https://capemisa.com.ar/socio/gye-s-a/
@@ -411,7 +412,6 @@ empresa_id,camara,rubro,url_ficha
 340,UIS,Servicios jurídicos,https://uis.com.ar/socios/estudio-aguilar-asociados/
 341,UIS,Ind. Frigoríficas,https://uis.com.ar/socios/frigorifico-bermejo-sa-inversora-juramento-s-a/
 342,UIS,Ind. Energía,https://uis.com.ar/socios/gasnor-s-a/
-343,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/hijos-de-salvador-munoz-srl/
 344,UIS,Ind. Gráfica,https://uis.com.ar/socios/horizontes-s-a/
 345,UIS,Ind. Frigoríficas,https://uis.com.ar/socios/ind-frigorificas-norte-grande-sa/
 346,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/jofa-s-a/
@@ -430,7 +430,7 @@ empresa_id,camara,rubro,url_ficha
 359,UIS,Empresa de Telecomunicaciones,https://uis.com.ar/socios/telecom-argentina-s-a/
 360,UIS,Ind. Energía,https://uis.com.ar/socios/termoandes-s-a/
 361,UIS,Ind. Textil,https://uis.com.ar/socios/zozzoli-s-a/
-362,UIS,,https://uis.com.ar/socios/agro-san-pedro-dulces-campo-quijano/
+362,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/agro-san-pedro-dulces-campo-quijano/
 363,UIS,Servicios jurídicos,https://uis.com.ar/socios/aguilar-dandrea-y-asociados/
 364,UIS,Empresa de servicios,https://uis.com.ar/socios/asociacion-mutual-sancor-salud/
 365,UIS,Ind. Construcción,https://uis.com.ar/socios/castellani/
