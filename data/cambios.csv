@@ -172,3 +172,7 @@ fecha,tipo,empresa_id,empresa_nombre,campo,valor_anterior,valor_nuevo
 2026-09-07 14:56:36,alta,434,CondorLink SA,,,
 2026-09-07 14:56:36,nuevo_rubro,362,Agro San Pedro (Dulces Campo Quijano),membresia,,UIS / Ind. Agroindustrias y Alimentos
 2026-09-07 14:56:36,baja,343,HIJOS DE SALVADOR MUÑOZ SRL,,HIJOS DE SALVADOR MUÑOZ SRL,
+2026-09-14 15:49:22,modificacion,12,GRUPO NIOI SA,actividad,"Especialización en los sectores de construcción y servicios logísticos, proporcionando soluciones integrales para la industria minera. Nuestra experiencia incluye Piping, Impermeabilización de Pozas, Obras Hidráulicas, Obras Metálicas, Movimiento de suelo, Obras civiles y la producción de ropa de trabajo y Elementos de Protección Personal (EPP)",Exploración Minera — Mineral: Piedra Caliza y Cobre — Fase: Exploración
+2026-09-14 15:49:22,modificacion,69,CAPITAL HUMANO SALTA,instagram,https://www.instagram.com/capitalhumanosalta/,https://www.instagram.com/capitalhumanoglobal2026/
+2026-09-14 15:49:22,modificacion,434,CONDORLINK SA,nombre,CondorLink SA,CONDORLINK SA
+2026-09-14 15:49:22,baja,226,TRANSPORTE ANTONINI S.R.L.,,TRANSPORTE ANTONINI S.R.L.,

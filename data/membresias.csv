@@ -15,9 +15,6 @@ empresa_id,camara,rubro,url_ficha
 11,CMS,Minería,https://cmsalta.com.ar/asociados/gestion-de-talentos/
 11,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/gestion-de-talentos-sas/
 12,CMS,Minería,https://cmsalta.com.ar/asociados/grupo-nioi-sa/
-12,CAPEMISA,Construcción,https://capemisa.com.ar/socio/grupo-nioi/
-12,CAPEMISA,Geomembrana,https://capemisa.com.ar/socio/grupo-nioi/
-12,CAPEMISA,Topografía,https://capemisa.com.ar/socio/grupo-nioi/
 13,CMS,Minería,https://cmsalta.com.ar/asociados/hanaq-group/
 14,CMS,Minería,https://cmsalta.com.ar/asociados/hidrotec-srl/
 14,CAPEMISA,Perforaciones,https://capemisa.com.ar/socio/hidrotec-srl/
@@ -285,7 +282,6 @@ empresa_id,camara,rubro,url_ficha
 433,CAPEMISA,Logística,https://capemisa.com.ar/socio/southcross-logistics-s-a-hmsproductos-y-servicios-s-r-l-consorcio-decooperacion/
 224,CAPEMISA,Logística,https://capemisa.com.ar/socio/tranor-s-a/
 225,CAPEMISA,Logística,https://capemisa.com.ar/socio/trans-gon-s-r-l/
-226,CAPEMISA,Logística,https://capemisa.com.ar/socio/transporte-antonini-s-r-l/
 227,CAPEMISA,Logística,https://capemisa.com.ar/socio/transporte-cruz-del-sur-s-a/
 228,CAPEMISA,Logística,https://capemisa.com.ar/socio/traxx-s-a/
 229,CAPEMISA,Medicina,https://capemisa.com.ar/socio/centro-diagnostico-molecular-s-r-l/
