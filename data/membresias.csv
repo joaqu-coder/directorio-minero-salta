@@ -84,7 +84,7 @@ empresa_id,camara,rubro,url_ficha
 67,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/berge-bau-patagonia-sa/
 375,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/bocana-valores-s-a/
 68,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/campo-bravo-s-a-s/
-69,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/capital-humano-salta/
+435,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/capital-humano-salta/
 70,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/cataldi-fleming-ernesto/
 72,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/consultora-integral-en-liderazgo/
 73,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/ec-y-asociados-consultora-juridico-ambiental-srl/
@@ -101,8 +101,6 @@ empresa_id,camara,rubro,url_ficha
 78,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/nuevas-energias/
 79,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/precyt-servicios-s-r-l/
 80,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/quanta-s-a-s/
-81,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/saltapetrol-srl/
-81,UIS,Ind. Química,https://uis.com.ar/socios/saltapetrol-srl/
 82,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/specterman-marcos-gustavo/
 83,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/sr-consultora/
 84,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/srk-consulting-argentina-s-a/
@@ -222,7 +220,6 @@ empresa_id,camara,rubro,url_ficha
 170,CAPEMISA,Insumos,https://capemisa.com.ar/socio/a-a-fluids-control-s-r-l/
 171,CAPEMISA,Insumos,https://capemisa.com.ar/socio/a-b-construcciones-s-r-l/
 172,CAPEMISA,Insumos,https://capemisa.com.ar/socio/agro-supplies-s-r-l/
-173,CAPEMISA,Insumos,https://capemisa.com.ar/socio/alvear-s-a-s/
 174,CAPEMISA,Insumos,https://capemisa.com.ar/socio/arsus-s-a-s/
 175,CAPEMISA,Insumos,https://capemisa.com.ar/socio/bm-mineria-salta-s-a-s/
 176,CAPEMISA,Insumos,https://capemisa.com.ar/socio/bollini-s-a/
@@ -276,6 +273,8 @@ empresa_id,camara,rubro,url_ficha
 219,CAPEMISA,Logística,https://capemisa.com.ar/socio/petroandina/
 219,UIS,Ind. Petroquímica,https://uis.com.ar/socios/petroandina-s-r-l/
 220,CAPEMISA,Logística,https://capemisa.com.ar/socio/royal-logistic-s-r-l/
+81,CAPEMISA,Logística,https://capemisa.com.ar/socio/saltapetrol-srl/
+81,UIS,Ind. Química,https://uis.com.ar/socios/saltapetrol-srl/
 221,CAPEMISA,Logística,https://capemisa.com.ar/socio/servinorte-s-r-l/
 222,CAPEMISA,Logística,https://capemisa.com.ar/socio/smart-waste-s-a-s/
 223,CAPEMISA,Logística,https://capemisa.com.ar/socio/solaris-s-r-l/

@@ -176,3 +176,20 @@ fecha,tipo,empresa_id,empresa_nombre,campo,valor_anterior,valor_nuevo
 2026-09-14 15:49:22,modificacion,69,CAPITAL HUMANO SALTA,instagram,https://www.instagram.com/capitalhumanosalta/,https://www.instagram.com/capitalhumanoglobal2026/
 2026-09-14 15:49:22,modificacion,434,CONDORLINK SA,nombre,CondorLink SA,CONDORLINK SA
 2026-09-14 15:49:22,baja,226,TRANSPORTE ANTONINI S.R.L.,,TRANSPORTE ANTONINI S.R.L.,
+2026-09-28 17:31:02,modificacion,68,CAMPO BRAVO S.A.S.,actividad,Consultora de Servicios Generales,"Servicio de consultoría en Higiene y Seguridad, Medio Ambiente y RSE"
+2026-09-28 17:31:02,modificacion,68,CAMPO BRAVO S.A.S.,direccion,Pje. Maravialla 645 (4400) Salta,Pje. Maravilla 645 (4400) Salta
+2026-09-28 17:31:02,alta,435,CAPITAL HUMANO GLOBAL,,,
+2026-09-28 17:31:02,modificacion,217,LOGÍSTICA Y SERVICIOS AMBIENTALES S.R.L.,telefono,(0387) 4283043 / 155 337 842,(0387) 226 7113
+2026-09-28 17:31:02,modificacion,217,LOGÍSTICA Y SERVICIOS AMBIENTALES S.R.L.,email,comercial@lsambientales.com.ar,jsastre@lsambientales.com.ar
+2026-09-28 17:31:02,modificacion,217,LOGÍSTICA Y SERVICIOS AMBIENTALES S.R.L.,contacto_nombre,Ivana Basalo,Juliana Sastre
+2026-09-28 17:31:02,modificacion,219,PETROANDINA,telefono,(0387) 4283043,(0387) 155 337 746
+2026-09-28 17:31:02,modificacion,219,PETROANDINA,email,ncornejo@grupopetroandina.com.ar,mvidal@grupopetroandina.com.ar
+2026-09-28 17:31:02,modificacion,219,PETROANDINA,contacto_nombre,Nicolás Cornejo,Miguel Vidal
+2026-09-28 17:31:02,modificacion,81,SALTAPETROL SRL,telefono,(0387) 4283043,(0387) 155 337 842
+2026-09-28 17:31:02,modificacion,81,SALTAPETROL SRL,contacto_nombre,Daniel Díaz Barceló,Ivana Basalo
+2026-09-28 17:31:02,nuevo_rubro,81,SALTAPETROL SRL,membresia,,CAPEMISA / Logística
+2026-09-28 17:31:02,modificacion,228,TRAXX S.A.,telefono,(0387) 155 337 746,(0387) 154 746 612
+2026-09-28 17:31:02,modificacion,228,TRAXX S.A.,email,mvidal@grupopetroandina.com.ar,ivan.sundblad@traxx.ar
+2026-09-28 17:31:02,modificacion,228,TRAXX S.A.,contacto_nombre,Miguel Vidal,Ivan Sundblad
+2026-09-28 17:31:02,baja,173,ALVEAR S.A.S.,,ALVEAR S.A.S.,
+2026-09-28 17:31:02,baja,69,CAPITAL HUMANO SALTA,,CAPITAL HUMANO SALTA,
