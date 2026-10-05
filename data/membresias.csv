@@ -240,6 +240,7 @@ empresa_id,camara,rubro,url_ficha
 192,CAPEMISA,Insumos,https://capemisa.com.ar/socio/hierronort-s-r-l/
 193,CAPEMISA,Insumos,https://capemisa.com.ar/socio/implementos-industriales-srl/
 384,CAPEMISA,Insumos,https://capemisa.com.ar/socio/ingenieria-electrica-s-a-s/
+436,CAPEMISA,Insumos,https://capemisa.com.ar/socio/la-playa-del-elastico-s-r-l/
 376,CAPEMISA,Insumos,https://capemisa.com.ar/socio/larocca-salta-neumaticos-s-a/
 195,CAPEMISA,Insumos,https://capemisa.com.ar/socio/lopez-diesel-sa/
 196,CAPEMISA,Insumos,https://capemisa.com.ar/socio/luxing-s-r-l/
@@ -293,6 +294,7 @@ empresa_id,camara,rubro,url_ficha
 236,CAPEMISA,Medicina,https://capemisa.com.ar/socio/med-lab-salta-s-r-l/
 237,CAPEMISA,Medicina,https://capemisa.com.ar/socio/medicina-ambulatoria-salta-s-r-l/
 238,CAPEMISA,Medicina,https://capemisa.com.ar/socio/prisma-salud/
+437,CAPEMISA,Medicina,https://capemisa.com.ar/socio/pulso-salud-argentina-s-a-s/
 239,CAPEMISA,Medicina,https://capemisa.com.ar/socio/salud-integrada-s-r-l/
 240,CAPEMISA,Medicina,https://capemisa.com.ar/socio/servicios-medicos-mineros/
 241,CAPEMISA,Medicina,https://capemisa.com.ar/socio/tempus-s-r-l/
@@ -319,8 +321,6 @@ empresa_id,camara,rubro,url_ficha
 119,CAPEMISA,Servicios,https://capemisa.com.ar/socio/alto-andina-soluciones-modulares/
 260,CAPEMISA,Servicios,https://capemisa.com.ar/socio/amalgama-lithium-argentina-s-a-s/
 261,CAPEMISA,Servicios,https://capemisa.com.ar/socio/apana/
-262,CAPEMISA,Servicios,https://capemisa.com.ar/socio/artes-graficas-crivelli/
-262,UIS,Ind. Gráfica,https://uis.com.ar/socios/artes-graficas-s-a/
 263,CAPEMISA,Servicios,https://capemisa.com.ar/socio/blg-translations/
 264,CAPEMISA,Servicios,https://capemisa.com.ar/socio/bohm-asesores-de-seguros/
 265,CAPEMISA,Servicios,https://capemisa.com.ar/socio/centinela-servicios-mineros-s-a/
@@ -332,6 +332,7 @@ empresa_id,camara,rubro,url_ficha
 270,CAPEMISA,Servicios,https://capemisa.com.ar/socio/coseguro-familiar/
 271,CAPEMISA,Servicios,https://capemisa.com.ar/socio/cumbres-mineras-s-a-s/
 386,CAPEMISA,Servicios,https://capemisa.com.ar/socio/eco-norte-s-r-l/
+438,CAPEMISA,Servicios,https://capemisa.com.ar/socio/english-for-mining/
 272,CAPEMISA,Servicios,https://capemisa.com.ar/socio/escudero-inmobiliara-s-a-s/
 273,CAPEMISA,Servicios,https://capemisa.com.ar/socio/esencial-turismo/
 274,CAPEMISA,Servicios,https://capemisa.com.ar/socio/explora-mining-s-r-l/
@@ -384,6 +385,7 @@ empresa_id,camara,rubro,url_ficha
 319,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/cosalta-ltda/
 320,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/agroindustrias-san-antonio-envases/
 321,UIS,Ind. Tabacalera,https://uis.com.ar/socios/alliance-one-tobacco-argentina-s-a/
+439,UIS,Ind. Gráfica,https://uis.com.ar/socios/artes-graficas-s-a/
 322,UIS,Ind. Química,https://uis.com.ar/socios/austin-powder-argentina-s-a/
 323,UIS,Entidad Financiera,https://uis.com.ar/socios/banco-de-la-nacion-argentina/
 324,UIS,Entidad Financiera,https://uis.com.ar/socios/banco-macro-s-a/

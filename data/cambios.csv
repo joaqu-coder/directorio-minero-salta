@@ -193,3 +193,9 @@ fecha,tipo,empresa_id,empresa_nombre,campo,valor_anterior,valor_nuevo
 2026-09-28 17:31:02,modificacion,228,TRAXX S.A.,contacto_nombre,Miguel Vidal,Ivan Sundblad
 2026-09-28 17:31:02,baja,173,ALVEAR S.A.S.,,ALVEAR S.A.S.,
 2026-09-28 17:31:02,baja,69,CAPITAL HUMANO SALTA,,CAPITAL HUMANO SALTA,
+2026-10-05 17:59:51,modificacion,384,INGENIERÍA ELÉCTRICA SALTA S.A.S.,instagram,https://www.instagram.com/ingenieriaelectricasalta/,https://instagram.com/ingenieriaelectricasalta/
+2026-10-05 17:59:51,alta,436,LA PLAYA DEL ELASTICO S.R.L.,,,
+2026-10-05 17:59:51,alta,437,PULSO SALUD ARGENTINA S.A.S.,,,
+2026-10-05 17:59:51,alta,438,ENGLISH FOR MINING,,,
+2026-10-05 17:59:51,alta,439,Artes Gráficas S.A.,,,
+2026-10-05 17:59:51,baja,262,ARTES GRAFICAS CRIVELLI,,ARTES GRAFICAS CRIVELLI,
