@@ -199,3 +199,9 @@ fecha,tipo,empresa_id,empresa_nombre,campo,valor_anterior,valor_nuevo
 2026-10-05 17:59:51,alta,438,ENGLISH FOR MINING,,,
 2026-10-05 17:59:51,alta,439,Artes Gráficas S.A.,,,
 2026-10-05 17:59:51,baja,262,ARTES GRAFICAS CRIVELLI,,ARTES GRAFICAS CRIVELLI,
+2026-10-12 18:44:08,alta,440,BARROSO MARIA CAROLINA,,,
+2026-10-12 18:44:08,modificacion,438,ENGLISH FOR MINING®,nombre,ENGLISH FOR MINING,ENGLISH FOR MINING®
+2026-10-12 18:44:08,modificacion,438,ENGLISH FOR MINING®,actividad,Diseño e implementación de programas de inglés técnico para la industria minera.,Consultoría y capacitación en inglés técnico aplicado a la industria minera y a sectores estratégicos.
+2026-10-12 18:44:08,modificacion,438,ENGLISH FOR MINING®,direccion,"Complejo Arenales, Torre E, Dto. 149, Salta","Deán Funes 1380, Salta"
+2026-10-12 18:44:08,modificacion,438,ENGLISH FOR MINING®,email,contacto@englishformining.com,info@englishformining.com
+2026-10-12 18:44:08,baja,225,TRANS GON S.R.L.,,TRANS GON S.R.L.,

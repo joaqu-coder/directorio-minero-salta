@@ -281,7 +281,6 @@ empresa_id,camara,rubro,url_ficha
 223,CAPEMISA,Logística,https://capemisa.com.ar/socio/solaris-s-r-l/
 433,CAPEMISA,Logística,https://capemisa.com.ar/socio/southcross-logistics-s-a-hmsproductos-y-servicios-s-r-l-consorcio-decooperacion/
 224,CAPEMISA,Logística,https://capemisa.com.ar/socio/tranor-s-a/
-225,CAPEMISA,Logística,https://capemisa.com.ar/socio/trans-gon-s-r-l/
 227,CAPEMISA,Logística,https://capemisa.com.ar/socio/transporte-cruz-del-sur-s-a/
 228,CAPEMISA,Logística,https://capemisa.com.ar/socio/traxx-s-a/
 229,CAPEMISA,Medicina,https://capemisa.com.ar/socio/centro-diagnostico-molecular-s-r-l/
@@ -321,6 +320,7 @@ empresa_id,camara,rubro,url_ficha
 119,CAPEMISA,Servicios,https://capemisa.com.ar/socio/alto-andina-soluciones-modulares/
 260,CAPEMISA,Servicios,https://capemisa.com.ar/socio/amalgama-lithium-argentina-s-a-s/
 261,CAPEMISA,Servicios,https://capemisa.com.ar/socio/apana/
+440,CAPEMISA,Servicios,https://capemisa.com.ar/socio/barroso-maria-carolina/
 263,CAPEMISA,Servicios,https://capemisa.com.ar/socio/blg-translations/
 264,CAPEMISA,Servicios,https://capemisa.com.ar/socio/bohm-asesores-de-seguros/
 265,CAPEMISA,Servicios,https://capemisa.com.ar/socio/centinela-servicios-mineros-s-a/
