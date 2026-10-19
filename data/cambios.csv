@@ -205,3 +205,9 @@ fecha,tipo,empresa_id,empresa_nombre,campo,valor_anterior,valor_nuevo
 2026-10-12 18:44:08,modificacion,438,ENGLISH FOR MINING®,direccion,"Complejo Arenales, Torre E, Dto. 149, Salta","Deán Funes 1380, Salta"
 2026-10-12 18:44:08,modificacion,438,ENGLISH FOR MINING®,email,contacto@englishformining.com,info@englishformining.com
 2026-10-12 18:44:08,baja,225,TRANS GON S.R.L.,,TRANS GON S.R.L.,
+2026-10-19 16:22:09,modificacion,151,AMS TRADING & CONSULTING GROUP S.R.L.,actividad,Obras de ingeniería. Instalaciones industriales. Servicios de poZo. Provisión de equipos con operarios. Escolta y transporte de personal,Ingeniería. Servicios de pozo. Equipos y logística de alta montaña.
+2026-10-19 16:22:09,modificacion,151,AMS TRADING & CONSULTING GROUP S.R.L.,telefono,(0387) 155 630 108 / 155 835 789,(0387) 155 630 108
+2026-10-19 16:22:09,modificacion,151,AMS TRADING & CONSULTING GROUP S.R.L.,email,amsgroupargentina@gmail.com,administracion@amsargentina.com
+2026-10-19 16:22:09,modificacion,151,AMS TRADING & CONSULTING GROUP S.R.L.,contacto_nombre,Matías Arias,Ernesto Priou Orozco
+2026-10-19 16:22:09,alta,441,MOTORTRAC S.R.L.,,,
+2026-10-19 16:22:09,alta,442,DON AURELIO,,,
