@@ -3,6 +3,12 @@ name: Deploy GitHub Pages
 on:
   push:
     branches: [main]
+  # Los commits de datos los hace scraper-bot con GITHUB_TOKEN, y ese push
+  # no dispara workflows: por eso también escuchamos el fin de los runs que
+  # commitean datos. Solo se deploya si el run terminó bien.
+  workflow_run:
+    workflows: ["Scrape semanal", "Enriquecer logos (manual)"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -16,6 +22,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -32,7 +39,8 @@ jobs:
           cp sw.js dist/
           cp data/empresas.json dist/data/
           HASH=$(git rev-parse --short HEAD)
-          sed -i "s/const CACHE = 'dir-v1'/const CACHE = 'dir-$HASH'/" dist/sw.js
+          sed -i -E "s/const CACHE = 'dir-[^']+'/const CACHE = 'dir-$HASH'/" dist/sw.js
+          grep -q "const CACHE = 'dir-$HASH'" dist/sw.js || { echo "::error::sed no aplicó CACHE en sw.js"; exit 1; }
 
       - uses: actions/configure-pages@v4
 

@@ -231,8 +231,8 @@ Escritura: `git add`, `git commit`, `git push`, `gh pr create`, `gh pr comment`,
 
 ## Criterios de aceptación
 
-- [x] Scrape completo corre en < 10 min sin bloqueos (delay 2-3s entre requests al mismo host)
-- [x] Cero duplicados: misma empresa en 2 cámaras = 1 registro
+- [ ] Scrape completo corre en < 10 min sin bloqueos (delay 2-3s entre requests al mismo host) — desmarcado 2026-10-30: los últimos 9 runs de "Scrape semanal" fallaron tras 17-28 min (ver docs/auditoria.md)
+- [ ] Cero duplicados: misma empresa en 2 cámaras = 1 registro — desmarcado 2026-10-30: CENTRO DISTRIBUIDOR S.A. y LOGISTICA DEL ALTO S.R.L. comparten teléfono, email y representante sin fusionar (ver docs/auditoria.md)
 - [ ] ≥ 90% empresas con logo no-placeholder tras enriquecimiento
 - [ ] Frontend carga en < 2s en 4G, usable a 360px de ancho
 - [ ] Compartir ficha individual funciona en Android (Web Share API)

@@ -275,7 +275,7 @@ footer{
   </div>
 </header>
 
-<div id="bannerNovedades">
+<div id="bannerNovedades" class="no-print">
   <span class="emoji" id="emojiNovedad">✨</span>
   <div class="info" id="textoNovedad"></div>
   <button class="cerrar-banner" onclick="cerrarBanner()" aria-label="Cerrar">✕</button>
@@ -359,6 +359,8 @@ function obtenerSector(rubro) {
 const norm = s => (s || '').toLowerCase()
   .normalize('NFD').replace(/[̀-ͯ]/g, '');
 const esc = s => (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// Los links vienen de scraping: solo http(s) llega a href (evita javascript:).
+const safeUrl = u => /^https?:\/\//i.test(u || '') ? esc(u) : '#';
 const iniciales = n => n.split(/\s+/).filter(w => /\w/.test(w)).slice(0, 2).map(w => w[0]).join('').toUpperCase();
 const hue = n => { let h = 0; for (const c of n) h = (h * 31 + c.charCodeAt(0)) % 360; return h; };
 
@@ -424,7 +426,7 @@ function renderLista() {
 function renderChips() {
   const camaras = [...new Set(DB.empresas.flatMap(e => e.membresias.map(m => m.camara)))];
   $('#chipsCamaras').innerHTML = camaras.map(c =>
-    `<button class="chip" data-camara="${c}">${c}</button>`).join('');
+    `<button class="chip" data-camara="${esc(c)}">${esc(c)}</button>`).join('');
 
   const sectorCounts = {};
   DB.empresas.forEach(e => {
@@ -487,10 +489,10 @@ function abrirFicha(e, pushUrl = true) {
       ${dato('Dirección', e.direccion ? esc(e.direccion) + (e.ubicacion ? ` <span style="color:var(--muted)">· ${esc(e.ubicacion)}</span>` : '') : (e.ubicacion ? esc(e.ubicacion) : null), true)}
       ${dato('Teléfono', e.telefono ? `<a href="tel:${esc(e.telefono.replace(/[^\d+]/g, ''))}" class="mono">${esc(e.telefono)}</a>` : null, true)}
       ${dato('Email', e.email ? `<a href="mailto:${esc(e.email)}" class="mono">${esc(e.email)}</a>` : null, true)}
-      ${dato('Web', e.web ? `<a href="${esc(e.web)}" target="_blank" rel="noopener" class="mono">${esc(webHost)}</a>` : null, true)}
-      ${dato('Instagram', e.instagram ? `<a href="${esc(e.instagram)}" target="_blank" rel="noopener" class="mono">@${esc(e.instagram.replace(/\/$/, '').split('/').pop())}</a>` : null)}
-      ${dato('Facebook', e.facebook ? `<a href="${esc(e.facebook)}" target="_blank" rel="noopener" class="mono">${esc(e.facebook.replace(/\/$/, '').split('/').pop())}</a>` : null)}
-      ${dato('LinkedIn', e.linkedin ? `<a href="${esc(e.linkedin)}" target="_blank" rel="noopener" class="mono">${esc(e.linkedin.replace(/\/$/, '').split('/').pop())}</a>` : null)}
+      ${dato('Web', e.web ? `<a href="${safeUrl(e.web)}" target="_blank" rel="noopener" class="mono">${esc(webHost)}</a>` : null, true)}
+      ${dato('Instagram', e.instagram ? `<a href="${safeUrl(e.instagram)}" target="_blank" rel="noopener" class="mono">@${esc(e.instagram.replace(/\/$/, '').split('/').pop())}</a>` : null)}
+      ${dato('Facebook', e.facebook ? `<a href="${safeUrl(e.facebook)}" target="_blank" rel="noopener" class="mono">${esc(e.facebook.replace(/\/$/, '').split('/').pop())}</a>` : null)}
+      ${dato('LinkedIn', e.linkedin ? `<a href="${safeUrl(e.linkedin)}" target="_blank" rel="noopener" class="mono">${esc(e.linkedin.replace(/\/$/, '').split('/').pop())}</a>` : null)}
       ${dato('Contacto', e.contacto ? esc(e.contacto) + (colegas.length ? `<div class="cruzado">también en: ${colegas.map(x => `<a data-id="${x.id}">${esc(x.nombre)}</a>`).join(', ')}</div>` : '') : null)}
       ${dato('Membresías', e.membresias.map(m => `${m.camara}${m.rubro ? ` / ${esc(m.rubro)}` : ''}`).join('<br>'))}
     </div>
