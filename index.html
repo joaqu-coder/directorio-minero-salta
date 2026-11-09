@@ -92,6 +92,8 @@ header{
 .chip[data-sector="servicios"].activo{border-color:#a78bfa;background:rgba(167,139,250,.12)}
 .chip[data-sector="otros"].activo{border-color:#14b8a6;background:rgba(20,184,166,.12)}
 .chip svg{width:14px;height:14px;margin-right:4px;vertical-align:-2px}
+.chip > .active{display:inline-block;width:6px;height:6px;margin-left:6px;border-radius:50%;background:currentColor;opacity:0;vertical-align:middle;transition:opacity .15s}
+.chip.activo > .active{opacity:1}
 #contador{max-width:1100px;margin:0 auto;padding:2px 16px;font-size:12px;color:var(--muted)}
 
 /* ---------- grilla de cards ---------- */
@@ -426,7 +428,7 @@ function renderLista() {
 function renderChips() {
   const camaras = [...new Set(DB.empresas.flatMap(e => e.membresias.map(m => m.camara)))];
   $('#chipsCamaras').innerHTML = camaras.map(c =>
-    `<button class="chip" data-camara="${esc(c)}">${esc(c)}</button>`).join('');
+    `<button class="chip" data-camara="${esc(c)}">${esc(c)}<span class="active"></span></button>`).join('');
 
   const sectorCounts = {};
   DB.empresas.forEach(e => {
