@@ -333,7 +333,9 @@ function renderLista() {
     const card = document.createElement('article');
     card.className = 'card';
     card.setAttribute('aria-label', e.nombre);
-    card.innerHTML = logoHtml(e);
+    card.innerHTML = `
+      ${logoHtml(e)}
+      <h3>${esc(e.nombre)}</h3>`;
     card.addEventListener('click', () => abrirFicha(e));
     frag.appendChild(card);
   }
