@@ -424,9 +424,14 @@ function renderLista() {
 
 /* ---------- chips ---------- */
 function renderChips() {
-  const camaras = [...new Set(DB.empresas.flatMap(e => e.membresias.map(m => m.camara)))];
+  const camaraCounts = {};
+  DB.empresas.forEach(e => {
+    const camarasEmpresa = [...new Set(e.membresias.map(m => m.camara))];
+    camarasEmpresa.forEach(c => camaraCounts[c] = (camaraCounts[c] || 0) + 1);
+  });
+  const camaras = Object.keys(camaraCounts);
   $('#chipsCamaras').innerHTML = camaras.map(c =>
-    `<button class="chip" data-camara="${esc(c)}">${esc(c)}</button>`).join('');
+    `<button class="chip" data-camara="${esc(c)}">${esc(c)} <span class="count mono">${camaraCounts[c]}</span></button>`).join('');
 
   const sectorCounts = {};
   DB.empresas.forEach(e => {
