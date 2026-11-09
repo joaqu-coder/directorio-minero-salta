@@ -116,6 +116,7 @@ header{
   letter-spacing:.04em;border:1px solid var(--border);color:var(--muted);
 }
 .badge.camara{font-weight:500;color:#fff;border:none}
+.badge.baja{color:#d64545;border-color:#d64545}
 .badge.camara.CMS{background:var(--cms)}
 .badge.camara.CAPEMISA{background:var(--capemisa)}
 .badge.camara.UIS{background:var(--uis)}
@@ -315,6 +316,7 @@ function badgesHtml(e) {
 function filtrar() {
   const q = norm(filtro.q);
   return DB.empresas.filter(e => {
+    if (e.estado === 'baja') return false;
     if (filtro.camara && !e.membresias.some(m => m.camara === filtro.camara)) return false;
     if (filtro.multicamara && new Set(e.membresias.map(m => m.camara)).size < 2) return false;
     if (!q) return true;
@@ -345,7 +347,7 @@ function renderLista() {
 /* ---------- chips ---------- */
 function renderChips() {
   const camaraCounts = {};
-  DB.empresas.forEach(e => {
+  DB.empresas.filter(e => e.estado !== 'baja').forEach(e => {
     const camarasEmpresa = [...new Set(e.membresias.map(m => m.camara))];
     camarasEmpresa.forEach(c => camaraCounts[c] = (camaraCounts[c] || 0) + 1);
   });
@@ -386,6 +388,7 @@ function abrirFicha(e, pushUrl = true) {
         ${e.actividad ? `<div class="actividad">${esc(e.actividad)}</div>` : ''}
       </div>
     </div>
+    ${e.estado === 'baja' ? '<div class="badges"><span class="badge baja">BAJA · ficha conservada</span></div>' : ''}
     ${badgesHtml(e)}
     ${e.descripcion ? `<p style="font-size:13px;color:var(--muted);margin-top:10px">${esc(e.descripcion)}</p>` : ''}
     <div class="datos-lista">
@@ -520,11 +523,12 @@ $('#btnNovedades').onclick = () => {
 
 /* ---------- inteligencia ---------- */
 function renderStats() {
-  const multiCamara = DB.empresas.filter(e => new Set(e.membresias.map(m => m.camara)).size >= 2);
+  const activas = DB.empresas.filter(e => e.estado !== 'baja');
+  const multiCamara = activas.filter(e => new Set(e.membresias.map(m => m.camara)).size >= 2);
   const contactosHub = Object.values(porContacto).filter(a => a.length >= 2);
 
   const rubrosCounts = {};
-  DB.empresas.forEach(e => {
+  activas.forEach(e => {
     [...new Set(e.membresias.map(m => m.rubro).filter(r => r))].forEach(r => rubrosCounts[r] = (rubrosCounts[r] || 0) + 1);
   });
   const nRubros = Object.keys(rubrosCounts).length;
@@ -543,7 +547,7 @@ function renderStats() {
       <span class="lbl">rubros activos</span>
     </div>
     <div class="stat-pill">
-      <span class="num">${DB.empresas.length}</span>
+      <span class="num">${activas.length}</span>
       <span class="lbl">empresas totales</span>
     </div>
   `;

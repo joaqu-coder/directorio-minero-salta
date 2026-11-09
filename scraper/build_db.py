@@ -29,6 +29,7 @@ CREATE TABLE empresas (
     descripcion TEXT,
     ubicacion TEXT,
     cuit TEXT,
+    estado TEXT NOT NULL DEFAULT 'activa',
     creado_en TEXT DEFAULT (datetime('now')),
     actualizado_en TEXT
 );
@@ -92,14 +93,15 @@ def main():
         con.execute(
             """INSERT INTO empresas (id, nombre, nombre_norm, actividad, direccion,
                telefono, email, sitio_web, instagram, facebook, linkedin, logo_url,
-               logo_origen, contacto_nombre, descripcion, ubicacion, cuit, actualizado_en)
-               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now'))""",
+               logo_origen, contacto_nombre, descripcion, ubicacion, cuit, estado, actualizado_en)
+               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now'))""",
             [e["id"], e["nombre"], e["nombre_norm"], e["actividad"] or None,
              e["direccion"] or None, e["telefono"] or None, e["email"] or None,
              e["sitio_web"] or None, e["instagram"] or None, e["facebook"] or None,
              e["linkedin"] or None, e["logo_url"] or None, e["logo_origen"] or None,
              e["contacto_nombre"] or None, e.get("descripcion") or None,
-             e.get("ubicacion") or None, e.get("cuit") or None],
+             e.get("ubicacion") or None, e.get("cuit") or None,
+             e.get("estado") or "activa"],
         )
         if e["contacto_nombre"]:
             con.execute(
@@ -140,6 +142,7 @@ def main():
         slugs_usados.add(slug)
         salida.append({
             "id": int(e["id"]),
+            "estado": e.get("estado") or "activa",
             "slug": slug,
             "nombre": e["nombre"],
             "actividad": e["actividad"] or None,

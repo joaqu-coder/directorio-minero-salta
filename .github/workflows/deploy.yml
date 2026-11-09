@@ -37,6 +37,7 @@ jobs:
           cp icon.svg dist/
           cp sw.js dist/
           cp data/empresas.json dist/data/
+          cp -r data/logos dist/data/
 
       - name: Crear proyecto Pages si no existe
         if: steps.cred.outputs.listo == 'true'

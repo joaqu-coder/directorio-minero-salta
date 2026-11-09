@@ -21,6 +21,7 @@ CAMPOS_EMPRESA = [
     "id", "nombre", "nombre_norm", "actividad", "direccion", "telefono",
     "email", "sitio_web", "instagram", "facebook", "linkedin", "logo_url",
     "logo_origen", "contacto_nombre", "descripcion", "ubicacion", "cuit",
+    "estado",  # "activa" | "baja". Una baja NUNCA borra la fila ni sus membresías.
 ]
 CAMPOS_MEMBRESIA = ["empresa_id", "camara", "rubro", "url_ficha"]
 CAMPOS_CAMBIO = [
@@ -245,6 +246,13 @@ def main():
             })
         else:
             eid = int(previa["id"])
+            if previa.get("estado") == "baja":
+                # reingreso: la ficha histórica se reactiva, no se crea otra
+                cambios.append({
+                    "fecha": ahora, "tipo": "alta", "empresa_id": eid,
+                    "empresa_nombre": ent.campos["nombre"], "campo": "reingreso",
+                    "valor_anterior": "baja", "valor_nuevo": "activa",
+                })
             for campo in CAMPOS_DIFF:
                 viejo = (previa.get(campo) or "").strip()
                 nuevo = (ent.campos.get(campo) or "").strip()
@@ -265,20 +273,28 @@ def main():
                         "empresa_nombre": ent.campos["nombre"], "campo": "membresia",
                         "valor_anterior": "", "valor_nuevo": f"{cam} / {rubro or ''}",
                     })
-        fila = {"id": eid, **ent.campos}
+        fila = {"id": eid, **ent.campos, "estado": "activa"}
         filas_empresas.append(fila)
         for cam, rubro, url in ent.membresias:
             filas_membresias.append({
                 "empresa_id": eid, "camara": cam, "rubro": rubro or "", "url_ficha": url or "",
             })
 
+    # Bajas: la empresa deja de aparecer en la fuente, pero su ficha y
+    # membresías se conservan con estado="baja". Solo se registra el cambio
+    # la primera vez que pasa a baja.
     for norm, previa in previas.items():
         if norm not in vistas:
-            cambios.append({
-                "fecha": ahora, "tipo": "baja", "empresa_id": previa["id"],
-                "empresa_nombre": previa["nombre"], "campo": "",
-                "valor_anterior": previa["nombre"], "valor_nuevo": "",
-            })
+            if previa.get("estado") != "baja":
+                cambios.append({
+                    "fecha": ahora, "tipo": "baja", "empresa_id": previa["id"],
+                    "empresa_nombre": previa["nombre"], "campo": "",
+                    "valor_anterior": previa["nombre"], "valor_nuevo": "",
+                })
+            filas_empresas.append({**previa, "estado": "baja"})
+            for m in memb_previas:
+                if m["empresa_id"] == previa["id"]:
+                    filas_membresias.append(m)
 
     filas_empresas.sort(key=lambda f: normalizar_nombre(f["nombre"]))
     escribir_csv(DATA / "empresas.csv", filas_empresas, CAMPOS_EMPRESA)

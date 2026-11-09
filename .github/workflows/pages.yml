@@ -38,6 +38,7 @@ jobs:
           cp icon.svg dist/
           cp sw.js dist/
           cp data/empresas.json dist/data/
+          cp -r data/logos dist/data/
           HASH=$(git rev-parse --short HEAD)
           sed -i -E "s/const CACHE = 'dir-[^']+'/const CACHE = 'dir-$HASH'/" dist/sw.js
           grep -q "const CACHE = 'dir-$HASH'" dist/sw.js || { echo "::error::sed no aplicó CACHE en sw.js"; exit 1; }

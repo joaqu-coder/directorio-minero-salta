@@ -78,7 +78,8 @@ def test_redes_no_son_paginas_de_login_ni_share(empresas):
 
 
 def test_logos_son_urls_http(empresas):
-    malos = [e["nombre"] for e in empresas if not re.match(r"^https?://", e["logo_url"])]
+    # logo vacío = "sin logo" (la UI muestra iniciales); rutas locales data/logos/ se publican en el deploy
+    malos = [e["nombre"] for e in empresas if e["logo_url"] and not re.match(r"^(https?://|data/logos/)", e["logo_url"])]
     assert malos == []
 
 
