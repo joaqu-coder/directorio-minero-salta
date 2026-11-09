@@ -271,6 +271,8 @@ footer{
 const FLAGS = { boletin: false, boletinApi: '/api/buscar' };
 const $ = s => document.querySelector(s);
 let DB = { empresas: [], cambios: [], generado: null };
+// Ajuste de gris por logo (scraper/ajustar_logos.py): {id: {b, c}}
+let AJUSTE_LOGOS = {};
 let filtro = { q: '', camara: null };
 let porContacto = {};
 
@@ -289,7 +291,9 @@ function logoHtml(e, lazy = true, conNombre = false) {
     : `<div class="logo-ini" style="background:hsl(${hue(e.nombre)},35%,28%)">${esc(iniciales(e.nombre))}</div>`;
   if (!e.logo) return `<div class="logo-box">${fallback}</div>`;
   // Si la imagen falla (onerror) o carga pero no tiene nada visible (onload), se muestra el fallback.
-  return `<div class="logo-box"><img src="${esc(e.logo)}" alt="" ${lazy ? 'loading="lazy"' : ''}
+  const aj = AJUSTE_LOGOS[e.id];
+  const filtro = aj ? `grayscale(1) brightness(${aj.b}) contrast(${aj.c})` : 'grayscale(1)';
+  return `<div class="logo-box"><img src="${esc(e.logo)}" alt="" ${lazy ? 'loading="lazy"' : ''} style="filter:${filtro}"
     data-fb="${esc(fallback)}" onerror="this.parentNode.innerHTML=this.dataset.fb"
     onload="if(!logoVisible(this))this.parentNode.innerHTML=this.dataset.fb"></div>`;
 }
@@ -553,6 +557,10 @@ $('#limpiar').onclick = () => {
     $('#contador').textContent = 'Error cargando datos.';
     return;
   }
+  try {
+    const r = await fetch('data/logos_ajuste.json');
+    if (r.ok) AJUSTE_LOGOS = await r.json();
+  } catch (e) { /* sin ajuste: los logos usan el filtro base */ }
   for (const e of DB.empresas) {
     e._busqueda = norm([
       e.nombre, e.actividad, e.contacto, e.descripcion, e.ubicacion, e.direccion,
