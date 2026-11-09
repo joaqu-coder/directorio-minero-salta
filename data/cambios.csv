@@ -215,3 +215,8 @@ fecha,tipo,empresa_id,empresa_nombre,campo,valor_anterior,valor_nuevo
 2026-10-26 16:00:20,alta,444,CARDENALES SEGURIDAD y LIMPIEZA S.A.S.,,,
 2026-11-02 19:17:35,alta,445,HIDRO GROUP S.A.S.,,,
 2026-11-02 19:17:35,alta,446,NORCOMEX ARGENTINA,,,
+2026-11-09 19:40:30,alta,447,FELTRIN S.A.,,,
+2026-11-09 19:40:30,modificacion,444,CARDENALES SEGURIDAD y LIMPIEZA S.A.S.,actividad,Seguridad privada. Limpieza.,Servicio de seguridad y vigilancia. Servicio de limpieza.
+2026-11-09 19:40:30,modificacion,444,CARDENALES SEGURIDAD y LIMPIEZA S.A.S.,telefono,(0387) 243 6433,(0387) 243 6433 / 155 350 840
+2026-11-09 19:40:30,modificacion,444,CARDENALES SEGURIDAD y LIMPIEZA S.A.S.,email,cardenaleslys@gmail.com,adm.cardenaleslys@gmail.com
+2026-11-09 19:40:30,modificacion,444,CARDENALES SEGURIDAD y LIMPIEZA S.A.S.,contacto_nombre,Gastón Ruiz Magno,Rocío Natalia Pérez Arroyo
