@@ -291,8 +291,10 @@ function logoHtml(e, lazy = true, conNombre = false) {
     : `<div class="logo-ini" style="background:hsl(${hue(e.nombre)},35%,28%)">${esc(iniciales(e.nombre))}</div>`;
   if (!e.logo) return `<div class="logo-box">${fallback}</div>`;
   // Si la imagen falla (onerror) o carga pero no tiene nada visible (onload), se muestra el fallback.
-  const filtro = AJUSTE_LOGOS[e.id] ? `url(#ajl-${e.id})` : 'grayscale(1)';
-  return `<div class="logo-box"><img src="${esc(e.logo)}" alt="" ${lazy ? 'loading="lazy"' : ''} style="filter:${filtro}"
+  const aj = AJUSTE_LOGOS[e.id] || {};
+  const filtro = aj.a !== undefined ? `url(#ajl-${e.id})` : 'grayscale(1)';
+  const src = aj.src || e.logo;  // copia alojada en data/logos/ si existe
+  return `<div class="logo-box"><img src="${esc(src)}" alt="" ${lazy ? 'loading="lazy"' : ''} style="filter:${filtro}"
     data-fb="${esc(fallback)}" onerror="this.parentNode.innerHTML=this.dataset.fb"
     onload="if(!logoVisible(this))this.parentNode.innerHTML=this.dataset.fb"></div>`;
 }
@@ -561,7 +563,7 @@ $('#limpiar').onclick = () => {
     if (r.ok) AJUSTE_LOGOS = await r.json();
   } catch (e) { /* sin ajuste: los logos usan el filtro base */ }
   // Un filtro SVG por logo: gris + tinta/fondo a la escala común (ver ajustar_logos.py)
-  const defs = Object.entries(AJUSTE_LOGOS).map(([id, { a, o }]) => {
+  const defs = Object.entries(AJUSTE_LOGOS).filter(([, v]) => v.a !== undefined).map(([id, { a, o }]) => {
     const f = `<feFuncR type="linear" slope="${a}" intercept="${o / 255}"/><feFuncG type="linear" slope="${a}" intercept="${o / 255}"/><feFuncB type="linear" slope="${a}" intercept="${o / 255}"/>`;
     return `<filter id="ajl-${id}" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0"/><feComponentTransfer>${f}</feComponentTransfer></filter>`;
   }).join('');
