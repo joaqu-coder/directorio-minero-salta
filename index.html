@@ -371,7 +371,7 @@ function abrirFicha(e, pushUrl = true) {
   cont.innerHTML = `
     <button class="cerrar" aria-label="Cerrar">✕</button>
     <div class="ficha-top">
-      ${logoHtml(e, false)}
+      ${logoHtml(e, false, true)}
       <div>
         <h2>${esc(e.nombre)}</h2>
         ${e.actividad ? `<div class="actividad">${esc(e.actividad)}</div>` : ''}
