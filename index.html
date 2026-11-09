@@ -109,7 +109,11 @@ header{
   width:100%;height:100%;display:grid;place-items:center;font-weight:800;font-size:34px;
   color:#fff;letter-spacing:.02em;
 }
-.card h3{font-size:13.5px;font-weight:700;line-height:1.3;letter-spacing:-.01em}
+.card h3{display:none;font-size:13.5px;font-weight:700;line-height:1.3;letter-spacing:-.01em}
+.logo-nombre{
+  width:100%;height:100%;display:grid;place-items:center;padding:12px;text-align:center;
+  font-weight:700;font-size:13.5px;line-height:1.3;letter-spacing:-.01em;color:var(--text);
+}
 .badges{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto}
 .badge{
   font-family:'Roboto',Helvetica,Arial,sans-serif;font-size:9.5px;padding:2px 7px;border-radius:5px;
@@ -208,7 +212,8 @@ footer{
   }
   .logo-box{width:58px;height:58px;aspect-ratio:auto;flex:none;border:1px solid #ddd}
   .logo-ini{color:#000 !important;background:#eee !important;font-size:18px}
-  .card h3{color:#000;font-size:11pt}
+  .card h3{display:block;color:#000;font-size:11pt}
+  .logo-nombre{display:none !important}
   .card .extra-print{display:block !important;font-size:9pt;color:#333}
   .badge{color:#333;border-color:#bbb}
   .badge.camara{color:#000;background:#eee !important}
@@ -278,8 +283,10 @@ const safeUrl = u => /^https?:\/\//i.test(u || '') ? esc(u) : '#';
 const iniciales = n => n.split(/\s+/).filter(w => /\w/.test(w)).slice(0, 2).map(w => w[0]).join('').toUpperCase();
 const hue = n => { let h = 0; for (const c of n) h = (h * 31 + c.charCodeAt(0)) % 360; return h; };
 
-function logoHtml(e, lazy = true) {
-  const fallback = `<div class="logo-ini" style="background:hsl(${hue(e.nombre)},35%,28%)">${esc(iniciales(e.nombre))}</div>`;
+function logoHtml(e, lazy = true, conNombre = false) {
+  const fallback = conNombre
+    ? `<div class="logo-nombre">${esc(e.nombre)}</div>`
+    : `<div class="logo-ini" style="background:hsl(${hue(e.nombre)},35%,28%)">${esc(iniciales(e.nombre))}</div>`;
   if (!e.logo) return `<div class="logo-box">${fallback}</div>`;
   return `<div class="logo-box"><img src="${esc(e.logo)}" alt="" ${lazy ? 'loading="lazy"' : ''}
     onerror="this.parentNode.innerHTML='${fallback.replace(/'/g, '&#39;').replace(/"/g, '&quot;')}'"></div>`;
@@ -318,7 +325,7 @@ function renderLista() {
     card.className = 'card';
     card.setAttribute('aria-label', e.nombre);
     card.innerHTML = `
-      ${logoHtml(e)}
+      ${logoHtml(e, true, true)}
       <h3>${esc(e.nombre)}</h3>`;
     card.addEventListener('click', () => abrirFicha(e));
     frag.appendChild(card);
