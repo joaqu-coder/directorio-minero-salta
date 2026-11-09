@@ -195,24 +195,6 @@ footer{
   font-size:8px;font-weight:700;font-family:'Roboto',Helvetica,Arial,sans-serif;
   display:grid;place-items:center;pointer-events:none;
 }
-.stats-bar{max-width:1100px;margin:0 auto;padding:0 16px 8px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
-.stats-bar::-webkit-scrollbar{display:none}
-.stat-pill{
-  flex:none;background:transparent;border:1px solid var(--border);border-radius:8px;
-  padding:5px 11px;display:flex;align-items:baseline;gap:6px;white-space:nowrap;
-}
-.stat-pill .num{font-size:13px;font-weight:700;color:var(--text);font-family:'Roboto',Helvetica,Arial,sans-serif}
-.stat-pill .lbl{font-size:10px;color:var(--muted)}
-.stat-pill.clickable{cursor:pointer}
-.stat-pill.clickable:hover{border-color:#3a4357;background:var(--surface)}
-.stat-pill.activo{border-color:var(--accent)}
-.stat-pill.activo .num{color:var(--accent)}
-.hub-item{display:flex;flex-direction:column;gap:4px;padding:10px;border-radius:9px}
-.hub-item:hover{background:var(--surface2)}
-.hub-nombre{font-weight:700;font-size:13.5px}
-.hub-empresas{font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px}
-.hub-empresas span{cursor:pointer;text-decoration:underline;text-decoration-color:var(--border)}
-.hub-empresas span:hover{color:var(--text)}
 
 /* ---------- impresión ---------- */
 @media print{
@@ -268,7 +250,6 @@ footer{
   <div class="chips" id="chipsCamaras"></div>
 </div>
 
-<div class="stats-bar no-print" id="statsBar"></div>
 
 <div id="contador"></div>
 <main id="lista"><div id="vacio">Sin resultados para esa búsqueda.</div></main>
@@ -285,7 +266,7 @@ footer{
 const FLAGS = { boletin: false, boletinApi: '/api/buscar' };
 const $ = s => document.querySelector(s);
 let DB = { empresas: [], cambios: [], generado: null };
-let filtro = { q: '', camara: null, multicamara: false };
+let filtro = { q: '', camara: null };
 let porContacto = {};
 
 /* ---------- helpers ---------- */
@@ -320,7 +301,6 @@ function filtrar() {
   return DB.empresas.filter(e => {
     if (e.estado === 'baja') return false;
     if (filtro.camara && !e.membresias.some(m => m.camara === filtro.camara)) return false;
-    if (filtro.multicamara && new Set(e.membresias.map(m => m.camara)).size < 2) return false;
     if (!q) return true;
     return e._busqueda.includes(q);
   });
@@ -526,75 +506,6 @@ $('#btnNovedades').onclick = () => {
 };
 
 /* ---------- inteligencia ---------- */
-function renderStats() {
-  const activas = DB.empresas.filter(e => e.estado !== 'baja');
-  const multiCamara = activas.filter(e => new Set(e.membresias.map(m => m.camara)).size >= 2);
-  const contactosHub = Object.values(porContacto).filter(a => a.length >= 2);
-
-  const rubrosCounts = {};
-  activas.forEach(e => {
-    [...new Set(e.membresias.map(m => m.rubro).filter(r => r))].forEach(r => rubrosCounts[r] = (rubrosCounts[r] || 0) + 1);
-  });
-  const nRubros = Object.keys(rubrosCounts).length;
-
-  $('#statsBar').innerHTML = `
-    <div class="stat-pill clickable${filtro.multicamara ? ' activo' : ''}" id="statMulti">
-      <span class="num">${multiCamara.length}</span>
-      <span class="lbl">en múlt. cámaras</span>
-    </div>
-    <div class="stat-pill clickable" id="statContactos">
-      <span class="num">${contactosHub.length}</span>
-      <span class="lbl">contactos en 2+ emp.</span>
-    </div>
-    <div class="stat-pill">
-      <span class="num">${nRubros}</span>
-      <span class="lbl">rubros activos</span>
-    </div>
-    <div class="stat-pill">
-      <span class="num">${activas.length}</span>
-      <span class="lbl">empresas totales</span>
-    </div>
-  `;
-
-  $('#statMulti').onclick = () => {
-    filtro.multicamara = !filtro.multicamara;
-    renderStats();
-    renderLista();
-  };
-  $('#statContactos').onclick = () => mostrarContactosHub(contactosHub);
-
-}
-
-function mostrarContactosHub(contactosHub) {
-  const sorted = [...contactosHub].sort((a, b) => b.length - a.length);
-  const cont = $('#fichaContenido');
-  cont.innerHTML = `
-    <button class="cerrar" aria-label="Cerrar">✕</button>
-    <h2 style="font-size:17px;margin-bottom:4px">Red de contactos</h2>
-    <p style="font-size:12px;color:var(--muted);margin-bottom:14px">
-      ${sorted.length} personas vinculadas a 2 o más empresas
-    </p>
-    <div class="datos-lista">
-      ${sorted.map(arr => `
-        <div class="hub-item">
-          <div class="hub-nombre">${esc(arr[0].contacto)}
-            <span class="badge" style="margin-left:6px;vertical-align:middle">${arr.length} empresas</span>
-          </div>
-          <div class="hub-empresas">
-            ${arr.map(e => `<span data-id="${e.id}">${esc(e.nombre)}</span>`).join('')}
-          </div>
-        </div>`).join('')}
-    </div>
-  `;
-  cont.querySelector('.cerrar').onclick = () => $('#modalFicha').close();
-  cont.querySelectorAll('.hub-empresas span').forEach(el =>
-    el.onclick = () => {
-      const e = DB.empresas.find(x => x.id === +el.dataset.id);
-      if (e) abrirFicha(e);
-    });
-  if (!$('#modalFicha').open) $('#modalFicha').showModal();
-}
-
 /* ---------- buscador ---------- */
 let debounce;
 $('#buscador').addEventListener('input', ev => {
@@ -625,7 +536,6 @@ $('#limpiar').onclick = () => {
   }
   $('#metaGenerado').textContent = DB.generado ? `actualizado ${DB.generado.slice(0, 10)}` : '';
   renderChips();
-  renderStats();
   renderLista();
   actualizarBadge();
   actualizarBannerNovedades();
