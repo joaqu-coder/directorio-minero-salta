@@ -288,8 +288,28 @@ function logoHtml(e, lazy = true, conNombre = false) {
     ? `<div class="logo-nombre">${esc(e.nombre)}</div>`
     : `<div class="logo-ini" style="background:hsl(${hue(e.nombre)},35%,28%)">${esc(iniciales(e.nombre))}</div>`;
   if (!e.logo) return `<div class="logo-box">${fallback}</div>`;
+  // Si la imagen falla (onerror) o carga pero no tiene nada visible (onload), se muestra el fallback.
   return `<div class="logo-box"><img src="${esc(e.logo)}" alt="" ${lazy ? 'loading="lazy"' : ''}
-    onerror="this.parentNode.innerHTML='${fallback.replace(/'/g, '&#39;').replace(/"/g, '&quot;')}'"></div>`;
+    data-fb="${esc(fallback)}" onerror="this.parentNode.innerHTML=this.dataset.fb"
+    onload="if(!logoVisible(this))this.parentNode.innerHTML=this.dataset.fb"></div>`;
+}
+
+// Mide la imagen ya cargada: cuenta píxeles opacos y no blancos (en gris, un logo blanco desaparece).
+// Si el origen no permite leer píxeles (sin CORS), no se puede medir: se muestra el logo.
+function logoVisible(img) {
+  try {
+    const s = 48, c = document.createElement('canvas');
+    c.width = c.height = s;
+    const ctx = c.getContext('2d', { willReadFrequently: true });
+    ctx.drawImage(img, 0, 0, s, s);
+    const d = ctx.getImageData(0, 0, s, s).data;
+    let vis = 0;
+    for (let i = 0; i < d.length; i += 4)
+      if (d[i + 3] > 40 && (d[i] + d[i + 1] + d[i + 2]) / 3 < 235) vis++;
+    return vis >= s * s * 0.02;
+  } catch (err) {
+    return true;
+  }
 }
 
 function badgesHtml(e) {
