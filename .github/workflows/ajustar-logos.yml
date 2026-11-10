@@ -21,7 +21,9 @@ jobs:
           python-version: '3.12'
 
       - name: Instalar dependencias
-        run: pip install pillow curl_cffi
+        run: |
+          sudo apt-get install -y librsvg2-bin
+          pip install pillow curl_cffi
 
       - name: Medir logos
         run: python scraper/ajustar_logos.py --alojar

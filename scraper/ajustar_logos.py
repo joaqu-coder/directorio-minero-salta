@@ -12,6 +12,8 @@ Para cada empresa con logo:
 Salida: data/logos_ajuste.json  {"<id>": {"src": "data/logos/<id>.png",
                                           "a": .., "o": ..}}
 La app usa "src" si existe y aplica el filtro si hay "a" y "o".
+Si la tinta queda casi blanca aun ajustada, la entrada lleva "nombre": true
+y la app muestra el nombre en lugar del logo.
 
 Uso:
     python scraper/ajustar_logos.py                # solo logos ya locales
@@ -21,8 +23,11 @@ import argparse
 import io
 import json
 import os
+import shutil
 import statistics
+import subprocess
 import sys
+import tempfile
 import urllib.request
 
 from PIL import Image
@@ -86,7 +91,20 @@ def extension(datos):
     return None
 
 
-def rasterizar(datos):
+def rasterizar(datos, ext):
+    """Imagen LADO x LADO con alpha. SVG se convierte con rsvg-convert."""
+    if ext == 'svg':
+        if shutil.which('rsvg-convert') is None:
+            return None
+        with tempfile.TemporaryDirectory() as tmp:
+            entrada = os.path.join(tmp, 'logo.svg')
+            with open(entrada, 'wb') as f:
+                f.write(datos)
+            res = subprocess.run(['rsvg-convert', '-w', str(LADO), '-h', str(LADO), entrada],
+                                 capture_output=True)
+        if res.returncode != 0 or not res.stdout:
+            return None
+        datos = res.stdout
     try:
         return Image.open(io.BytesIO(datos)).convert('RGBA').resize((LADO, LADO))
     except Exception:
@@ -148,9 +166,11 @@ def main():
             with open(os.path.join(RAIZ, src), 'wb') as f:
                 f.write(datos)
             nuevo = True
-        img = rasterizar(datos) if ext != 'svg' else None
+        img = rasterizar(datos, ext)
         medida = medir(img) if img is not None else None
-        entradas[str(e['id'])] = {'src': src, 'medida': medida, 'nuevo': nuevo}
+        # imagen abierta pero sin tinta visible (p. ej. blanca): se muestra el nombre
+        vacio = img is not None and medida is None
+        entradas[str(e['id'])] = {'src': src, 'medida': medida, 'nuevo': nuevo, 'vacio': vacio}
 
     medidas = {k: v['medida'] for k, v in entradas.items() if v['medida']}
     if not medidas:
@@ -164,13 +184,23 @@ def main():
     #   L' = 255 - g*(255 - A1*L) = a*L + o   con a = g*A1, o = 255*(1-g)
     # La app lo aplica como un filtro SVG (feComponentTransfer lineal).
     salida = {}
+    sin_medir = [k for k, v in entradas.items() if not v['medida']]
+    if sin_medir:
+        print(f'Sin medir (quedan con gris simple): {len(sin_medir)}', file=sys.stderr)
     for id_, v in entradas.items():
         fila = {'src': v['src']}
+        if v['vacio']:
+            fila['nombre'] = True
         if v['medida']:
             m = v['medida']
             g = min(max((255 - T) / (255 - m['m']), 0.7), 2.0)
-            fila['a'] = round(g * m['A1'], 4)
-            fila['o'] = round(255 * (1 - g), 2)
+            tinta_final = 255 - g * (255 - m['m'])
+            if tinta_final > 215:
+                # tinta casi blanca: sobre fondo blanco no se ve. La app muestra el nombre.
+                fila['nombre'] = True
+            else:
+                fila['a'] = round(g * m['A1'], 4)
+                fila['o'] = round(255 * (1 - g), 2)
         salida[id_] = fila
 
     # No perder entradas de corridas anteriores (p. ej. una corrida sin --alojar

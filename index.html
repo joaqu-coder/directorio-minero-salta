@@ -289,7 +289,8 @@ function logoHtml(e, lazy = true, conNombre = false) {
   const fallback = conNombre
     ? `<div class="logo-nombre">${esc(e.nombre)}</div>`
     : `<div class="logo-ini" style="background:hsl(${hue(e.nombre)},35%,28%)">${esc(iniciales(e.nombre))}</div>`;
-  if (!e.logo) return `<div class="logo-box">${fallback}</div>`;
+  // Sin logo, o logo con tinta casi blanca (ajuste: "nombre"): se muestra el nombre.
+  if (!e.logo || (AJUSTE_LOGOS[e.id] || {}).nombre) return `<div class="logo-box">${fallback}</div>`;
   // Si la imagen falla (onerror) o carga pero no tiene nada visible (onload), se muestra el fallback.
   const aj = AJUSTE_LOGOS[e.id] || {};
   const filtro = aj.a !== undefined ? `url(#ajl-${e.id})` : 'grayscale(1)';
