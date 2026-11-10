@@ -32,6 +32,7 @@ EMPRESAS = os.path.join(RAIZ, 'data', 'empresas.json')
 SALIDA = os.path.join(RAIZ, 'data', 'logos_ajuste.json')
 CARPETA = os.path.join(RAIZ, 'data', 'logos')
 LADO = 64
+FALLOS = []  # (url, motivo) de cada descarga fallida
 MIN_TINTA = 0.03  # fracción mínima de píxeles con contenido para medir
 
 
@@ -44,12 +45,29 @@ def leer_bytes(logo, alojar):
                 return f.read()
         return None
     if alojar and logo.startswith('http'):
-        req = urllib.request.Request(logo, headers={'User-Agent': 'Mozilla/5.0'})
+        return descargar(logo)
+    return None
+
+
+def descargar(url):
+    """Descarga con huella TLS de navegador (curl_cffi), que los sitios con WAF
+    aceptan; si no está instalado, cae a urllib. Devuelve None si falla."""
+    try:
+        from curl_cffi import requests as cffi
+        r = cffi.get(url, impersonate='chrome', timeout=25, allow_redirects=True)
+        if r.status_code == 200 and r.content:
+            return r.content
+        motivo = f'HTTP {r.status_code}'
+    except ImportError:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
         try:
-            with urllib.request.urlopen(req, timeout=20) as r:
+            with urllib.request.urlopen(req, timeout=25) as r:
                 return r.read()
-        except Exception:
-            return None
+        except Exception as ex:
+            motivo = type(ex).__name__
+    except Exception as ex:
+        motivo = type(ex).__name__
+    FALLOS.append((url, motivo))
     return None
 
 
@@ -155,9 +173,22 @@ def main():
             fila['o'] = round(255 * (1 - g), 2)
         salida[id_] = fila
 
+    # No perder entradas de corridas anteriores (p. ej. una corrida sin --alojar
+    # no descarga los remotos y no debe borrarlos).
+    if os.path.exists(SALIDA):
+        with open(SALIDA, encoding='utf-8') as f:
+            for id_, fila in json.load(f).items():
+                salida.setdefault(id_, fila)
+
     with open(SALIDA, 'w', encoding='utf-8') as f:
         json.dump(salida, f, ensure_ascii=False, separators=(',', ':'), sort_keys=True)
 
+    if FALLOS:
+        from collections import Counter
+        por_motivo = Counter(m for _, m in FALLOS)
+        print(f'Descargas fallidas: {len(FALLOS)} {dict(por_motivo)}', file=sys.stderr)
+        for url, motivo in FALLOS[:5]:
+            print(f'  {motivo}: {url}', file=sys.stderr)
     nuevos = sum(1 for v in entradas.values() if v['nuevo'])
     print(f'Medidos: {len(medidas)} de {len(entradas)} | T={T:.1f} | '
           f'alojados ahora: {nuevos} -> {SALIDA}')

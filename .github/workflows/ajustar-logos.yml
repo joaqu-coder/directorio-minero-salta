@@ -20,8 +20,8 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Instalar Pillow
-        run: pip install pillow
+      - name: Instalar dependencias
+        run: pip install pillow curl_cffi
 
       - name: Medir logos
         run: python scraper/ajustar_logos.py --alojar
