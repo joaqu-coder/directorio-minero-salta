@@ -49,8 +49,8 @@ def leer_bytes(logo, alojar):
             with open(ruta, 'rb') as f:
                 return f.read()
         return None
-    # capemisa.com.ar se muestra como nombre en la app: no se aloja
-    if alojar and logo.startswith('http') and 'capemisa.com.ar' not in logo.lower():
+    # El placeholder LogoCapemisa se muestra como nombre en la app: no se aloja
+    if alojar and logo.startswith('http') and 'logocapemisa' not in logo.lower():
         return descargar(logo)
     return None
 

@@ -290,9 +290,9 @@ function logoHtml(e, lazy = true, conNombre = false) {
     ? `<div class="logo-nombre">${esc(e.nombre)}</div>`
     : `<div class="logo-ini" style="background:hsl(${hue(e.nombre)},35%,28%)">${esc(iniciales(e.nombre))}</div>`;
   // Sin logo, o logo con tinta casi blanca (ajuste: "nombre"): se muestra el nombre.
-  // Logos alojados en capemisa.com.ar (incluido el placeholder LogoCapemisa): se muestra el nombre.
-  const capemisa = /capemisa\.com\.ar/i.test(e.logo || '');
-  if (!e.logo || capemisa || (AJUSTE_LOGOS[e.id] || {}).nombre) return `<div class="logo-box">${fallback}</div>`;
+  // Placeholder de la cámara (LogoCapemisa): no es el logo de la empresa, se muestra el nombre.
+  const placeholder = /logocapemisa/i.test(e.logo || '');
+  if (!e.logo || placeholder || (AJUSTE_LOGOS[e.id] || {}).nombre) return `<div class="logo-box">${fallback}</div>`;
   // Si la imagen falla (onerror) o carga pero no tiene nada visible (onload), se muestra el fallback.
   const aj = AJUSTE_LOGOS[e.id] || {};
   const filtro = aj.a !== undefined ? `url(#ajl-${e.id})` : 'grayscale(1)';
