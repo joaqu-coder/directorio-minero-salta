@@ -12,10 +12,48 @@ diffea contra data/empresas.csv + data/membresias.csv para producir:
 """
 import csv
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 
 from common import DATA, cargar_staging, normalizar_dominio, normalizar_nombre, slugificar
+
+# Guarda contra scrapes incompletos (ver docs/auditoria.md, corrida 2026-08-31:
+# -41 bajas por una fuente que devolvió de menos). Si se excede, no se escribe nada.
+MAX_BAJAS_ABS = 5          # nunca más de 5 bajas por semana...
+MAX_BAJAS_PCT = 0.03       # ...ni más del 3 % de las activas (lo que sea mayor)
+MAX_CAIDA_CAMARA = 0.10    # ninguna cámara puede perder más del 10 % de sus empresas
+
+
+def verificar_caida(previas: dict, memb_previas: list, entidades: list, vistas: set):
+    """Aborta (SystemExit) si el scrape parece incompleto. PERMITIR_CAIDA=1 lo saltea
+    para bajas legítimas masivas (decisión manual, dejarla en el commit)."""
+    if not previas or os.environ.get("PERMITIR_CAIDA") == "1":
+        return
+    activas_previas = {n: p for n, p in previas.items() if p.get("estado") != "baja"}
+    bajas = [p for n, p in activas_previas.items() if n not in vistas]
+    limite = max(MAX_BAJAS_ABS, MAX_BAJAS_PCT * len(activas_previas))
+    if len(bajas) > limite:
+        raise SystemExit(
+            f"ABORTADO: {len(bajas)} bajas (límite {limite:.0f} de {len(activas_previas)} "
+            f"activas). Revisar los scrapers, o correr con PERMITIR_CAIDA=1 si es real."
+        )
+    ids_activos = {p["id"] for p in activas_previas.values()}
+    previas_por_camara: dict = {}
+    for m in memb_previas:
+        if m["empresa_id"] in ids_activos:
+            previas_por_camara.setdefault(m["camara"], set()).add(m["empresa_id"])
+    nuevas_por_camara: dict = {}
+    for ent in entidades:
+        for cam in {c for c, _, _ in ent.membresias}:
+            nuevas_por_camara[cam] = nuevas_por_camara.get(cam, 0) + 1
+    for cam, ids in previas_por_camara.items():
+        antes, ahora = len(ids), nuevas_por_camara.get(cam, 0)
+        if ahora < antes * (1 - MAX_CAIDA_CAMARA):
+            raise SystemExit(
+                f"ABORTADO: {cam} pasó de {antes} a {ahora} empresas (caída > "
+                f"{MAX_CAIDA_CAMARA:.0%}). Revisar el scraper, o PERMITIR_CAIDA=1 si es real."
+            )
 
 CAMPOS_EMPRESA = [
     "id", "nombre", "nombre_norm", "actividad", "direccion", "telefono",
@@ -279,6 +317,8 @@ def main():
             filas_membresias.append({
                 "empresa_id": eid, "camara": cam, "rubro": rubro or "", "url_ficha": url or "",
             })
+
+    verificar_caida(previas, memb_previas, entidades, vistas)
 
     # Bajas: la empresa deja de aparecer en la fuente, pero su ficha y
     # membresías se conservan con estado="baja". Solo se registra el cambio

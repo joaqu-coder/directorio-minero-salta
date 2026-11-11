@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 """CSV (source of truth) -> SQLite (directorio.db) + JSON estático (empresas.json)."""
 import csv
+import hashlib
 import json
+import re
 import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
@@ -9,6 +11,28 @@ from pathlib import Path
 from common import DATA, RAIZ, normalizar_nombre, slugificar
 
 DB = RAIZ / "directorio.db"
+
+# Placeholder de la cámara (no es el logo de la empresa). Se detecta por nombre
+# (archivos LogoCapemisa / Logo-Capemisa / logo-1.png de capemisa.com.ar) o por
+# contenido (MD5 de la copia local en data/logos/). Así el frontend no adivina.
+PLACEHOLDER_MD5 = {
+    "aee184964155730855513a270056ec19",  # placeholder gris de 8336 bytes (16 empresas)
+    "44f72ef542795b19d2f4dfc8456c7aca",  # banner colorido CAPEMISA de 76496 bytes
+}
+PLACEHOLDER_NOMBRE = re.compile(r"logo-?capemisa|capemisa\.com\.ar/wp-content/uploads/2021/11/logo-1\.png$", re.I)
+
+
+def es_placeholder_camara(logo):
+    """True si el logo es el de la cámara y no el de la empresa."""
+    if not logo:
+        return False
+    if PLACEHOLDER_NOMBRE.search(logo):
+        return True
+    if logo.startswith("data/logos/"):
+        ruta = RAIZ / logo
+        if ruta.exists():
+            return hashlib.md5(ruta.read_bytes()).hexdigest() in PLACEHOLDER_MD5
+    return False
 
 ESQUEMA = """
 CREATE TABLE empresas (
@@ -153,7 +177,8 @@ def main():
             "instagram": e["instagram"] or None,
             "facebook": e["facebook"] or None,
             "linkedin": e["linkedin"] or None,
-            "logo": e["logo_url"] or None,
+            # placeholder de la cámara -> sin logo: el frontend muestra el nombre
+            "logo": None if es_placeholder_camara(e["logo_url"]) else (e["logo_url"] or None),
             "logo_origen": e["logo_origen"] or None,
             "contacto": e["contacto_nombre"] or None,
             "descripcion": e.get("descripcion") or None,
