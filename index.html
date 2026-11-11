@@ -174,6 +174,8 @@ dialog::backdrop{background:rgba(0,0,0,.65);backdrop-filter:blur(3px)}
 #panelNovedades .ficha{max-width:560px}
 .nov-item{padding:10px;border-radius:9px;border-bottom:1px solid var(--border);font-size:13px}
 .nov-item:last-child{border-bottom:none}
+.nov-item.nuevo{border-left:3px solid var(--accent);padding-left:9px}
+.nov-tag-nuevo{font-size:10.5px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.04em}
 .nov-meta{display:flex;align-items:center;gap:8px;margin-top:3px;flex-wrap:wrap}
 .nov-fecha{font-size:11.5px;color:var(--muted)}
 .nov-tipo{
@@ -538,18 +540,25 @@ function cerrarBanner() {
 $('#btnNovedades').onclick = () => {
   const cont = $('#novedadesContenido');
   const items = DB.cambios.slice(0, 60);
+  // "Nuevo" se calcula contra la marca ANTERIOR a abrir el panel.
+  // La marca de visto se escribe recién al cerrarlo (ver listener 'close' abajo).
+  const vistoAntes = leerVistoHasta();
   cont.innerHTML = `
     <button class="cerrar" aria-label="Cerrar">✕</button>
     <h2 style="font-size:17px;margin-bottom:12px">🔔 Novedades</h2>
-    ${items.length ? items.map(c => `
-      <div class="nov-item">
+    ${items.length ? items.map(c => {
+      const nuevo = c.fecha > vistoAntes;
+      return `
+      <div class="nov-item${nuevo ? ' nuevo' : ''}">
         <div class="nov-empresa" ${c.empresa_id ? `data-id="${c.empresa_id}"` : ''}>${esc(c.empresa)}</div>
         <div class="nov-meta">
+          ${nuevo ? '<span class="nov-tag-nuevo">Nuevo</span>' : ''}
           <span class="nov-fecha">${c.fecha.slice(0, 10)}</span>
           <span class="nov-tipo ${c.tipo}">${({alta:'alta', modificacion:'modificación', baja:'baja', nuevo_rubro:'nuevo rubro'})[c.tipo] || esc(c.tipo)}</span>
         </div>
         ${c.campo || c.despues ? `<div class="nov-detalle">${c.campo ? `<b>${esc(c.campo)}</b>: ` : ''}${c.antes ? `${esc(c.antes)} → ` : ''}${esc(c.despues || '')}</div>` : ''}
-      </div>`).join('') : '<p style="color:var(--muted)">Sin novedades registradas todavía.</p>'}
+      </div>`;
+    }).join('') : '<p style="color:var(--muted)">Sin novedades registradas todavía.</p>'}
   `;
   cont.querySelector('.cerrar').onclick = () => $('#panelNovedades').close();
   cont.querySelectorAll('.nov-empresa[data-id]').forEach(el =>
@@ -558,9 +567,13 @@ $('#btnNovedades').onclick = () => {
       if (e) { $('#panelNovedades').close(); abrirFicha(e); }
     });
   $('#panelNovedades').showModal();
+};
+// Se marca como visto al CERRAR (botón ✕, Escape, clic en un link a ficha).
+// Así las novedades siguen resaltadas mientras el panel está abierto.
+$('#panelNovedades').addEventListener('close', () => {
   marcarVisto();
   actualizarBadge();
-};
+});
 
 /* ---------- inteligencia ---------- */
 /* ---------- buscador ---------- */
