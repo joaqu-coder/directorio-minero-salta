@@ -6,11 +6,12 @@
 <title>Agenda</title>
 <meta name="description" content="Directorio de empresas asociadas a CMS Minería, CAPEMISA y UIS — Salta, Argentina.">
 <meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon.svg">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Agenda">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -20,6 +21,7 @@
   --text:#111318; --muted:#5b6374; --accent:#b7791f;
   --cms:#e8762d; --capemisa:#4d8fe8; --uis:#d64545;
   --radius:14px;
+  color-scheme:light; /* fija tema claro: el SO en oscuro no oscurece controles nativos */
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scrollbar-gutter:stable}
@@ -474,9 +476,21 @@ $('#btnCompartir').onclick = () => compartir({
 $('#btnImprimir').onclick = () => window.print();
 
 /* ---------- novedades ---------- */
+// La campanita cuenta solo cambios de los últimos 7 días que no se hayan visto.
+// Primera visita (sin marca): todo queda visto, no se muestra un 99+ heredado.
+const DIAS_NOVEDADES = 7;
+const fechaUTC = (desplazamientoMs = 0) =>
+  new Date(Date.now() + desplazamientoMs).toISOString().slice(0, 19).replace('T', ' ');
+function leerVistoHasta() {
+  try { return localStorage.getItem('vistoHasta') || ''; } catch (e) { return ''; }
+}
+function marcarVisto() {
+  try { localStorage.setItem('vistoHasta', fechaUTC()); } catch (e) { /* sin storage */ }
+}
 function novedadesNoVistas() {
-  const vistoHasta = localStorage.getItem('vistoHasta') || '';
-  return DB.cambios.filter(c => c.fecha > vistoHasta);
+  const vistoHasta = leerVistoHasta();
+  const desde = fechaUTC(-DIAS_NOVEDADES * 24 * 60 * 60 * 1000);
+  return DB.cambios.filter(c => c.fecha > vistoHasta && c.fecha >= desde);
 }
 function actualizarBadge() {
   const n = novedadesNoVistas().length;
@@ -544,7 +558,7 @@ $('#btnNovedades').onclick = () => {
       if (e) { $('#panelNovedades').close(); abrirFicha(e); }
     });
   $('#panelNovedades').showModal();
-  localStorage.setItem('vistoHasta', new Date().toISOString().slice(0, 19).replace('T', ' '));
+  marcarVisto();
   actualizarBadge();
 };
 
@@ -590,6 +604,7 @@ $('#limpiar').onclick = () => {
   $('#metaGenerado').textContent = DB.generado ? `actualizado ${DB.generado.slice(0, 10)}` : '';
   renderChips();
   renderLista();
+  if (!leerVistoHasta()) marcarVisto();  // primera visita: no heredar novedades
   actualizarBadge();
   actualizarBannerNovedades();
   const slug = new URLSearchParams(location.search).get('empresa');

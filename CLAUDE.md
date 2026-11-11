@@ -15,7 +15,7 @@ Usuario: Judas. Comunicación en español, directa, sin relleno. Patches quirúr
 | Base de datos | SQLite (`directorio.db`), build artifact. CSVs en `/data` como source of truth en Git |
 | Scraper | **Scrapling** (verificado: BSD 3-Clause, gratuito, v0.4.9) |
 | Frontend | **Single-file HTML** (`index.html`), sin frameworks, sin build step |
-| Estilo | Dark theme, mobile-first, minimalista. Fuente: Roboto (UI y datos) |
+| Estilo | Light theme, mobile-first, minimalista. Fuente: Roboto (UI y datos) |
 | Hosting frontend | **GitHub Pages** — deploy automático vía GitHub Actions (`.github/workflows/pages.yml`). Repo público requerido. URL: `https://<owner>.github.io/<repo>/`. Ver regla general de hosting más abajo. |
 | Scheduler | GitHub Actions, cron semanal (lunes 06:00 ART = `0 9 * * 1` UTC) |
 | Datos en frontend | SQLite exportado a JSON estático (`empresas.json`) consumido por fetch — NO servidor backend |
@@ -187,7 +187,7 @@ Single-file `index.html`. Sin dependencias externas salvo Google Fonts (Roboto).
 - **Buscador**: input único (nombre, actividad, rubro, representante) + chips por cámara y rubro.
 - **Compartir**: Web Share API; ficha individual via `?empresa=slug`; fallback clipboard en desktop.
 - **Imprimir**: `@media print` → lista filtrada limpia en A4, una empresa por bloque.
-- Dark theme default. Diseño consistente con Antigravity v2.
+- Light theme default (fijado por Judas, 2026-11-11; no volver a dark). Diseño consistente con Antigravity v2.
 
 ## Estructura del repo
 
