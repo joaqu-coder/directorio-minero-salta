@@ -143,6 +143,25 @@ class Entidad:
         self.campos["nombre_norm"] = normalizar_nombre(self.campos["nombre"])
 
 
+def aplicar_fusiones(registros: list, fusiones: list) -> list:
+    """Decisiones manuales de data/fusiones.csv (alias -> canónico).
+
+    Renombra el alias al nombre canónico ANTES de la cascada: el registro cae
+    en la regla 1 (nombre_norm exacto) y se absorbe en la misma entidad. Sin
+    esto, el scraper volvería a crear la empresa dada de baja como alta.
+    """
+    mapa = {
+        normalizar_nombre(f["alias"]): f["canonico"]
+        for f in fusiones
+        if f.get("alias") and f.get("canonico")
+    }
+    for reg in registros:
+        canonico = mapa.get(normalizar_nombre(reg.get("nombre") or ""))
+        if canonico:
+            reg["nombre"] = canonico
+    return registros
+
+
 def construir_entidades(registros: list) -> tuple[list, list]:
     """Cascada: 1) nombre_norm exacto  2) dominio  3) fuzzy  4) representante -> solo log."""
     entidades = []
@@ -256,6 +275,7 @@ def main():
     if not registros:
         raise SystemExit("Sin staging: correr los scrapers primero.")
 
+    registros = aplicar_fusiones(registros, leer_csv(DATA / "fusiones.csv"))
     entidades, candidatos = construir_entidades(registros)
     aplicar_enriquecimiento(entidades)
     print(f"{len(registros)} registros -> {len(entidades)} entidades")
