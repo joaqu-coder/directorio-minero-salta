@@ -268,7 +268,6 @@ footer{
 
 <script>
 'use strict';
-const FLAGS = { boletin: false, boletinApi: '/api/buscar' };
 const $ = s => document.querySelector(s);
 let DB = { empresas: [], cambios: [], generado: null };
 // Ajuste de gris por logo (scraper/ajustar_logos.py): {id: {b, c}}
@@ -324,7 +323,7 @@ function badgesHtml(e) {
   const camaras = [...new Set(e.membresias.map(m => m.camara))];
   const rubros = [...new Set(e.membresias.map(m => m.rubro).filter(r => r))];
   return `<div class="badges">
-    ${camaras.map(c => `<span class="badge camara ${c}">${c}</span>`).join('')}
+    ${camaras.map(c => `<span class="badge camara ${esc(c)}">${esc(c)}</span>`).join('')}
     ${rubros.slice(0, 3).map(r => `<span class="badge">${esc(r)}</span>`).join('')}
     ${rubros.length > 3 ? `<span class="badge">+${rubros.length - 3}</span>` : ''}
   </div>`;
@@ -355,7 +354,13 @@ function renderLista() {
     card.innerHTML = `
       ${logoHtml(e, true, true)}
       <h3>${esc(e.nombre)}</h3>`;
+    // Accesible por teclado: la tarjeta es un botón (Enter / Espacio abren la ficha)
+    card.setAttribute('role', 'button');
+    card.tabIndex = 0;
     card.addEventListener('click', () => abrirFicha(e));
+    card.addEventListener('keydown', ev => {
+      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); abrirFicha(e); }
+    });
     frag.appendChild(card);
   }
   lista.appendChild(frag);
@@ -417,11 +422,10 @@ function abrirFicha(e, pushUrl = true) {
       ${dato('Facebook', e.facebook ? `<a href="${safeUrl(e.facebook)}" target="_blank" rel="noopener" class="mono">${esc(e.facebook.replace(/\/$/, '').split('/').pop())}</a>` : null)}
       ${dato('LinkedIn', e.linkedin ? `<a href="${safeUrl(e.linkedin)}" target="_blank" rel="noopener" class="mono">${esc(e.linkedin.replace(/\/$/, '').split('/').pop())}</a>` : null)}
       ${dato('Contacto', e.contacto ? esc(e.contacto) + (colegas.length ? `<div class="cruzado">también en: ${colegas.map(x => `<a data-id="${x.id}">${esc(x.nombre)}</a>`).join(', ')}</div>` : '') : null)}
-      ${dato('Membresías', e.membresias.map(m => `${m.camara}${m.rubro ? ` / ${esc(m.rubro)}` : ''}`).join('<br>'))}
+      ${dato('Membresías', e.membresias.map(m => `${esc(m.camara)}${m.rubro ? ` / ${esc(m.rubro)}` : ''}`).join('<br>'))}
     </div>
     <div class="ficha-acciones no-print">
       <button class="btn primario" id="btnCompartirFicha">Compartir</button>
-      ${FLAGS.boletin ? `<button class="btn" id="btnBoletin">Buscar en Boletín</button>` : ''}
     </div>
     ${cambiosEmpresa.length ? `<div class="hist"><h4>Historial</h4>${cambiosEmpresa.map(c =>
       `<div class="hist-item"><span class="mono">${c.fecha.slice(0, 10)}</span> · ${c.tipo}${c.campo ? ` <b>${esc(c.campo)}</b>` : ''}${c.despues ? ` → ${esc(c.despues)}` : ''}</div>`).join('')}</div>` : ''}
@@ -431,8 +435,6 @@ function abrirFicha(e, pushUrl = true) {
   cont.querySelectorAll('.cruzado a').forEach(a =>
     a.onclick = () => abrirFicha(DB.empresas.find(x => x.id === +a.dataset.id)));
   cont.querySelector('#btnCompartirFicha').onclick = () => compartirFicha(e);
-  if (FLAGS.boletin) cont.querySelector('#btnBoletin').onclick = () =>
-    window.open(`${FLAGS.boletinApi}?q=${encodeURIComponent(e.nombre)}`, '_blank');
 
   const modal = $('#modalFicha');
   if (!modal.open) modal.showModal();
@@ -502,16 +504,22 @@ function actualizarBannerNovedades() {
     if (altas > 0) msg.push(`<strong>${altas}</strong> ${altas === 1 ? 'empresa nueva' : 'empresas nuevas'}`);
     if (bajas > 0) msg.push(`<strong>${bajas}</strong> ${bajas === 1 ? 'empresa dada de baja' : 'empresas dadas de baja'}`);
     texto.innerHTML = `${msg.join(', ')} esta semana. <a href="#" onclick="$('#btnNovedades').click(); return false">Ver detalles</a>`;
-    banner.classList.add('visible');
-    if (localStorage.getItem('bannerCerrado') !== 'true') {
+    // Se oculta solo si el usuario ya cerró ESTE grupo de novedades (la más reciente).
+    // Una corrida nueva con novedades vuelve a mostrarlo.
+    bannerUltima = cambiosRecientes.filter(c => c.tipo === 'alta' || c.tipo === 'baja')
+      .map(c => c.fecha).sort().pop();
+    let cerradoHasta = '';
+    try { cerradoHasta = localStorage.getItem('bannerCerradoHasta') || ''; } catch (e) { /* sin storage */ }
+    if (!(cerradoHasta >= bannerUltima)) {
       banner.style.display = 'flex';
     }
   }
 }
 
+let bannerUltima = '';
 function cerrarBanner() {
   $('#bannerNovedades').style.display = 'none';
-  localStorage.setItem('bannerCerrado', 'true');
+  try { localStorage.setItem('bannerCerradoHasta', bannerUltima); } catch (e) { /* sin storage */ }
 }
 $('#btnNovedades').onclick = () => {
   const cont = $('#novedadesContenido');

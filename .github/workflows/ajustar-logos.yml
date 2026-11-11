@@ -9,6 +9,11 @@ on:
 permissions:
   contents: write
 
+# Mismo grupo que el scrape: nunca dos corridas que escriben data/ a la vez.
+concurrency:
+  group: datos
+  cancel-in-progress: false
+
 jobs:
   ajustar:
     runs-on: ubuntu-latest
@@ -38,4 +43,5 @@ jobs:
             exit 0
           fi
           git commit -m "feat(data): alojar logos y ajustar tonos (escala de grises uniforme)"
+          git pull --rebase origin main
           git push

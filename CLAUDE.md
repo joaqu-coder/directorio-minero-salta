@@ -15,7 +15,7 @@ Usuario: Judas. Comunicación en español, directa, sin relleno. Patches quirúr
 | Base de datos | SQLite (`directorio.db`), build artifact. CSVs en `/data` como source of truth en Git |
 | Scraper | **Scrapling** (verificado: BSD 3-Clause, gratuito, v0.4.9) |
 | Frontend | **Single-file HTML** (`index.html`), sin frameworks, sin build step |
-| Estilo | Dark theme, mobile-first, minimalista. Fuentes: Manrope (UI) + DM Mono (datos) |
+| Estilo | Dark theme, mobile-first, minimalista. Fuente: Roboto (UI y datos) |
 | Hosting frontend | **GitHub Pages** — deploy automático vía GitHub Actions (`.github/workflows/pages.yml`). Repo público requerido. URL: `https://<owner>.github.io/<repo>/`. Ver regla general de hosting más abajo. |
 | Scheduler | GitHub Actions, cron semanal (lunes 06:00 ART = `0 9 * * 1` UTC) |
 | Datos en frontend | SQLite exportado a JSON estático (`empresas.json`) consumido por fetch — NO servidor backend |
@@ -123,7 +123,7 @@ jobs:
 - **Las cards traen TODOS los campos → no hace falta visitar fichas individuales.**
 - REST API útil para verificación: `/wp-json/wp/v2/socio` (CPT expuesto), `/wp-json/wp/v2/categoria` (16 términos con counts).
 - ~346 membresías, ~296 empresas únicas (junio 2026). Una misma empresa aparece en varias categorías → crítico para matching.
-- Logos placeholder: si `src` contiene `LogoCapemisa` (case-insensitive), es el logo de la cámara → `logo_placeholder=1`, enriquecer desde sitio oficial.
+- Logos placeholder (logo de la cámara, no de la empresa): `scraper/build_db.py` (`es_placeholder_camara`) lo detecta por nombre (`LogoCapemisa`, `Logo-Capemisa`, `logo-1.png` de capemisa.com.ar) o por MD5 de la copia local. En `empresas.json` el `logo` sale `null` y el frontend muestra el nombre. Enriquecer desde sitio oficial.
 
 ### 3. uis.com.ar — Unión Industrial Salta ✅ VERIFICADO (Fase 0 junio 2026)
 - Directorio público, sin login. WordPress server-side (meta generator dice Drupal: ignorar, es falso).
@@ -176,9 +176,11 @@ La UI muestra en la ficha: badges de todas las cámaras/rubros, y si el represen
 
 Cada run semanal: scrape → diff contra CSVs por `nombre_norm` (altas / bajas / modificaciones campo a campo / nuevo_rubro) → append a `data/cambios.csv` → badge "🔔 N novedades" en frontend (visto con localStorage) → commit message resume (`feat(data): +2 altas, 3 modificaciones — run YYYY-MM-DD`).
 
+**Guarda contra scrapes incompletos** (`scraper/matching.py`, `verificar_caida`): antes de escribir nada, aborta si hay más de max(5, 3 %) de bajas, o si una cámara pierde más del 10 % de sus empresas. Motivo: la corrida del 2026-08-31 dio de baja 41 empresas por una fuente que devolvió de menos. Para una caída real, correr con `PERMITIR_CAIDA=1` y dejarlo explicado en el commit. Los umbrales fijos de los scrapers (CMS ≥ 25, CAPEMISA ≥ 100, UIS ≥ 50) son una segunda barrera, no la principal.
+
 ## Frontend — specs
 
-Single-file `index.html`. Sin dependencias externas salvo Google Fonts (Manrope, DM Mono).
+Single-file `index.html`. Sin dependencias externas salvo Google Fonts (Roboto).
 
 - **Lista**: cards compactas → logo 200px (redondeado, lazy-load, fallback iniciales), nombre, rubro badge, cámara badge.
 - **Ficha** (modal): logo grande, actividad, dirección, teléfono (`tel:`), email (`mailto:`), redes, sitio web, representante, membresías, historial de cambios.
