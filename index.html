@@ -504,7 +504,6 @@ function actualizarBannerNovedades() {
     if (altas > 0) msg.push(`<strong>${altas}</strong> ${altas === 1 ? 'empresa nueva' : 'empresas nuevas'}`);
     if (bajas > 0) msg.push(`<strong>${bajas}</strong> ${bajas === 1 ? 'empresa dada de baja' : 'empresas dadas de baja'}`);
     texto.innerHTML = `${msg.join(', ')} esta semana. <a href="#" onclick="$('#btnNovedades').click(); return false">Ver detalles</a>`;
-    banner.classList.add('visible');
     // Se oculta solo si el usuario ya cerró ESTE grupo de novedades (la más reciente).
     // Una corrida nueva con novedades vuelve a mostrarlo.
     bannerUltima = cambiosRecientes.filter(c => c.tipo === 'alta' || c.tipo === 'baja')
