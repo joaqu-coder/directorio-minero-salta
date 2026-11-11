@@ -90,7 +90,6 @@ def test_no_hay_logos_huerfanos(export_json):
     assert huerfanos == []
 
 
-@pytest.mark.xfail(strict=False, reason="Pendiente: CENTRO DISTRIBUIDOR y LOGISTICA DEL ALTO comparten teléfono, email y representante (docs/auditoria.md)")
 def test_sin_pares_con_telefono_y_email_compartidos(empresas):
     por_par = defaultdict(list)
     for e in empresas:
@@ -103,3 +102,10 @@ def test_sin_pares_con_telefono_y_email_compartidos(empresas):
 def test_cambios_csv_tipos_validos():
     tipos = Counter(c["tipo"] for c in leer_csv("cambios.csv"))
     assert set(tipos) <= {"alta", "baja", "modificacion", "nuevo_rubro"}
+
+
+def test_historial_publico_sin_datos_personales():
+    """Decisión de Judas (2026-11-11): no se publican nombres de representantes ni emails en el historial."""
+    paquete = json.loads((DATA / "empresas.json").read_text(encoding="utf-8"))
+    privados = [c for c in paquete["cambios"] if c.get("campo") in {"contacto_nombre", "email"}]
+    assert privados == []

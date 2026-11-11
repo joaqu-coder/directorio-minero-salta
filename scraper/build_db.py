@@ -12,6 +12,9 @@ from common import DATA, RAIZ, normalizar_nombre, slugificar
 
 DB = RAIZ / "directorio.db"
 
+# Campos de cambios.csv que no van al JSON público (historial de la ficha y campanita).
+CAMPOS_PRIVADOS_HISTORIAL = {"contacto_nombre", "email"}
+
 # Placeholder de la cámara (no es el logo de la empresa). Se detecta por nombre
 # (archivos LogoCapemisa / Logo-Capemisa / logo-1.png de capemisa.com.ar) o por
 # contenido (MD5 de la copia local en data/logos/). Así el frontend no adivina.
@@ -186,6 +189,7 @@ def main():
             "membresias": memb_por_empresa.get(e["id"], []),
         })
 
+    # Datos personales (nombre del representante, email) no se publican en el historial.
     cambios_json = [{
         "fecha": c["fecha"],
         "tipo": c["tipo"],
@@ -194,7 +198,7 @@ def main():
         "campo": c["campo"] or None,
         "antes": c["valor_anterior"] or None,
         "despues": c["valor_nuevo"] or None,
-    } for c in cambios]
+    } for c in cambios if c["campo"] not in CAMPOS_PRIVADOS_HISTORIAL]
     cambios_json.sort(key=lambda c: c["fecha"], reverse=True)
 
     paquete = {
