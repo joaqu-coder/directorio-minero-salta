@@ -16,7 +16,7 @@ concurrency:
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
 
@@ -73,5 +73,6 @@ jobs:
           ")
           FECHA=$(date -u +%Y-%m-%d)
           git commit -m "feat(data): ${RESUMEN} — run ${FECHA}"
+          git pull --rebase origin main
           git push
           # El deploy lo dispara pages.yml (workflow_run) al terminar este run.

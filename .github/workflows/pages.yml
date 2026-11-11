@@ -7,7 +7,7 @@ on:
   # no dispara workflows: por eso también escuchamos el fin de los runs que
   # commitean datos. Solo se deploya si el run terminó bien.
   workflow_run:
-    workflows: ["Scrape semanal", "Enriquecer logos (manual)"]
+    workflows: ["Scrape semanal", "Enriquecer logos (manual)", "Ajustar tonos de logos"]
     types: [completed]
   workflow_dispatch:
 
