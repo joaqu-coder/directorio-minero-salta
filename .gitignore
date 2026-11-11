@@ -3,6 +3,7 @@ directorio.db
 test_directorio.db
 data/staging/
 data/resumen_run.json
+tests/out/
 
 # desarrollo local
 _dev/

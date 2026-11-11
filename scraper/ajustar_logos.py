@@ -41,6 +41,9 @@ FALLOS = []  # (url, motivo) de cada descarga fallida
 MIN_TINTA = 0.03  # fracción mínima de píxeles con contenido para medir
 
 
+LOGOS_CAMARA = ('logocapemisa', 'uploads/2021/11/logo-1.png')  # placeholder y logo genérico de CAPEMISA
+
+
 def leer_bytes(logo, alojar):
     """Bytes del logo: archivo local, o descarga si es remoto y se pidió alojar."""
     if logo.startswith('data/'):
@@ -49,8 +52,10 @@ def leer_bytes(logo, alojar):
             with open(ruta, 'rb') as f:
                 return f.read()
         return None
-    # El placeholder LogoCapemisa se muestra como nombre en la app: no se aloja
-    if alojar and logo.startswith('http') and 'logocapemisa' not in logo.lower():
+    # Los logos genéricos de CAPEMISA no son de la empresa: se muestran como
+    # nombre en la app y no se alojan. Así sus entradas de logos_ajuste.json
+    # ("nombre": true) se conservan en cada corrida.
+    if alojar and logo.startswith('http') and not any(g in logo.lower() for g in LOGOS_CAMARA):
         return descargar(logo)
     return None
 
