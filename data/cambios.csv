@@ -220,3 +220,14 @@ fecha,tipo,empresa_id,empresa_nombre,campo,valor_anterior,valor_nuevo
 2026-11-09 19:40:30,modificacion,444,CARDENALES SEGURIDAD y LIMPIEZA S.A.S.,telefono,(0387) 243 6433,(0387) 243 6433 / 155 350 840
 2026-11-09 19:40:30,modificacion,444,CARDENALES SEGURIDAD y LIMPIEZA S.A.S.,email,cardenaleslys@gmail.com,adm.cardenaleslys@gmail.com
 2026-11-09 19:40:30,modificacion,444,CARDENALES SEGURIDAD y LIMPIEZA S.A.S.,contacto_nombre,Gastón Ruiz Magno,Rocío Natalia Pérez Arroyo
+2026-11-16 19:25:41,alta,448,CRZ SOLUTIONS S.R.L.,,,
+2026-11-16 19:25:41,modificacion,214,LOGISTICA DEL ALTO S.R.L.,actividad,Servicio de transporte de automotor de carga NCP,Logística y servicios
+2026-11-16 19:25:41,modificacion,214,LOGISTICA DEL ALTO S.R.L.,sitio_web,https://logisticadelalto.com/,http://centrodistribuidorsa.negocio.site/
+2026-11-16 19:25:41,alta,449,ACRES BIENES RAÍCES,,,
+2026-11-16 19:25:41,alta,450,MULTISERVICIOS MINEROS S.A.S.,,,
+2026-11-16 19:25:41,modificacion,319,Cosalta Ltda,sitio_web,https://www.cosalta.com.ar,https://http://www.cosalta.com.ar
+2026-11-16 19:25:41,modificacion,321,Alliance One Tobacco Argentina S.A.,sitio_web,https://aointl.com/contact/around-world/south-america#south-america,https://http://aointl.com/contact/around-world/south-america#south-america
+2026-11-16 19:25:41,baja,152,ARKADE INGENERÍA S.R.L,,ARKADE INGENERÍA S.R.L,
+2026-11-16 19:25:41,baja,182,CRAUSAZ S.R.L.,,CRAUSAZ S.R.L.,
+2026-11-16 19:25:41,baja,156,FUTURA INGENIERIA Y CONSTRUCCION S.A.S.,,FUTURA INGENIERIA Y CONSTRUCCION S.A.S.,
+2026-11-16 19:25:41,baja,197,MAR ANDINO S.A.S.,,MAR ANDINO S.A.S.,

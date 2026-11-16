@@ -199,12 +199,10 @@ empresa_id,camara,rubro,url_ficha
 149,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/agi-construcciones-s-r-l/
 150,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/aminco-s-r-l/
 151,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/ams-trading-consulting-group-s-r-l/
-152,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/arkade-ingeneria-s-r-l/
 153,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/ciclos-ingenieria-s-r-l/
 154,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/consorcio-de-cooperacion-bsd-geco/
 155,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/dam-ingenieria-s-a-s/
 390,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/fmf-argentina-s-r-l/
-156,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/futura-ingenieria-y-construccion-s-a-s/
 158,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/hoyos-ibarra-enrique/
 159,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/hormin-argentina-s-a/
 160,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/imec-engineering-company-s-r-l/
@@ -227,7 +225,7 @@ empresa_id,camara,rubro,url_ficha
 178,CAPEMISA,Insumos,https://capemisa.com.ar/socio/carlos-flores-s-h/
 180,CAPEMISA,Insumos,https://capemisa.com.ar/socio/corralon-cedroran-s-r-l/
 181,CAPEMISA,Insumos,https://capemisa.com.ar/socio/corralon-la-tablada/
-182,CAPEMISA,Insumos,https://capemisa.com.ar/socio/crausaz-s-r-l/
+448,CAPEMISA,Insumos,https://capemisa.com.ar/socio/crz-solutions-s-r-l/
 183,CAPEMISA,Insumos,https://capemisa.com.ar/socio/distribuidora-jj-plast/
 184,CAPEMISA,Insumos,https://capemisa.com.ar/socio/el-arca-de-noe/
 447,CAPEMISA,Insumos,https://capemisa.com.ar/socio/feltrin-s-a/
@@ -245,8 +243,6 @@ empresa_id,camara,rubro,url_ficha
 376,CAPEMISA,Insumos,https://capemisa.com.ar/socio/larocca-salta-neumaticos-s-a/
 195,CAPEMISA,Insumos,https://capemisa.com.ar/socio/lopez-diesel-sa/
 196,CAPEMISA,Insumos,https://capemisa.com.ar/socio/luxing-s-r-l/
-197,CAPEMISA,Insumos,https://capemisa.com.ar/socio/mar-andino-s-a-s/
-197,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mar-andino-s-a-s/
 198,CAPEMISA,Insumos,https://capemisa.com.ar/socio/master-clean-s-a/
 441,CAPEMISA,Insumos,https://capemisa.com.ar/socio/motortrac-s-r-l/
 199,CAPEMISA,Insumos,https://capemisa.com.ar/socio/mundo-pack-s-r-l/
@@ -260,6 +256,7 @@ empresa_id,camara,rubro,url_ficha
 205,CAPEMISA,Insumos,https://capemisa.com.ar/socio/ypf-sa/
 206,CAPEMISA,Logística,https://capemisa.com.ar/socio/aramis-s-a-s/
 206,CAPEMISA,Servicios,https://capemisa.com.ar/socio/aramis-s-a-s/
+214,CAPEMISA,Logística,https://capemisa.com.ar/socio/centro-distribuidor-s-a/
 434,CAPEMISA,Logística,https://capemisa.com.ar/socio/condorlink-sa/
 208,CAPEMISA,Logística,https://capemisa.com.ar/socio/cuenca-del-pilcomayo-s-r-l/
 209,CAPEMISA,Logística,https://capemisa.com.ar/socio/flytec/
@@ -268,7 +265,6 @@ empresa_id,camara,rubro,url_ficha
 212,CAPEMISA,Logística,https://capemisa.com.ar/socio/la-veloz-del-norte-s-a/
 212,CAPEMISA,Servicios,https://capemisa.com.ar/socio/la-veloz-del-norte-s-a/
 213,CAPEMISA,Logística,https://capemisa.com.ar/socio/logistica-cn-grupo-s-a/
-214,CAPEMISA,Logística,https://capemisa.com.ar/socio/logistica-del-alto-s-r-l/
 215,CAPEMISA,Logística,https://capemisa.com.ar/socio/logistica-minera/
 216,CAPEMISA,Logística,https://capemisa.com.ar/socio/logistica-salta/
 217,CAPEMISA,Logística,https://capemisa.com.ar/socio/logistica-y-servicios-ambientales-s-r-l/
@@ -317,6 +313,7 @@ empresa_id,camara,rubro,url_ficha
 254,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/vacu-s-r-l/
 255,CAPEMISA,Servicios,https://capemisa.com.ar/socio/9amas/
 256,CAPEMISA,Servicios,https://capemisa.com.ar/socio/acclimatare-s-r-l/
+449,CAPEMISA,Servicios,https://capemisa.com.ar/socio/acres-bienes-raices/
 258,CAPEMISA,Servicios,https://capemisa.com.ar/socio/agro-mix-s-r-l/
 259,CAPEMISA,Servicios,https://capemisa.com.ar/socio/airox-argentina-s-a-s/
 382,CAPEMISA,Servicios,https://capemisa.com.ar/socio/albiero-sistemas-de-seguridad/
@@ -355,6 +352,7 @@ empresa_id,camara,rubro,url_ficha
 285,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mardan-s-a-s/
 287,CAPEMISA,Servicios,https://capemisa.com.ar/socio/milimetric-s-a-s/
 288,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mining-technologies-s-a-s/
+450,CAPEMISA,Servicios,https://capemisa.com.ar/socio/multiservicios-mineros-s-a-s/
 289,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mva-s-r-l/
 290,CAPEMISA,Servicios,https://capemisa.com.ar/socio/nivel-seguros-s-a/
 291,CAPEMISA,Servicios,https://capemisa.com.ar/socio/noa-aberturas-s-r-l/
@@ -446,63 +444,68 @@ empresa_id,camara,rubro,url_ficha
 372,UIS,Ind. Láctea,https://uis.com.ar/socios/prolacsa/
 373,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/semix/
 374,UIS,Ind. Varias,https://uis.com.ar/socios/recapados-santa-monica/
-225,CAPEMISA,Logística,https://capemisa.com.ar/socio/trans-gon-s-r-l/
-262,CAPEMISA,Servicios,https://capemisa.com.ar/socio/artes-graficas-crivelli/
-69,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/capital-humano-salta/
-173,CAPEMISA,Insumos,https://capemisa.com.ar/socio/alvear-s-a-s/
-226,CAPEMISA,Logística,https://capemisa.com.ar/socio/transporte-antonini-s-r-l/
-343,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/hijos-de-salvador-munoz-srl/
+257,CAPEMISA,Servicios,https://capemisa.com.ar/socio/ad-argia-s-r-l/
 392,Parque Industrial Güemes,Química y de Procesos,
 393,Parque Industrial Güemes,Construcción,
 394,Parque Industrial Güemes,Industria Forestal y Derivados,
-395,Parque Industrial Güemes,Agroindustria y Alimentación,
-396,Parque Industrial Güemes,Metalmecánica y Equipamiento Industrial,
-397,Parque Industrial Güemes,Agroindustria y Alimentación,
-398,Parque Industrial Güemes,Metalmecánica y Equipamiento Industrial,
-399,Parque Industrial Güemes,Metalmecánica y Equipamiento Industrial,
-400,Parque Industrial Güemes,Energía y Combustibles,
-401,Parque Industrial Güemes,Agroindustria y Alimentación,
-402,Parque Industrial Güemes,Materiales e Insumos,
-403,Parque Industrial Güemes,Agroindustria y Alimentación,
-404,Parque Industrial Güemes,Logística y abastecimiento industrial,
-405,Parque Industrial Güemes,Agroindustria y Alimentación,
-406,Parque Industrial Güemes,Metalmecánica y Equipamiento Industrial,
-407,Parque Industrial Güemes,Construcción,
-408,Parque Industrial Güemes,Materiales e Insumos,
-409,Parque Industrial Güemes,Energía y Combustibles,
-410,Parque Industrial Güemes,Metalmecánica y Equipamiento Industrial,
-411,Parque Industrial Güemes,Telecomunicaciones,
-412,Parque Industrial Güemes,Energía y Combustibles,
 413,Parque Industrial Güemes,Agroindustria y Alimentación,
+247,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/albiero-sistemas-de-seguridad/
 414,Parque Industrial Güemes,Agroindustria y Alimentación,
 415,Parque Industrial Güemes,Agroindustria y Alimentación,
+173,CAPEMISA,Insumos,https://capemisa.com.ar/socio/alvear-s-a-s/
+152,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/arkade-ingeneria-s-r-l/
+262,CAPEMISA,Servicios,https://capemisa.com.ar/socio/artes-graficas-crivelli/
+395,Parque Industrial Güemes,Agroindustria y Alimentación,
+31,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/cactus-s-r-l/
+69,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/capital-humano-salta/
+71,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/claudio-devita-consultores-en-abastecimientos/
+179,CAPEMISA,Insumos,https://capemisa.com.ar/socio/clicer-s-a-s/
 416,Parque Industrial Güemes,Logística y abastecimiento industrial,
+182,CAPEMISA,Insumos,https://capemisa.com.ar/socio/crausaz-s-r-l/
+396,Parque Industrial Güemes,Metalmecánica y Equipamiento Industrial,
 417,Parque Industrial Güemes,Metalmecánica y Equipamiento Industrial,
+398,Parque Industrial Güemes,Metalmecánica y Equipamiento Industrial,
+399,Parque Industrial Güemes,Metalmecánica y Equipamiento Industrial,
+51,CAPEMISA,Catering,https://capemisa.com.ar/socio/ermaya-s-r-l/
+432,Parque Industrial Güemes,Materiales e Insumos,
+401,Parque Industrial Güemes,Agroindustria y Alimentación,
+402,Parque Industrial Güemes,Materiales e Insumos,
 418,Parque Industrial Güemes,Materiales e Insumos,
+156,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/futura-ingenieria-y-construccion-s-a-s/
 419,Parque Industrial Güemes,Química y de Procesos,
 420,Parque Industrial Güemes,técnicos especializados,
+157,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/grupo-7d-ingenieria-vial-topografia/
 421,Parque Industrial Güemes,Química y de Procesos,
+343,UIS,Ind. Agroindustrias y Alimentos,https://uis.com.ar/socios/hijos-de-salvador-munoz-srl/
+278,CAPEMISA,Servicios,https://capemisa.com.ar/socio/hotel-alejandro-i/
+194,CAPEMISA,Insumos,https://capemisa.com.ar/socio/ingenieria-electrica-s-a-s/
+403,Parque Industrial Güemes,Agroindustria y Alimentación,
 422,Parque Industrial Güemes,Minera y Litio,
+404,Parque Industrial Güemes,Logística y abastecimiento industrial,
+197,CAPEMISA,Insumos,https://capemisa.com.ar/socio/mar-andino-s-a-s/
+197,CAPEMISA,Servicios,https://capemisa.com.ar/socio/mar-andino-s-a-s/
+286,CAPEMISA,Servicios,https://capemisa.com.ar/socio/metalnor-s-r-l/
 423,Parque Industrial Güemes,Agroindustria y Alimentación,
 424,Parque Industrial Güemes,Metalmecánica y Equipamiento Industrial,
 425,Parque Industrial Güemes,Química y de Procesos,
+405,Parque Industrial Güemes,Agroindustria y Alimentación,
+406,Parque Industrial Güemes,Metalmecánica y Equipamiento Industrial,
 426,Parque Industrial Güemes,Agroindustria y Alimentación,
+407,Parque Industrial Güemes,Construcción,
 427,Parque Industrial Güemes,Agroindustria y Alimentación,
-428,Parque Industrial Güemes,Logística y abastecimiento industrial,
-429,Parque Industrial Güemes,Planta extrusora de granos de soja,
-430,Parque Industrial Güemes,Química y de Procesos,
-431,Parque Industrial Güemes,Materiales e Insumos,
-432,Parque Industrial Güemes,Materiales e Insumos,
+408,Parque Industrial Güemes,Materiales e Insumos,
+409,Parque Industrial Güemes,Energía y Combustibles,
+410,Parque Industrial Güemes,Metalmecánica y Equipamiento Industrial,
 144,CAPEMISA,Insumos,https://capemisa.com.ar/socio/rodamas-35/
-286,CAPEMISA,Servicios,https://capemisa.com.ar/socio/metalnor-s-r-l/
-316,CAPEMISA,Servicios,https://capemisa.com.ar/socio/wkb-group/
-51,CAPEMISA,Catering,https://capemisa.com.ar/socio/ermaya-s-r-l/
+428,Parque Industrial Güemes,Logística y abastecimiento industrial,
+400,Parque Industrial Güemes,Energía y Combustibles,
 55,CAPEMISA,Catering,https://capemisa.com.ar/socio/servicios-integrales-salta-srl/
-179,CAPEMISA,Insumos,https://capemisa.com.ar/socio/clicer-s-a-s/
-257,CAPEMISA,Servicios,https://capemisa.com.ar/socio/ad-argia-s-r-l/
-71,CAPEMISA,Consultoría,https://capemisa.com.ar/socio/claudio-devita-consultores-en-abastecimientos/
-31,CAPEMISA,Alquiler de vehículos,https://capemisa.com.ar/socio/cactus-s-r-l/
-194,CAPEMISA,Insumos,https://capemisa.com.ar/socio/ingenieria-electrica-s-a-s/
-157,CAPEMISA,Ingeniería,https://capemisa.com.ar/socio/grupo-7d-ingenieria-vial-topografia/
-247,CAPEMISA,Seguridad,https://capemisa.com.ar/socio/albiero-sistemas-de-seguridad/
-278,CAPEMISA,Servicios,https://capemisa.com.ar/socio/hotel-alejandro-i/
+397,Parque Industrial Güemes,Agroindustria y Alimentación,
+429,Parque Industrial Güemes,Planta extrusora de granos de soja,
+411,Parque Industrial Güemes,Telecomunicaciones,
+225,CAPEMISA,Logística,https://capemisa.com.ar/socio/trans-gon-s-r-l/
+430,Parque Industrial Güemes,Química y de Procesos,
+226,CAPEMISA,Logística,https://capemisa.com.ar/socio/transporte-antonini-s-r-l/
+431,Parque Industrial Güemes,Materiales e Insumos,
+316,CAPEMISA,Servicios,https://capemisa.com.ar/socio/wkb-group/
+412,Parque Industrial Güemes,Energía y Combustibles,
